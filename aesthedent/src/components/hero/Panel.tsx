@@ -79,6 +79,7 @@ export default function Panel({
     <motion.article
       ref={articleRef}
       id={`service-${service.id}`}
+      layout="position"
       className={`panel panel--${service.id} js-reveal${active ? " is-active" : ""}${compact ? " is-compact" : ""}`}
       style={styles}
       data-cursor="grow"
@@ -92,6 +93,7 @@ export default function Panel({
             y: { duration: 0.5, delay: index * 0.055, ease: EASE_OUT },
             opacity: { duration: 0.36, delay: index * 0.055 },
             flexGrow: { type: "spring", stiffness: 150, damping: 24, mass: 0.85 },
+            layout: { type: "spring", stiffness: 220, damping: 28, mass: 0.8 },
           }
       }
       onPointerMove={handlePointerMove}
@@ -142,22 +144,50 @@ export default function Panel({
         <h2 className="panel__title" id={titleId}>
           {service.name}
         </h2>
-        <p className="panel__descriptor">{service.descriptor}</p>
+        <motion.p
+          className="panel__descriptor"
+          initial={false}
+          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
+          transition={{ duration: 0.3 }}
+        >
+          {service.descriptor}
+        </motion.p>
 
-        <div
+        <motion.div
           className="panel__details"
           id={detailsId}
           aria-hidden={!active}
           inert={!active}
+          initial={false}
+          animate={
+            active
+              ? { height: "auto", opacity: 1 }
+              : { height: 0, opacity: 0 }
+          }
+          transition={{
+            height: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+            opacity: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+          }}
+          style={{ overflow: "hidden" }}
         >
           <div className="panel__details-inner">
-            <ul className="panel__list">
+            <motion.ul
+              className="panel__list"
+              initial={false}
+              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+              transition={{ duration: 0.35, delay: active ? 0.08 : 0 }}
+            >
               {service.treatments.map((treatment) => (
                 <li key={treatment}>{treatment}</li>
               ))}
-            </ul>
+            </motion.ul>
 
-            <div className="panel__actions">
+            <motion.div
+              className="panel__actions"
+              initial={false}
+              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
+              transition={{ duration: 0.35, delay: active ? 0.14 : 0 }}
+            >
               <Magnetic>
                 <LiquidMetalButton
                   label={service.bookLabel}
@@ -167,15 +197,21 @@ export default function Panel({
                   variant={service.ctaTheme === "dark" ? "aubergine" : "cream"}
                 />
               </Magnetic>
-            </div>
+            </motion.div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="panel__rest" aria-hidden="true">
+        <motion.div
+          className="panel__rest"
+          aria-hidden="true"
+          initial={false}
+          animate={{ opacity: active ? 0 : 1, scale: active ? 0.8 : 1 }}
+          transition={{ duration: 0.25 }}
+        >
           <span className="panel__arrow">
             <ArrowRight size={18} strokeWidth={1.4} />
           </span>
-        </div>
+        </motion.div>
       </div>
     </motion.article>
   );

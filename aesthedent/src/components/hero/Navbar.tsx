@@ -110,7 +110,19 @@ export default function Navbar() {
             detail: serviceKey,
           }),
         );
+        if (window.innerWidth <= 699) {
+          const el = document.getElementById(`service-${serviceKey}`);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+          }
+        }
       }
+    } else if (serviceKey === "doctors") {
+      const el = document.getElementById("doctors");
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    } else if (serviceKey === "contact") {
+      const el = document.getElementById("clinic-info");
+      el?.scrollIntoView({ behavior: "smooth", block: "center" });
     }
   };
 
@@ -125,9 +137,44 @@ export default function Navbar() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ ...transition, delay: reduceMotion ? 0 : 0.82 }}
     >
-      <Logo />
+      <div className="hero__nav-main">
+        <Logo />
 
-      <div className="nav-center-wrapper">
+        <div className="nav-center-wrapper">
+          <LiquidNavbar
+            items={NAV_ITEMS}
+            active={activeNavIndex}
+            onChange={handleNavChange}
+            tone="light"
+            sound={false}
+          />
+        </div>
+
+        <div className="nav-cta">
+          <Magnetic>
+            <LiquidMetalButton
+              label="Book a visit"
+              onClick={() => {
+                window.location.href = CLINIC.bookingHref;
+              }}
+            />
+          </Magnetic>
+        </div>
+
+        <button
+          ref={triggerRef}
+          type="button"
+          className="nav-menu"
+          aria-label="Open menu"
+          aria-expanded={open}
+          aria-controls="site-menu"
+          onClick={() => setOpen(true)}
+        >
+          <Menu size={19} strokeWidth={1.6} aria-hidden="true" />
+        </button>
+      </div>
+
+      <div className="hero__nav-mobile-strip" aria-label="Quick category navigation">
         <LiquidNavbar
           items={NAV_ITEMS}
           active={activeNavIndex}
@@ -136,29 +183,6 @@ export default function Navbar() {
           sound={false}
         />
       </div>
-
-      <div className="nav-cta">
-        <Magnetic>
-          <LiquidMetalButton
-            label="Book a visit"
-            onClick={() => {
-              window.location.href = CLINIC.bookingHref;
-            }}
-          />
-        </Magnetic>
-      </div>
-
-      <button
-        ref={triggerRef}
-        type="button"
-        className="nav-menu"
-        aria-label="Open menu"
-        aria-expanded={open}
-        aria-controls="site-menu"
-        onClick={() => setOpen(true)}
-      >
-        <Menu size={19} strokeWidth={1.6} aria-hidden="true" />
-      </button>
 
       <AnimatePresence>
         {open && (

@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
 import { ArrowRight, Phone } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import Navbar from "./Navbar";
 import Headline from "./Headline";
 import PanelsContainer from "./PanelsContainer";
@@ -42,10 +43,17 @@ export default function Hero() {
           <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
           <span>Call</span>
         </a>
-        <a className="mobile-bar__book" href={CLINIC.bookingHref}>
-          <span>Book a visit</span>
-          <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
-        </a>
+        <div className="mobile-bar__book-wrapper">
+          <LiquidMetalButton
+            label="Book a visit"
+            onClick={() => {
+              window.location.href = CLINIC.bookingHref;
+            }}
+            variant="aubergine"
+            width={195}
+            height={46}
+          />
+        </div>
       </div>
 
       <div className="grain" aria-hidden="true" />
