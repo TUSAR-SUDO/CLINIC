@@ -38,14 +38,22 @@ export default function InfoPill() {
 
       <span className="info-pill__divider" aria-hidden="true" />
 
-      <span className="info-pill__block">
+      <a
+        className="info-pill__block info-pill__address-link"
+        href={`https://maps.google.com/?q=${encodeURIComponent(
+          `${CLINIC.address.line1}, ${CLINIC.address.line2}, ${CLINIC.address.city} ${CLINIC.address.postalCode}`,
+        )}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View clinic on Google Maps"
+      >
         <MapPin size={17} strokeWidth={1.5} aria-hidden="true" />
         <span className="info-pill__address">
           {CLINIC.address.shortLine1}
           <br />
           {CLINIC.address.shortLine2}
         </span>
-      </span>
+      </a>
 
       <span className="info-pill__divider" aria-hidden="true" />
 

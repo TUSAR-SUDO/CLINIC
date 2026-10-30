@@ -41,7 +41,9 @@ export default function PanelsContainer() {
           index={index}
           active={active === service.id}
           compact={compact}
-          onActivate={() => setActive(service.id)}
+          onActivate={() => {
+            if (!compact) setActive(service.id);
+          }}
           onToggle={() =>
             setActive((current) =>
               compact && current === service.id ? null : service.id,

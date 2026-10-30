@@ -35,18 +35,18 @@ export default function Hero() {
       >
         <DoctorsCard />
         <InfoPill />
-
-        <div className="mobile-bar">
-          <a className="mobile-bar__call" href={CLINIC.phone.primaryHref}>
-            <Phone size={17} strokeWidth={1.6} aria-hidden="true" />
-            Call
-          </a>
-          <a className="mobile-bar__book" href={CLINIC.bookingHref}>
-            Book a visit
-            <ArrowRight size={16} strokeWidth={1.6} aria-hidden="true" />
-          </a>
-        </div>
       </motion.footer>
+
+      <div className="mobile-bar" aria-label="Quick contact and booking">
+        <a className="mobile-bar__call" href={CLINIC.phone.primaryHref}>
+          <Phone size={16} strokeWidth={1.75} aria-hidden="true" />
+          <span>Call</span>
+        </a>
+        <a className="mobile-bar__book" href={CLINIC.bookingHref}>
+          <span>Book a visit</span>
+          <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
+        </a>
+      </div>
 
       <div className="grain" aria-hidden="true" />
       <CustomCursor />

@@ -26,7 +26,10 @@ export default function DoctorsCard() {
 
       <span className="doctors-card__names">
         {CLINIC.doctors.map((doctor) => (
-          <span key={doctor.name}>{doctor.name}</span>
+          <span key={doctor.name} className="doctors-card__doctor-entry">
+            <span className="doctors-card__doctor-name">{doctor.name}</span>
+            <span className="doctors-card__doctor-creds">{doctor.credentials}</span>
+          </span>
         ))}
       </span>
 

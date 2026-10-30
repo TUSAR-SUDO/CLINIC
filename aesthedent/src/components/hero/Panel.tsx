@@ -97,7 +97,7 @@ export default function Panel({
       onPointerMove={handlePointerMove}
       onPointerLeave={resetParallax}
       onPointerEnter={(event) => {
-        if (event.pointerType !== "touch") onActivate();
+        if (!compact && event.pointerType !== "touch") onActivate();
       }}
     >
       <button
@@ -107,7 +107,6 @@ export default function Panel({
         aria-controls={detailsId}
         aria-label={`${active ? "Collapse" : "View"} ${service.name} treatments`}
         onClick={onToggle}
-        onFocus={onActivate}
       />
 
       <div className="panel__media">

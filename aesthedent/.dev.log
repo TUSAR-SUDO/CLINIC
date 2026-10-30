@@ -497,3 +497,14 @@ Error: Route "/": Could not validate `instant` because an error prevented the ta
 ✓ Compiled in 68ms
 ✓ Compiled in 97ms
 ✓ Compiled in 86ms
+ GET / 200 in 230ms (next.js: 3ms, application-code: 227ms)
+✓ Compiled in 69ms
+✓ Compiled in 126ms
+✓ Compiled in 73ms
+✓ Compiled in 69ms
+✓ Compiled in 228ms
+✓ Compiled in 218ms
+✓ Compiled in 71ms
+✓ Compiled in 80ms
+✓ Compiled in 91ms
+✓ Compiled in 501ms
