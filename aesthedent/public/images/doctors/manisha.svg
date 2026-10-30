@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Illustrated placeholder portrait">
+  <title>Placeholder portrait</title>
+  <defs>
+    <clipPath id="manisha-circle">
+      <circle cx="80" cy="80" r="80" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#manisha-circle)">
+    <rect width="160" height="160" fill="#D9A79E" />
+    <circle cx="122" cy="38" r="42" fill="#F3EEE8" opacity=".25" />
+    <path d="M20 162c6-27 29-39 60-39s54 12 60 39H20Z" fill="#FBF7F2" />
+    <path d="M66 106h28v28c-4 8-10 12-14 12s-10-4-14-12v-28Z" fill="#B97E60" />
+    <path d="M38 160c-4-34 0-63 7-83 8-24 22-38 43-38 25 0 38 20 38 50 0 27-11 47-13 71H38Z" fill="#3A1530" />
+    <ellipse cx="82" cy="79" rx="25" ry="33" fill="#C88D6C" />
+    <path d="M57 74c1-20 11-32 27-32 15 0 25 10 27 27-4 12-9 19-14 23 1-10-3-17-10-22-8 8-18 11-30 4Z" fill="#2A1A14" />
+    <path d="M95 58c6 7 7 20 3 30-4 9-10 14-17 17" fill="none" stroke="#8C543B" stroke-width="1.4" stroke-linecap="round" opacity=".7" />
+    <path d="M80 98c4 5 9 6 14 4" fill="none" stroke="#9F6048" stroke-width="1.5" stroke-linecap="round" opacity=".8" />
+    <circle cx="105" cy="84" r="2.2" fill="#6B2237" />
+    <path d="M49 136c-7 9-11 17-12 26h34c-1-15 2-27 9-38" fill="#FBF7F2" />
+    <path d="M111 136c7 9 11 17 12 26H94c1-14-1-25-6-34" fill="#FBF7F2" />
+    <path d="M67 106c3 10 8 17 15 20 7-4 11-11 14-20" fill="none" stroke="#3A1530" stroke-width="1.2" opacity=".38" />
+  </g>
+</svg>

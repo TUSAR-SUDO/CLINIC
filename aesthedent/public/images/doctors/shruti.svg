@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Illustrated placeholder portrait">
+  <title>Placeholder portrait</title>
+  <defs>
+    <clipPath id="shruti-circle">
+      <circle cx="80" cy="80" r="80" />
+    </clipPath>
+  </defs>
+  <g clip-path="url(#shruti-circle)">
+    <rect width="160" height="160" fill="#B9CFDB" />
+    <circle cx="34" cy="40" r="44" fill="#F3EEE8" opacity=".28" />
+    <path d="M18 162c7-27 30-39 62-39s55 12 62 39H18Z" fill="#FBF7F2" />
+    <path d="M65 105h30v28c-4 9-11 13-15 13s-11-4-15-13v-28Z" fill="#A96E50" />
+    <path d="M46 160c-2-31 1-58 7-76 7-23 20-36 37-36 20 0 32 17 33 43 1 24-5 45-6 69H46Z" fill="#2A1A14" />
+    <ellipse cx="83" cy="77" rx="26" ry="34" fill="#B9795B" />
+    <path d="M57 70c2-20 12-31 27-31 16 0 26 11 27 30-5-13-13-20-27-20-12 0-21 7-27 21Z" fill="#241017" />
+    <path d="M96 55c6 8 7 21 3 31-4 9-10 14-18 17" fill="none" stroke="#7E4A35" stroke-width="1.4" stroke-linecap="round" opacity=".7" />
+    <path d="M80 97c4 5 9 6 14 4" fill="none" stroke="#8C523B" stroke-width="1.5" stroke-linecap="round" opacity=".8" />
+    <circle cx="107" cy="82" r="2" fill="#6B2237" />
+    <path d="M48 136c-6 8-10 16-11 25h32c-1-14 2-25 8-35" fill="#FBF7F2" />
+    <path d="M112 136c6 8 10 16 11 25H92c1-13-1-24-6-33" fill="#FBF7F2" />
+    <path d="M68 106c3 9 8 16 15 19 7-4 11-11 14-19" fill="none" stroke="#2A1A14" stroke-width="1.2" opacity=".34" />
+  </g>
+</svg>
