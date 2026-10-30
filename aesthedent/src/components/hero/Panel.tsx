@@ -89,10 +89,10 @@ export default function Panel({
         reduceMotion
           ? { duration: 0.22 }
           : {
-              y: { duration: 0.5, delay: index * 0.055, ease: EASE_OUT },
-              opacity: { duration: 0.36, delay: index * 0.055 },
-              flexGrow: { type: "spring", stiffness: 150, damping: 24, mass: 0.85 },
-            }
+            y: { duration: 0.5, delay: index * 0.055, ease: EASE_OUT },
+            opacity: { duration: 0.36, delay: index * 0.055 },
+            flexGrow: { type: "spring", stiffness: 150, damping: 24, mass: 0.85 },
+          }
       }
       onPointerMove={handlePointerMove}
       onPointerLeave={resetParallax}
