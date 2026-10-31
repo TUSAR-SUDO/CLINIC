@@ -11,7 +11,7 @@ export default function DentalFooter() {
     { label: "Hair", href: "/#service-hair" },
     { label: "PMU", href: "/#service-pmu" },
     { label: "Doctors", href: "#dentists" },
-    { label: "Contact", href: "#clinic-info" },
+    { label: "Contact", href: "#contact-info" },
   ];
 
   return (
@@ -34,4 +34,3 @@ export default function DentalFooter() {
     </footer>
   );
 }
-

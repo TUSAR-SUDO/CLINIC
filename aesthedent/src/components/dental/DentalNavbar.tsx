@@ -2,63 +2,62 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight } from "lucide-react";
 import Logo from "@/components/hero/Logo";
 import { CLINIC } from "@/lib/clinic";
-import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
-const NAV_ITEMS: LiquidNavItem[] = [
-  { label: "Dental", href: "/dental" },
-  { label: "Skin", href: "/#service-skin" },
-  { label: "Hair", href: "/#service-hair" },
-  { label: "PMU", href: "/#service-pmu" },
-  { label: "Doctors", href: "#dentists" },
-  { label: "Contact", href: "#contact-info" },
+const NAV_LINKS = [
+  { label: "Dental", href: "/dental", active: true },
+  { label: "Skin", href: "/#service-skin", active: false },
+  { label: "Hair", href: "/#service-hair", active: false },
+  { label: "PMU", href: "/#service-pmu", active: false },
+  { label: "Doctors", href: "#dentists", active: false },
+  { label: "Contact", href: "#contact-info", active: false },
 ];
 
 export default function DentalNavbar() {
-  const router = useRouter();
-  const [activeIdx, setActiveIdx] = useState(0); // 0 = Dental
   const [sheetOpen, setSheetOpen] = useState(false);
-
-  const handleNavChange = (index: number, item: LiquidNavItem) => {
-    setActiveIdx(index);
-    if (item.href) {
-      if (item.href.startsWith("#")) {
-        const el = document.querySelector(item.href);
-        if (el) el.scrollIntoView({ behavior: "smooth" });
-      } else {
-        router.push(item.href);
-      }
-    }
-  };
 
   return (
     <header className="dental-nav-header" role="banner">
       <div className="dental-nav-header__inner">
+        {/* Brand Logo */}
         <Link href="/" className="dental-nav-header__logo" aria-label="Aesthedent Home">
           <Logo />
         </Link>
 
-        {/* Center Liquid Navbar */}
-        <div className="dental-nav-header__center">
-          <LiquidNavbar
-            items={NAV_ITEMS}
-            active={activeIdx}
-            onChange={handleNavChange}
-            tone="light"
-            sound={false}
-          />
-        </div>
+        {/* Center Nav Capsule - Exact replica of reference image */}
+        <nav className="dental-nav-capsule" aria-label="Specialty navigation">
+          {NAV_LINKS.map((link) =>
+            link.active ? (
+              <span key={link.label} className="dental-nav-capsule__active">
+                {link.label}
+              </span>
+            ) : (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="dental-nav-capsule__link"
+                onClick={(e) => {
+                  if (link.href.startsWith("#")) {
+                    e.preventDefault();
+                    document.querySelector(link.href)?.scrollIntoView({ behavior: "smooth" });
+                  }
+                }}
+              >
+                {link.label}
+              </Link>
+            )
+          )}
+        </nav>
 
         {/* Right CTA */}
         <div className="dental-nav-header__cta">
           <LiquidMetalButton
             label="Book a visit"
             variant="aubergine"
-            width={132}
+            width={128}
             height={38}
             onClick={() => {
               window.location.href = CLINIC.bookingHref;
@@ -80,11 +79,11 @@ export default function DentalNavbar() {
       {sheetOpen && (
         <div className="dental-mobile-sheet">
           <nav className="dental-mobile-sheet__nav">
-            {NAV_ITEMS.map((item) => (
+            {NAV_LINKS.map((item) => (
               <Link
                 key={item.label}
-                href={item.href || "/"}
-                className="dental-mobile-sheet__link"
+                href={item.href}
+                className={`dental-mobile-sheet__link${item.active ? " is-active" : ""}`}
                 onClick={() => setSheetOpen(false)}
               >
                 {item.label}
@@ -107,4 +106,3 @@ export default function DentalNavbar() {
     </header>
   );
 }
-

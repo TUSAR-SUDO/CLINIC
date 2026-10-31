@@ -3,9 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import { Calendar, MapPin, Phone } from "lucide-react";
-import { motion } from "motion/react";
 import { CLINIC } from "@/lib/clinic";
-import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 export default function DentalBottomCta() {
   return (

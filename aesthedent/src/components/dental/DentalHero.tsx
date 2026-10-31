@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, ArrowRight, ArrowDown } from "lucide-react";
-import { motion } from "motion/react";
 import { CLINIC } from "@/lib/clinic";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
@@ -21,7 +20,7 @@ export default function DentalHero() {
 
   return (
     <section className="dental-hero" aria-label="Dental Care Introduction">
-      {/* Left Vertical Step Rail */}
+      {/* Left Vertical Indicator Rail */}
       <aside className="dental-rail" aria-hidden="true">
         <div className="dental-rail__steps">
           <div className="dental-rail__item is-active">
@@ -53,15 +52,10 @@ export default function DentalHero() {
         </button>
       </aside>
 
-      {/* Main Content Area */}
+      {/* Main Container */}
       <div className="dental-hero__container">
         {/* Left Column: Typography & CTAs */}
-        <motion.div
-          className="dental-hero__content"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-        >
+        <div className="dental-hero__content">
           <nav className="dental-hero__breadcrumb" aria-label="Breadcrumb">
             <Link href="/" className="dental-hero__bread-link">Home</Link>
             <span className="dental-hero__bread-sep">/</span>
@@ -84,7 +78,7 @@ export default function DentalHero() {
             <LiquidMetalButton
               label="Book dental consultation"
               variant="aubergine"
-              width={204}
+              width={216}
               height={44}
               onClick={() => {
                 window.location.href = CLINIC.bookingHref;
@@ -100,15 +94,10 @@ export default function DentalHero() {
               <span>Call {CLINIC.phone.primaryDisplay}</span>
             </a>
           </div>
-        </motion.div>
+        </div>
 
-        {/* Right Column: Arched Dental Photo + Collapsed Companion Panels */}
-        <motion.div
-          className="dental-hero__stage"
-          initial={{ opacity: 0, scale: 0.96 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-        >
+        {/* Right Column: Arched Dental Photo + 3 Flush Companion Strips */}
+        <div className="dental-hero__stage">
           {/* Main Arched Dental Photo */}
           <div className="dental-hero__arch-card">
             <Image
@@ -117,12 +106,12 @@ export default function DentalHero() {
               fill
               priority
               className="dental-hero__arch-img"
-              sizes="(max-width: 900px) 100vw, 55vw"
+              sizes="(max-width: 900px) 100vw, 50vw"
             />
             <div className="dental-hero__arch-scrim" />
           </div>
 
-          {/* Collapsed Vertical Companion Panels */}
+          {/* 3 Companion Panels: Skin, Hair, PMU */}
           <div className="dental-hero__companions" role="region" aria-label="Explore other specialties">
             {COMPANIONS.map((item) => (
               <Link
@@ -142,13 +131,13 @@ export default function DentalHero() {
                 <div className="dental-companion__info">
                   <h3 className="dental-companion__name">{item.name}</h3>
                   <span className="dental-companion__btn" aria-hidden="true">
-                    <ArrowRight size={13} strokeWidth={2} />
+                    <ArrowRight size={13} strokeWidth={1.8} />
                   </span>
                 </div>
               </Link>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

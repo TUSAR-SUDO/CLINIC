@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Image from "next/image";
 import { Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -37,6 +38,17 @@ export default function DentalFAQ() {
 
   return (
     <section className="faq-section" aria-label="Frequently Asked Questions">
+      {/* Decorative Botanical Branch Shadow (Bottom Left) */}
+      <div className="faq-section__botanical" aria-hidden="true">
+        <Image
+          src="/images/dental/botanical-shadow.png"
+          alt=""
+          width={150}
+          height={123}
+          className="faq-section__botanical-img"
+        />
+      </div>
+
       <div className="faq-section__container">
         {/* Left: Section Headline */}
         <div className="faq-section__header">
@@ -74,7 +86,7 @@ export default function DentalFAQ() {
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
                       exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.38, ease: [0.16, 1, 0.3, 1] }}
+                      transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                       className="faq-item__collapse"
                     >
                       <div className="faq-item__content">
@@ -91,4 +103,3 @@ export default function DentalFAQ() {
     </section>
   );
 }
-

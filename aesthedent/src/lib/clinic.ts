@@ -37,7 +37,7 @@ export const CLINIC = {
   /** TODO(clinic): replace with the real booking destination when confirmed. */
   bookingHref: "tel:+919692485602",
   nav: [
-    { label: "Dental", href: "#service-dental" },
+    { label: "Dental", href: "/dental" },
     { label: "Skin", href: "#service-skin" },
     { label: "Hair", href: "#service-hair" },
     { label: "PMU", href: "#service-pmu" },

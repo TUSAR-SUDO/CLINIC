@@ -2228,12 +2228,51 @@ svg {
   z-index: 10;
 }
 
-.dental-nav-header__center {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+/* Center Nav Capsule - Exact replica of reference image */
+.dental-nav-capsule {
   display: flex;
   align-items: center;
+  gap: 0.2rem;
+  padding: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.dental-nav-capsule__active {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 1.25rem;
+  border-radius: 9999px;
+  background: #250E1A;
+  color: #FFFFFF;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(37, 14, 26, 0.25);
+  cursor: default;
+}
+
+.dental-nav-capsule__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 9999px;
+  color: #554440;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 450;
+  transition: all 0.2s ease;
+}
+
+.dental-nav-capsule__link:hover {
+  color: var(--dark-aubergine);
+  background: rgba(0, 0, 0, 0.04);
 }
 
 .dental-nav-header__cta {
@@ -2828,13 +2867,19 @@ svg {
 .how-section__steps-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
+  gap: 2.25rem;
 }
 
 .how-step {
   display: flex;
   flex-direction: column;
   gap: 0.65rem;
+  position: relative;
+}
+
+.how-step--divided {
+  padding-left: 2rem;
+  border-left: 1px solid rgba(140, 127, 122, 0.22);
 }
 
 .how-step__head {
@@ -3160,9 +3205,26 @@ svg {
    FAQ SECTION
    ========================================================================== */
 .faq-section {
+  position: relative;
   max-width: 1360px;
   margin: 0 auto;
-  padding: 4rem 2.5rem;
+  padding: 4.5rem 2.5rem 5rem;
+}
+
+.faq-section__botanical {
+  position: absolute;
+  bottom: 2rem;
+  left: 1rem;
+  pointer-events: none;
+  opacity: 0.85;
+  z-index: 1;
+}
+
+.faq-section__botanical-img {
+  width: 150px;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
 }
 
 .faq-section__container {
@@ -3170,6 +3232,8 @@ svg {
   grid-template-columns: 240px 1fr;
   gap: 3.5rem;
   align-items: flex-start;
+  position: relative;
+  z-index: 2;
 }
 
 .faq-section__header {

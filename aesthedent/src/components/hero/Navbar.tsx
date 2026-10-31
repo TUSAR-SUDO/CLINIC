@@ -248,6 +248,10 @@ export default function Navbar() {
                   onClick={() => {
                     closeMenu();
                     const serviceKey = link.label.toLowerCase();
+                    if (serviceKey === "dental") {
+                      window.location.href = "/dental";
+                      return;
+                    }
                     if (["dental", "skin", "hair", "pmu"].includes(serviceKey)) {
                       window.dispatchEvent(
                         new CustomEvent("aesthedent:select-service", {

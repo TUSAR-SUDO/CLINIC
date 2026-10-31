@@ -33,18 +33,18 @@ export default function HowItWorks() {
               alt="Aesthedent modern dental suite with luxury clinic chair and surgical light"
               fill
               className="how-section__img"
-              sizes="(max-width: 768px) 100vw, 40vw"
+              sizes="(max-width: 768px) 100vw, 42vw"
             />
           </div>
         </div>
 
-        {/* Right: 3-Step Timeline */}
+        {/* Right: 3-Step Timeline with vertical divider lines */}
         <div className="how-section__steps-wrap">
           <span className="how-section__kicker">HOW A VISIT WORKS</span>
 
           <div className="how-section__steps-list">
-            {STEPS.map((step) => (
-              <div key={step.num} className="how-step">
+            {STEPS.map((step, idx) => (
+              <div key={step.num} className={`how-step${idx > 0 ? " how-step--divided" : ""}`}>
                 <div className="how-step__head">
                   <span className="how-step__num">{step.num}</span>
                   <span className="how-step__rule" />
