@@ -13,6 +13,7 @@ export interface LiquidMetalButtonProps {
   height?: number;
   variant?: "aubergine" | "cream" | "dark" | "default";
   icon?: React.ReactNode;
+  children?: React.ReactNode;
   className?: string;
   ariaLabel?: string;
 }
@@ -25,6 +26,7 @@ export function LiquidMetalButton({
   height: customHeight,
   variant = "aubergine",
   icon,
+  children,
   className = "",
   ariaLabel,
 }: LiquidMetalButtonProps) {
@@ -246,8 +248,10 @@ export function LiquidMetalButton({
               pointerEvents: "none",
             }}
           >
-            {viewMode === "icon" &&
-              (icon ? (
+            {children ? (
+              children
+            ) : viewMode === "icon" ? (
+              icon ? (
                 icon
               ) : (
                 <Sparkles
@@ -259,8 +263,8 @@ export function LiquidMetalButton({
                     transform: "scale(1)",
                   }}
                 />
-              ))}
-            {viewMode === "text" && (
+              )
+            ) : (
               <span
                 style={{
                   fontSize: "13.2px",

@@ -63,17 +63,26 @@ export default function InfoPill() {
         </span>
       </span>
 
+      <span className="info-pill__divider" aria-hidden="true" />
+
       <div className="info-pill__call-wrapper">
         <LiquidMetalButton
-          label={`Call ${CLINIC.phone.primaryDisplay}`}
-          icon={<Phone size={12} strokeWidth={1.8} aria-hidden="true" />}
           onClick={() => {
             window.location.href = CLINIC.phone.primaryHref;
           }}
           variant="aubergine"
-          width={140}
-          height={34}
-        />
+          width={120}
+          height={36}
+          ariaLabel={`Call ${CLINIC.phone.primaryDisplay}`}
+        >
+          <div className="info-pill__call-layout">
+            <Phone size={13} strokeWidth={2} className="info-pill__call-ico" aria-hidden="true" />
+            <div className="info-pill__call-col">
+              <span className="info-pill__call-text">Call</span>
+              <span className="info-pill__call-digits">{CLINIC.phone.primaryDisplay}</span>
+            </div>
+          </div>
+        </LiquidMetalButton>
       </div>
 
       <address className="sr-only">
