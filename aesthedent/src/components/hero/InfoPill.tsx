@@ -31,13 +31,6 @@ export default function InfoPill() {
 
   return (
     <aside className="info-pill" id="clinic-info" aria-label="Clinic hours and contact">
-      <span className="info-pill__status" aria-live="polite">
-        <span className={`status-dot ${dotClass}`} aria-hidden="true" />
-        <span>{status?.label ?? "Clinic hours"}</span>
-      </span>
-
-      <span className="info-pill__divider" aria-hidden="true" />
-
       <a
         className="info-pill__block info-pill__address-link"
         href={`https://maps.google.com/?q=${encodeURIComponent(
@@ -47,25 +40,37 @@ export default function InfoPill() {
         rel="noopener noreferrer"
         aria-label="View clinic on Google Maps"
       >
-        <MapPin size={17} strokeWidth={1.5} aria-hidden="true" />
+        <MapPin size={16} strokeWidth={1.6} className="info-pill__pin" aria-hidden="true" />
         <span className="info-pill__address">
-          {CLINIC.address.shortLine1}
+          <span>{CLINIC.address.shortLine1}</span>
           <br />
-          {CLINIC.address.shortLine2}
+          <span>{CLINIC.address.shortLine2}</span>
         </span>
       </a>
 
       <span className="info-pill__divider" aria-hidden="true" />
 
+      <span className="info-pill__status" aria-live="polite">
+        <span className={`status-dot ${dotClass}`} aria-hidden="true" />
+        <span className="info-pill__status-text">
+          <strong className="info-pill__status-main">
+            {isOpen === null ? "Clinic hours" : isOpen ? "Open now" : "Closed"}
+          </strong>
+          <span className="info-pill__status-sub">
+            {isOpen ? "Open today until 8 PM" : "Opens at 10 AM"}
+          </span>
+        </span>
+      </span>
+
       <a
-        className="info-pill__block"
+        className="info-pill__call-btn"
         href={CLINIC.phone.primaryHref}
         aria-label={`Call Aesthedent on ${CLINIC.phone.primaryDisplay}`}
       >
-        <Phone size={17} strokeWidth={1.5} aria-hidden="true" />
-        <span className="info-pill__call">
-          <span>Call</span>
-          <span>{CLINIC.phone.primaryDisplay}</span>
+        <Phone size={14} strokeWidth={1.8} aria-hidden="true" />
+        <span className="info-pill__call-text">
+          <span className="info-pill__call-action">Call</span>
+          <span className="info-pill__call-num">{CLINIC.phone.primaryDisplay}</span>
         </span>
       </a>
 

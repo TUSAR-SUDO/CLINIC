@@ -41,7 +41,10 @@ export default function Logo({ href = "#top", onClick, className = "" }: LogoPro
   const content = (
     <>
       <BrandMark className="brand__mark" />
-      <span className="brand__word">Aesthedent</span>
+      <span className="brand__text-group">
+        <span className="brand__word">Aesthedent</span>
+        <span className="brand__tagline">DENTAL · SKIN · HAIR · PMU</span>
+      </span>
     </>
   );
 

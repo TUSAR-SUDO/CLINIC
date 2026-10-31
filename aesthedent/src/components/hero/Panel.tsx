@@ -69,10 +69,12 @@ export default function Panel({
 
   const detailsId = `treatments-${service.id}`;
   const titleId = `title-${service.id}`;
+  const flexGrowVal = compact ? (active ? 1.85 : 0.72) : (active ? 1.9 : service.restingGrow);
   const styles = {
     "--image-position": service.image.position,
     "--panel-offset": `${service.offset}px`,
-    flexGrow: active ? 1.9 : service.restingGrow,
+    "--panel-radius": service.radius,
+    flexGrow: flexGrowVal,
   } as CSSProperties;
 
   return (
@@ -85,15 +87,15 @@ export default function Panel({
       data-cursor="grow"
       aria-labelledby={titleId}
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 74 }}
-      animate={{ opacity: 1, y: 0, flexGrow: active ? 1.9 : service.restingGrow }}
+      animate={{ opacity: 1, y: 0, flexGrow: flexGrowVal }}
       transition={
         reduceMotion
           ? { duration: 0.22 }
           : {
             y: { duration: 0.5, delay: index * 0.055, ease: EASE_OUT },
             opacity: { duration: 0.36, delay: index * 0.055 },
-            flexGrow: { type: "spring", stiffness: 150, damping: 24, mass: 0.85 },
-            layout: { type: "spring", stiffness: 220, damping: 28, mass: 0.8 },
+            flexGrow: { type: "spring", stiffness: 160, damping: 24, mass: 0.8 },
+            layout: { type: "spring", stiffness: 200, damping: 26, mass: 0.8 },
           }
       }
       onPointerMove={handlePointerMove}
@@ -107,7 +109,7 @@ export default function Panel({
         className="panel__hit"
         aria-expanded={active}
         aria-controls={detailsId}
-        aria-label={`${active ? "Collapse" : "View"} ${service.name} treatments`}
+        aria-label={`${active ? "Active" : "Select"} ${service.name} treatments`}
         onClick={onToggle}
       />
 
@@ -122,7 +124,7 @@ export default function Panel({
               src={service.image.src}
               alt={service.image.alt}
               fill
-              sizes="(max-width: 699px) 100vw, (max-width: 1023px) 42vw, 38vw"
+              sizes="(max-width: 699px) 45vw, (max-width: 1023px) 42vw, 38vw"
               className="panel__image"
               quality={84}
               loading="eager"
@@ -144,14 +146,20 @@ export default function Panel({
         <h2 className="panel__title" id={titleId}>
           {service.name}
         </h2>
+
         <motion.p
           className="panel__descriptor"
           initial={false}
-          animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
+          animate={active || compact ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
           transition={{ duration: 0.3 }}
         >
           {service.descriptor}
         </motion.p>
+
+        {/* Circular arrow button underneath descriptor as in Reference Image 2 */}
+        <div className="panel__circle-arrow" aria-hidden="true">
+          <ArrowRight size={13} strokeWidth={1.8} />
+        </div>
 
         <motion.div
           className="panel__details"
@@ -160,7 +168,7 @@ export default function Panel({
           inert={!active}
           initial={false}
           animate={
-            active
+            active && !compact
               ? { height: "auto", opacity: 1 }
               : { height: 0, opacity: 0 }
           }
@@ -205,7 +213,7 @@ export default function Panel({
           className="panel__rest"
           aria-hidden="true"
           initial={false}
-          animate={{ opacity: active ? 0 : 1, scale: active ? 0.8 : 1 }}
+          animate={{ opacity: active || compact ? 0 : 1, scale: active || compact ? 0.8 : 1 }}
           transition={{ duration: 0.25 }}
         >
           <span className="panel__arrow">

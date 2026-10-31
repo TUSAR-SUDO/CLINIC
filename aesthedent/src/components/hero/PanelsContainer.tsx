@@ -5,7 +5,7 @@ import { DEFAULT_SERVICE, SERVICES, type ServiceId } from "@/lib/services";
 import Panel from "./Panel";
 
 export default function PanelsContainer() {
-  const [active, setActive] = useState<ServiceId | null>(DEFAULT_SERVICE);
+  const [active, setActive] = useState<ServiceId>(DEFAULT_SERVICE);
   const [compact, setCompact] = useState(false);
 
   useEffect(() => {
@@ -23,14 +23,22 @@ export default function PanelsContainer() {
     const media = window.matchMedia("(max-width: 699px)");
     const sync = () => {
       setCompact(media.matches);
-      if (!media.matches) {
-        setActive((current) => current ?? DEFAULT_SERVICE);
-      }
     };
     sync();
     media.addEventListener("change", sync);
     return () => media.removeEventListener("change", sync);
   }, []);
+
+  const selectService = (id: ServiceId) => {
+    setActive(id);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("aesthedent:select-service", {
+          detail: id,
+        }),
+      );
+    }
+  };
 
   return (
     <div className="hero__stage" role="group" aria-label="Aesthedent services">
@@ -41,14 +49,8 @@ export default function PanelsContainer() {
           index={index}
           active={active === service.id}
           compact={compact}
-          onActivate={() => {
-            if (!compact) setActive(service.id);
-          }}
-          onToggle={() =>
-            setActive((current) =>
-              compact && current === service.id ? null : service.id,
-            )
-          }
+          onActivate={() => selectService(service.id)}
+          onToggle={() => selectService(service.id)}
         />
       ))}
     </div>

@@ -9,13 +9,20 @@ import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-n
 import Logo from "./Logo";
 import Magnetic from "./Magnetic";
 
-const NAV_ITEMS: LiquidNavItem[] = [
+const DESKTOP_NAV_ITEMS: LiquidNavItem[] = [
   { label: "Dental", href: "#service-dental", fx: "glow" },
   { label: "Skin", href: "#service-skin", fx: "drop" },
   { label: "Hair", href: "#service-hair", fx: "wave" },
   { label: "PMU", href: "#service-pmu", fx: "pop" },
   { label: "Doctors", href: "#doctors", fx: "glow" },
   { label: "Contact", href: "#clinic-info", fx: "drop" },
+];
+
+const MOBILE_NAV_ITEMS: LiquidNavItem[] = [
+  { label: "Dental", href: "#service-dental", fx: "glow" },
+  { label: "Skin", href: "#service-skin", fx: "drop" },
+  { label: "Hair", href: "#service-hair", fx: "wave" },
+  { label: "PMU", href: "#service-pmu", fx: "pop" },
 ];
 
 export default function Navbar() {
@@ -85,15 +92,21 @@ export default function Navbar() {
   }, []);
 
   const [activeNavIndex, setActiveNavIndex] = useState(1); // 1 = Skin (default expanded)
+  const [mobileNavIndex, setMobileNavIndex] = useState(1);
 
   useEffect(() => {
     const handleSelect = (e: Event) => {
       const customEvent = e as CustomEvent<string>;
       if (customEvent.detail) {
-        const idx = NAV_ITEMS.findIndex(
-          (item) => item.label.toLowerCase() === customEvent.detail.toLowerCase(),
+        const key = customEvent.detail.toLowerCase();
+        const dIdx = DESKTOP_NAV_ITEMS.findIndex(
+          (item) => item.label.toLowerCase() === key,
         );
-        if (idx !== -1) setActiveNavIndex(idx);
+        if (dIdx !== -1) setActiveNavIndex(dIdx);
+        const mIdx = MOBILE_NAV_ITEMS.findIndex(
+          (item) => item.label.toLowerCase() === key,
+        );
+        if (mIdx !== -1) setMobileNavIndex(mIdx);
       }
     };
     window.addEventListener("aesthedent:select-service", handleSelect);
@@ -103,6 +116,11 @@ export default function Navbar() {
   const handleNavChange = (index: number, item: LiquidNavItem) => {
     setActiveNavIndex(index);
     const serviceKey = item.label.toLowerCase();
+    const mIdx = MOBILE_NAV_ITEMS.findIndex(
+      (m) => m.label.toLowerCase() === serviceKey,
+    );
+    if (mIdx !== -1) setMobileNavIndex(mIdx);
+
     if (["dental", "skin", "hair", "pmu"].includes(serviceKey)) {
       if (typeof window !== "undefined") {
         window.dispatchEvent(
@@ -110,12 +128,6 @@ export default function Navbar() {
             detail: serviceKey,
           }),
         );
-        if (window.innerWidth <= 699) {
-          const el = document.getElementById(`service-${serviceKey}`);
-          if (el) {
-            el.scrollIntoView({ behavior: "smooth", block: "nearest" });
-          }
-        }
       }
     } else if (serviceKey === "doctors") {
       const el = document.getElementById("doctors");
@@ -123,6 +135,23 @@ export default function Navbar() {
     } else if (serviceKey === "contact") {
       const el = document.getElementById("clinic-info");
       el?.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  };
+
+  const handleMobileNavChange = (index: number, item: LiquidNavItem) => {
+    setMobileNavIndex(index);
+    const serviceKey = item.label.toLowerCase();
+    const dIdx = DESKTOP_NAV_ITEMS.findIndex(
+      (d) => d.label.toLowerCase() === serviceKey,
+    );
+    if (dIdx !== -1) setActiveNavIndex(dIdx);
+
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(
+        new CustomEvent("aesthedent:select-service", {
+          detail: serviceKey,
+        }),
+      );
     }
   };
 
@@ -142,7 +171,7 @@ export default function Navbar() {
 
         <div className="nav-center-wrapper">
           <LiquidNavbar
-            items={NAV_ITEMS}
+            items={DESKTOP_NAV_ITEMS}
             active={activeNavIndex}
             onChange={handleNavChange}
             tone="light"
@@ -176,9 +205,9 @@ export default function Navbar() {
 
       <div className="hero__nav-mobile-strip" aria-label="Quick category navigation">
         <LiquidNavbar
-          items={NAV_ITEMS}
-          active={activeNavIndex}
-          onChange={handleNavChange}
+          items={MOBILE_NAV_ITEMS}
+          active={mobileNavIndex}
+          onChange={handleMobileNavChange}
           tone="light"
           sound={false}
         />

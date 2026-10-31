@@ -34,6 +34,16 @@ export default function Headline() {
           One clinic.
         </motion.span>
       </span>
+      <span className="mask-line hero__subtitle-mask">
+        <motion.span
+          className="mask-line__inner hero__subtitle"
+          initial={reduceMotion ? { opacity: 0 } : { y: "110%" }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={lineTransition(0.72)}
+        >
+          A COMPLETE AESTHETIC CARE DESTINATION IN OLD TOWN, BHUBANESWAR.
+        </motion.span>
+      </span>
     </h1>
   );
 }
