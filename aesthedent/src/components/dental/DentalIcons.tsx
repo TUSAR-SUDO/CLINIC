@@ -123,3 +123,4 @@ export function TeethWhiteningIcon({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+
