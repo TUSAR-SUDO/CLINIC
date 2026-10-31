@@ -265,7 +265,7 @@ export function LiquidNavbar({
     const r = T.r * (1 - 0.3 * thin)
     if (s.glc) {
       const { gl: g, u } = s.glc
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       g.viewport(0, 0, g.drawingBufferWidth, g.drawingBufferHeight)
       g.uniform2f(u.uRes, s.w + PAD * 2, s.h + PAD * 2)
       g.uniform1f(u.uDpr, dpr)
@@ -301,7 +301,7 @@ export function LiquidNavbar({
     const s = st.current
     const T = s.t
     s.time += dt
-    s.q += (T.q - s.q) * Math.min(1, dt * 12)
+    s.q += (T.q - s.q) * Math.min(1, dt * 18)
     const bodies = [s.a, s.b]
     let still = true
     if (s.reduce) {
@@ -309,10 +309,9 @@ export function LiquidNavbar({
     } else {
       bodies.forEach((B, i) => {
         const lead = i === s.lead
-        const k = lead ? 210 : 72
-        const c = lead ? 25 : 13
-        const f = !lead && now < s.lagFrom ? 0.08 : 1
-        B.v += (k * (T.x - B.x) - c * B.v) * dt * f
+        const k = lead ? 440 : 360
+        const c = lead ? 34 : 30
+        B.v += (k * (T.x - B.x) - c * B.v) * dt
         B.x += B.v * dt
         const lo = PAD + 6 + s.q + T.r - 3, hi = PAD + s.w - 6 - s.q - T.r + 3
         if (B.x < lo || B.x > hi) {
@@ -323,14 +322,14 @@ export function LiquidNavbar({
         if (Math.abs(T.x - B.x) > 0.3 || Math.abs(B.v) > 3) still = false
       })
       const L = bodies[s.lead]
-      const syT = 1 - 0.2 * Math.min(Math.abs(L.v) / 1500, 1)
-      s.sy.v += (280 * (syT - s.sy.s) - 9 * s.sy.v) * dt
+      const syT = 1 - 0.12 * Math.min(Math.abs(L.v) / 1500, 1)
+      s.sy.v += (360 * (syT - s.sy.s) - 14 * s.sy.v) * dt
       s.sy.s += s.sy.v * dt
       if (Math.abs(s.sy.s - 1) > 0.002 || Math.abs(s.sy.v) > 0.02) still = false
-      // break the neck: spawn droplets between head and tail
+      // Only split into droplets on wide distant jumps, preserving cohesive silk on normal tabs
       const sep = Math.abs(s.a.x - s.b.x)
       const r = T.r * (1 - 0.3 * Math.min(sep / (2 * (T.q + T.r) || 1), 1))
-      if (!s.split && s.moving && sep - 2 * T.q - 2 * r > -6) {
+      if (!s.split && s.moving && sep > 150 && sep - 2 * T.q - 2 * r > 35) {
         s.split = true
         const lo = bodies[1 - s.lead], hi = bodies[s.lead]
         ;[0.3, 0.5, 0.72].forEach((t, j) => {
@@ -375,7 +374,7 @@ export function LiquidNavbar({
       s.last = now
       step(dt, now)
       draw()
-      const busy = s.moving || s.rips.length || s.sats.length || s.mouse.s > 0.01
+      const busy = s.moving || s.rips.length || s.sats.length || s.mouse.s > 0.01 || Math.abs(s.a.x - s.t.x) > 0.3 || Math.abs(s.b.x - s.t.x) > 0.3
       // ambient water keeps moving while visible; reduced-motion only animates on change
       if (s.visible && (!s.reduce || busy)) s.raf = requestAnimationFrame(tick)
       else s.raf = 0
@@ -402,14 +401,13 @@ export function LiquidNavbar({
       s.ready = true
     } else if (Math.abs(nx - T.x) > 0.5) {
       s.lead = Math.abs(nx - s.a.x) <= Math.abs(nx - s.b.x) ? 0 : 1
-      s.lagFrom = performance.now() + 70
       s.moving = true
       s.split = false
     }
     T.x = nx
     const cv = canvasRef.current
     if (cv) {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2)
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5)
       const W = s.w + PAD * 2, Hh = s.h + PAD * 2
       if (cv.width !== Math.round(W * dpr) || cv.height !== Math.round(Hh * dpr)) {
         cv.width = Math.round(W * dpr)
