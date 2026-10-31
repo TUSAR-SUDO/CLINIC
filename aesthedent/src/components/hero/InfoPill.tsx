@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { MapPin, Phone } from "lucide-react";
 import { CLINIC, getClinicOpenState, type ClinicOpenState } from "@/lib/clinic";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 export default function InfoPill() {
   // The clock is intentionally read after hydration: Next's Cache Components
@@ -62,17 +63,18 @@ export default function InfoPill() {
         </span>
       </span>
 
-      <a
-        className="info-pill__call-btn"
-        href={CLINIC.phone.primaryHref}
-        aria-label={`Call Aesthedent on ${CLINIC.phone.primaryDisplay}`}
-      >
-        <Phone size={14} strokeWidth={1.8} aria-hidden="true" />
-        <span className="info-pill__call-text">
-          <span className="info-pill__call-action">Call</span>
-          <span className="info-pill__call-num">{CLINIC.phone.primaryDisplay}</span>
-        </span>
-      </a>
+      <div className="info-pill__call-wrapper">
+        <LiquidMetalButton
+          label={`Call ${CLINIC.phone.primaryDisplay}`}
+          icon={<Phone size={12} strokeWidth={1.8} aria-hidden="true" />}
+          onClick={() => {
+            window.location.href = CLINIC.phone.primaryHref;
+          }}
+          variant="aubergine"
+          width={140}
+          height={34}
+        />
+      </div>
 
       <address className="sr-only">
         {CLINIC.address.line1}, {CLINIC.address.line2}, {CLINIC.address.city},{" "}

@@ -977,39 +977,23 @@ svg {
   white-space: nowrap;
 }
 
-.info-pill__call-btn {
-  display: inline-flex;
+.info-pill__call-wrapper {
+  display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.55rem 0.95rem;
-  border-radius: 999px;
-  background: var(--dark-aubergine);
-  color: var(--cream);
-  font-size: 0.74rem;
-  font-weight: 550;
-  transition: transform 0.2s var(--ease-out), background 0.2s;
-  box-shadow: 0 4px 12px -2px rgba(58, 21, 48, 0.35);
-  text-decoration: none !important;
+  flex: none;
 }
 
-.info-pill__call-btn:hover {
-  background: #250b1d;
-  transform: translateY(-1px);
+.info-pill__call-wrapper .metal-btn-wrap {
+  width: 140px !important;
+  height: 36px !important;
 }
 
-.info-pill__call-text {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.35rem;
-}
-
-.info-pill__call-action {
-  font-weight: 500;
-  opacity: 0.88;
-}
-
-.info-pill__call-num {
-  font-weight: 600;
+.info-pill__call-wrapper .metal-btn {
+  width: 140px !important;
+  height: 36px !important;
+  font-size: 0.72rem !important;
+  gap: 5px !important;
+  padding: 0 10px !important;
 }
 
 .info-pill a {
@@ -1508,7 +1492,36 @@ svg {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 0.5rem;
     width: 100%;
+  }
+
+  .brand {
+    gap: 0.45rem !important;
+    flex: 0 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .brand__mark {
+    width: 1.45rem !important;
+    height: 1.45rem !important;
+    flex-shrink: 0 !important;
+  }
+
+  .brand__word {
+    font-size: 1.15rem !important;
+    font-weight: 500 !important;
+    letter-spacing: -0.025em !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  .brand__tagline {
+    font-size: 0.38rem !important;
+    letter-spacing: 0.12em !important;
+    color: var(--muted-ink) !important;
+    margin-top: 0.12rem !important;
+    white-space: nowrap !important;
   }
 
   .nav-center-wrapper {
@@ -1519,27 +1532,28 @@ svg {
     display: flex;
     align-items: center;
     margin-left: auto;
-    margin-right: 0.45rem;
+    margin-right: 0.35rem;
+    flex-shrink: 0;
   }
 
-  /* Compact LiquidMetalButton in header matching Reference Image 2 */
+  /* Compact LiquidMetalButton in header — zero collision with brand */
   .nav-cta .metal-btn-wrap {
-    width: 114px !important;
-    height: 36px !important;
+    width: 98px !important;
+    height: 32px !important;
   }
 
   .nav-cta .metal-btn {
-    width: 114px !important;
-    height: 36px !important;
-    font-size: 0.72rem !important;
-    gap: 4px !important;
-    padding: 0 10px !important;
+    width: 98px !important;
+    height: 32px !important;
+    font-size: 0.65rem !important;
+    gap: 3px !important;
+    padding: 0 8px !important;
   }
 
   .nav-menu {
     display: inline-flex;
-    width: 2.25rem;
-    height: 2.25rem;
+    width: 2rem !important;
+    height: 2rem !important;
     border-radius: 50%;
     align-items: center;
     justify-content: center;
@@ -1599,8 +1613,40 @@ svg {
     height: 100%;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 12px 28px -8px rgba(42, 26, 20, 0.18);
-    border: 1px solid rgba(255, 255, 255, 0.25);
+    flex: 0.65 1 0% !important;
+    transition:
+      flex 0.52s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: flex;
+    box-shadow:
+      0 14px 34px -8px rgba(35, 14, 25, 0.25),
+      inset 0 1.5px 2px rgba(255, 255, 255, 0.7),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+  }
+
+  .panel.is-active {
+    flex: 2.1 1 0% !important;
+    box-shadow:
+      0 18px 42px -8px rgba(58, 21, 48, 0.35),
+      inset 0 2px 2.5px rgba(255, 255, 255, 0.9),
+      inset 0 -1px 2px rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.65);
+  }
+
+  .panel__zoom {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .panel.is-active .panel__zoom {
+    transform: scale(1.05);
+  }
+
+  .panel__image {
+    filter: contrast(1.04) saturate(1.14);
   }
 
   /* Asymmetric Card Top Radii & Offsets from Reference Image 2 */
@@ -1713,25 +1759,25 @@ svg {
     display: none !important;
   }
 
-  /* Scrims for mobile */
+  /* Vibrant Luminous Scrims matching Reference Image 2 */
   .panel--dental .panel__scrim {
     background:
-      linear-gradient(180deg, rgba(185, 207, 219, 0.85) 0%, rgba(185, 207, 219, 0.3) 40%, rgba(15, 10, 20, 0.6) 100%);
+      linear-gradient(180deg, rgba(185, 207, 219, 0.42) 0%, rgba(185, 207, 219, 0.12) 26%, transparent 48%, rgba(10, 5, 15, 0.72) 100%);
   }
 
   .panel--skin .panel__scrim {
     background:
-      linear-gradient(180deg, rgba(217, 167, 158, 0.88) 0%, rgba(217, 167, 158, 0.3) 40%, rgba(15, 10, 20, 0.6) 100%);
+      linear-gradient(180deg, rgba(226, 172, 162, 0.38) 0%, rgba(226, 172, 162, 0.1) 26%, transparent 48%, rgba(10, 5, 15, 0.72) 100%);
   }
 
   .panel--hair .panel__scrim {
     background:
-      linear-gradient(180deg, rgba(42, 26, 20, 0.8) 0%, rgba(42, 26, 20, 0.25) 40%, rgba(15, 10, 20, 0.65) 100%);
+      linear-gradient(180deg, rgba(42, 26, 20, 0.45) 0%, rgba(42, 26, 20, 0.12) 26%, transparent 48%, rgba(10, 5, 15, 0.75) 100%);
   }
 
   .panel--pmu .panel__scrim {
     background:
-      linear-gradient(180deg, rgba(107, 34, 55, 0.85) 0%, rgba(107, 34, 55, 0.3) 40%, rgba(15, 10, 20, 0.65) 100%);
+      linear-gradient(180deg, rgba(118, 38, 62, 0.45) 0%, rgba(118, 38, 62, 0.12) 26%, transparent 48%, rgba(10, 5, 15, 0.75) 100%);
   }
 
   /* Floating Headline Overlay */
@@ -1884,10 +1930,10 @@ svg {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    gap: 0.45rem;
+    gap: 0.35rem;
     width: 100%;
     min-height: auto;
-    padding: 0.55rem 0.65rem;
+    padding: 0.5rem 0.55rem;
     border-radius: 1.45rem;
     background: rgba(255, 255, 255, 0.94);
     backdrop-filter: blur(18px);
@@ -1901,7 +1947,7 @@ svg {
   .info-pill__address-link {
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     flex: 1 1 auto;
     min-width: 0;
     text-decoration: none;
@@ -1910,13 +1956,15 @@ svg {
   .info-pill__pin {
     color: var(--dark-aubergine);
     flex-shrink: 0;
+    width: 14px;
+    height: 14px;
   }
 
   .info-pill__address {
     display: flex;
     flex-direction: column;
-    font-size: 0.58rem;
-    line-height: 1.22;
+    font-size: 0.53rem;
+    line-height: 1.2;
     color: var(--ink);
     white-space: nowrap;
     overflow: hidden;
@@ -1957,25 +2005,23 @@ svg {
     white-space: nowrap;
   }
 
-  .info-pill__call-btn {
-    display: inline-flex;
+  .info-pill__call-wrapper {
+    display: flex;
     align-items: center;
-    gap: 0.35rem;
-    padding: 0.52rem 0.75rem;
-    border-radius: 999px;
-    background: var(--dark-aubergine);
-    color: var(--cream);
-    font-size: 0.65rem;
-    font-weight: 550;
     flex-shrink: 0;
-    text-decoration: none;
-    box-shadow: 0 3px 10px -2px rgba(58, 21, 48, 0.35);
   }
 
-  .info-pill__call-text {
-    display: flex;
-    align-items: baseline;
-    gap: 0.25rem;
+  .info-pill__call-wrapper .metal-btn-wrap {
+    width: 128px !important;
+    height: 33px !important;
+  }
+
+  .info-pill__call-wrapper .metal-btn {
+    width: 128px !important;
+    height: 33px !important;
+    font-size: 0.64rem !important;
+    gap: 4px !important;
+    padding: 0 8px !important;
   }
 
   .info-pill__call-action {

@@ -10,19 +10,19 @@ import Logo from "./Logo";
 import Magnetic from "./Magnetic";
 
 const DESKTOP_NAV_ITEMS: LiquidNavItem[] = [
-  { label: "Dental", href: "#service-dental", fx: "glow" },
-  { label: "Skin", href: "#service-skin", fx: "drop" },
-  { label: "Hair", href: "#service-hair", fx: "wave" },
-  { label: "PMU", href: "#service-pmu", fx: "pop" },
+  { label: "Dental", fx: "glow" },
+  { label: "Skin", fx: "drop" },
+  { label: "Hair", fx: "wave" },
+  { label: "PMU", fx: "pop" },
   { label: "Doctors", href: "#doctors", fx: "glow" },
   { label: "Contact", href: "#clinic-info", fx: "drop" },
 ];
 
 const MOBILE_NAV_ITEMS: LiquidNavItem[] = [
-  { label: "Dental", href: "#service-dental", fx: "glow" },
-  { label: "Skin", href: "#service-skin", fx: "drop" },
-  { label: "Hair", href: "#service-hair", fx: "wave" },
-  { label: "PMU", href: "#service-pmu", fx: "pop" },
+  { label: "Dental", fx: "glow" },
+  { label: "Skin", fx: "drop" },
+  { label: "Hair", fx: "wave" },
+  { label: "PMU", fx: "pop" },
 ];
 
 export default function Navbar() {

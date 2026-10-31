@@ -558,7 +558,12 @@ export function LiquidNavbar({
           ref: (el: HTMLElement | null) => { itemRefs.current[i] = el },
           className: "nimbus-item",
           "aria-current": i === current ? ("page" as const) : undefined,
-          onClick: () => select(i),
+          onClick: (e: React.MouseEvent) => {
+            if (it.href?.startsWith("#")) {
+              e.preventDefault();
+            }
+            select(i);
+          },
         }
         const content = (
           <>

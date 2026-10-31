@@ -69,33 +69,29 @@ export default function Panel({
 
   const detailsId = `treatments-${service.id}`;
   const titleId = `title-${service.id}`;
-  const flexGrowVal = compact ? (active ? 1.85 : 0.72) : (active ? 1.9 : service.restingGrow);
   const styles = {
     "--image-position": service.image.position,
     "--panel-offset": `${service.offset}px`,
     "--panel-radius": service.radius,
-    flexGrow: flexGrowVal,
+    "--resting-grow": service.restingGrow,
   } as CSSProperties;
 
   return (
     <motion.article
       ref={articleRef}
       id={`service-${service.id}`}
-      layout="position"
       className={`panel panel--${service.id} js-reveal${active ? " is-active" : ""}${compact ? " is-compact" : ""}`}
       style={styles}
       data-cursor="grow"
       aria-labelledby={titleId}
-      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 74 }}
-      animate={{ opacity: 1, y: 0, flexGrow: flexGrowVal }}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 50 }}
+      animate={{ opacity: 1, y: 0 }}
       transition={
         reduceMotion
           ? { duration: 0.22 }
           : {
-            y: { duration: 0.5, delay: index * 0.055, ease: EASE_OUT },
-            opacity: { duration: 0.36, delay: index * 0.055 },
-            flexGrow: { type: "spring", stiffness: 160, damping: 24, mass: 0.8 },
-            layout: { type: "spring", stiffness: 200, damping: 26, mass: 0.8 },
+            y: { duration: 0.55, delay: index * 0.05, ease: EASE_OUT },
+            opacity: { duration: 0.4, delay: index * 0.05 },
           }
       }
       onPointerMove={handlePointerMove}
@@ -115,10 +111,8 @@ export default function Panel({
 
       <div className="panel__media">
         <motion.div className="panel__drift" style={{ x: driftX, y: driftY }}>
-          <motion.div
-            className="panel__zoom"
-            animate={{ scale: active ? 1.04 : 1.005 }}
-            transition={{ duration: 1.15, ease: EASE_OUT }}
+          <div
+            className={`panel__zoom${active ? " is-zoomed" : ""}`}
           >
             <Image
               src={service.image.src}
@@ -131,7 +125,7 @@ export default function Panel({
               preload={service.id === "skin"}
               fetchPriority={service.id === "skin" ? "high" : "auto"}
             />
-          </motion.div>
+          </div>
         </motion.div>
       </div>
 
