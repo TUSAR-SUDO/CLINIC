@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useRef, type CSSProperties, type PointerEvent } from "react";
 import {
   cubicBezier,
@@ -151,9 +152,20 @@ export default function Panel({
         </motion.p>
 
         {/* Circular arrow button underneath descriptor as in Reference Image 2 */}
-        <div className="panel__circle-arrow" aria-hidden="true">
-          <ArrowRight size={13} strokeWidth={1.8} />
-        </div>
+        {service.id === "dental" ? (
+          <Link
+            href="/dental"
+            className="panel__circle-arrow"
+            aria-label="View Dental treatments page"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ArrowRight size={13} strokeWidth={1.8} />
+          </Link>
+        ) : (
+          <div className="panel__circle-arrow" aria-hidden="true">
+            <ArrowRight size={13} strokeWidth={1.8} />
+          </div>
+        )}
 
         <motion.div
           className="panel__details"

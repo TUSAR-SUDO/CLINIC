@@ -2185,3 +2185,1387 @@ svg {
     transform: none !important;
   }
 }
+
+/* ==========================================================================
+   DENTAL SPECIALTY PAGE STYLES
+   Matches the luxury aesthetic of reference media_1793472329605_b8bfbf32.jpg
+   ========================================================================== */
+
+.dental-page-wrapper {
+  min-height: 100vh;
+  background-color: var(--bg-stone);
+  color: var(--ink);
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Header & Navigation */
+.dental-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  width: 100%;
+  padding: 1.25rem 2.5rem;
+  background: rgba(247, 244, 238, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.dental-nav-header__inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
+.dental-nav-header__logo {
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.dental-nav-header__center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.dental-nav-header__cta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  z-index: 10;
+}
+
+.dental-nav-header__menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  padding: 0.5rem;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* Mobile drawer sheet for dental */
+.dental-mobile-sheet {
+  position: fixed;
+  top: 72px;
+  left: 0;
+  right: 0;
+  background: var(--bg-stone);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1.5rem 2rem 2rem;
+  z-index: 89;
+  box-shadow: 0 16px 32px rgba(36, 13, 24, 0.08);
+}
+
+.dental-mobile-sheet__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dental-mobile-sheet__link {
+  font-family: var(--font-fraunces);
+  font-size: 1.25rem;
+  color: var(--ink);
+}
+
+.dental-mobile-sheet__cta-wrap {
+  margin-top: 1rem;
+}
+
+/* ==========================================================================
+   HERO SECTION
+   ========================================================================== */
+.dental-hero {
+  position: relative;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2.5rem 2.5rem 4.5rem;
+  display: flex;
+  gap: 2.25rem;
+}
+
+/* Vertical indicator rail on the left */
+.dental-rail {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 28px;
+  padding: 0.5rem 0;
+}
+
+.dental-rail__steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.dental-rail__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.dental-rail__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--dark-aubergine);
+}
+
+.dental-rail__num {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: #8C7F7A;
+  font-weight: 500;
+}
+
+.dental-rail__item.is-active .dental-rail__num {
+  color: var(--dark-aubergine);
+  font-weight: 700;
+}
+
+.dental-rail__line {
+  width: 1px;
+  height: 28px;
+  background: rgba(140, 127, 122, 0.25);
+}
+
+.dental-rail__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  letter-spacing: 0.06em;
+  color: #8C7F7A;
+  transition: color 0.2s ease;
+}
+
+.dental-rail__scroll:hover {
+  color: var(--dark-aubergine);
+}
+
+.dental-rail__arrow {
+  animation: floatArrow 1.8s ease-in-out infinite;
+}
+
+@keyframes floatArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
+}
+
+/* Hero Content Grid */
+.dental-hero__container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.dental-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dental-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  color: #8C7F7A;
+}
+
+.dental-hero__bread-link {
+  color: #8C7F7A;
+  transition: color 0.2s ease;
+}
+
+.dental-hero__bread-link:hover {
+  color: var(--dark-aubergine);
+}
+
+.dental-hero__bread-sep {
+  opacity: 0.5;
+}
+
+.dental-hero__bread-current {
+  color: var(--dark-aubergine);
+  font-weight: 600;
+}
+
+.dental-hero__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(3rem, 5.5vw, 4.8rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.dental-hero__dash {
+  font-weight: 300;
+  opacity: 0.65;
+}
+
+.dental-hero__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A6662;
+  margin: 0;
+}
+
+.dental-hero__subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #5C4F4B;
+  max-width: 420px;
+  margin: 0;
+}
+
+.dental-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.dental-hero__call-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  height: 44px;
+  padding: 0 1.25rem;
+  border-radius: 9999px;
+  background: #FAF6F0;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--dark-aubergine);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dental-hero__call-pill:hover {
+  background: #FFFFFF;
+  border-color: rgba(36, 13, 24, 0.2);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(36, 13, 24, 0.08);
+}
+
+/* Stage: Arched Photo + Collapsed Companions */
+.dental-hero__stage {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+  height: clamp(380px, 46vw, 480px);
+}
+
+.dental-hero__arch-card {
+  position: relative;
+  flex: 3.2;
+  border-radius: clamp(90px, 11vw, 150px) 24px 24px 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 45px rgba(36, 13, 24, 0.12);
+}
+
+.dental-hero__arch-img {
+  object-fit: cover;
+  object-position: center 20%;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dental-hero__arch-card:hover .dental-hero__arch-img {
+  transform: scale(1.03);
+}
+
+.dental-hero__arch-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 60%, rgba(36,13,24,0.15) 100%);
+  pointer-events: none;
+}
+
+.dental-hero__companions {
+  display: flex;
+  gap: 0.5rem;
+  flex: 1.4;
+}
+
+.dental-companion {
+  position: relative;
+  flex: 1;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.3s ease;
+  min-width: 60px;
+}
+
+.dental-companion:hover {
+  flex: 1.5;
+  transform: translateY(-2px);
+}
+
+.dental-companion__img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dental-companion:hover .dental-companion__img {
+  transform: scale(1.08);
+}
+
+.dental-companion__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(36, 13, 24, 0.05) 0%, rgba(36, 13, 24, 0.65) 100%);
+  pointer-events: none;
+}
+
+.dental-companion__info {
+  position: absolute;
+  bottom: 0.85rem;
+  left: 0.65rem;
+  right: 0.65rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  z-index: 2;
+}
+
+.dental-companion__name {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.05rem;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+.dental-companion__btn {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.dental-companion:hover .dental-companion__btn {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   TREATMENTS SECTION
+   ========================================================================== */
+.treatments-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+}
+
+.treatments-section__header {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 3.5rem;
+  align-items: flex-start;
+}
+
+.treatments-section__title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.treatments-section__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A6662;
+}
+
+.treatments-section__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.treatments-section__divider {
+  width: 48px;
+  height: 1px;
+  background: rgba(36, 13, 24, 0.4);
+  margin-top: 0.25rem;
+}
+
+.treatments-section__controls {
+  display: flex;
+  gap: 0.65rem;
+  margin-top: 1.25rem;
+}
+
+.treatments-section__ctrl-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #FAF6F0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--dark-aubergine);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.treatments-section__ctrl-btn:hover {
+  background: #FFFFFF;
+  border-color: rgba(36, 13, 24, 0.3);
+  transform: translateY(-1px);
+}
+
+.treatments-section__ctrl-btn--active {
+  background: var(--dark-aubergine);
+  color: #FAF6F0;
+  border-color: var(--dark-aubergine);
+}
+
+.treatments-section__ctrl-btn--active:hover {
+  background: #3B1629;
+}
+
+.treatments-section__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.treatment-card {
+  position: relative;
+  border-radius: 20px;
+  padding: 1.75rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 190px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+  overflow: hidden;
+}
+
+.treatment-card:hover {
+  box-shadow: 0 16px 36px rgba(36, 13, 24, 0.09);
+}
+
+/* Card Pastels from Reference Image */
+.treatment-card--blue {
+  background-color: #E8F1F5;
+}
+.treatment-card--blush {
+  background-color: #F6EAE6;
+}
+.treatment-card--cream {
+  background-color: #FBF6EB;
+}
+.treatment-card--rose {
+  background-color: #F9ECEB;
+}
+
+.treatment-card__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.treatment-card__icon-wrap {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-aubergine);
+}
+
+.treatment-card__index {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #8C7F7A;
+}
+
+.treatment-card__body {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.treatment-card__name {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.18rem;
+  font-weight: 500;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.treatment-card__desc {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #6E6260;
+  margin: 0;
+}
+
+.treatment-card__glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,0.45) 0%, transparent 60%);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.treatment-card:hover .treatment-card__glare {
+  opacity: 1;
+}
+
+/* ==========================================================================
+   HOW A VISIT WORKS SECTION
+   ========================================================================== */
+.how-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem 4.5rem;
+}
+
+.how-section__container {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+.how-section__img-frame {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 16px 36px rgba(36, 13, 24, 0.08);
+}
+
+.how-section__img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.how-section__img-frame:hover .how-section__img {
+  transform: scale(1.04);
+}
+
+.how-section__steps-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.how-section__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A6662;
+}
+
+.how-section__steps-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.how-step__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.how-step__num {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: var(--dark-aubergine);
+}
+
+.how-step__rule {
+  height: 1px;
+  flex: 1;
+  background: rgba(140, 127, 122, 0.25);
+}
+
+.how-step__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--dark-aubergine);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.how-step__title.is-italic {
+  font-style: italic;
+}
+
+.how-step__desc {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #6E6260;
+  margin: 0;
+}
+
+/* ==========================================================================
+   MEET YOUR DENTISTS SECTION
+   ========================================================================== */
+.dentists-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 3rem 2.5rem;
+}
+
+.dentists-section__container {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.dentists-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dentists-section__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A6662;
+}
+
+.dentists-section__controls {
+  display: flex;
+  gap: 0.65rem;
+}
+
+.dentists-section__ctrl-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: #FAF6F0;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: var(--dark-aubergine);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dentists-section__ctrl-btn:hover {
+  background: #FFFFFF;
+  border-color: rgba(36, 13, 24, 0.3);
+  transform: translateY(-1px);
+}
+
+.dentists-section__ctrl-btn--active {
+  background: var(--dark-aubergine);
+  color: #FAF6F0;
+  border-color: var(--dark-aubergine);
+}
+
+.dentists-section__ctrl-btn--active:hover {
+  background: #3B1629;
+}
+
+.dentists-section__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.dentist-card {
+  background: #FFFFFF;
+  border-radius: 9999px;
+  padding: 0.75rem 1.4rem 0.75rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 18px rgba(36, 13, 24, 0.04);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dentist-card:hover {
+  background: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(36, 13, 24, 0.08);
+}
+
+.dentist-card__avatar-wrap {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background: #EAE3D9;
+}
+
+.dentist-card__avatar {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.dentist-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.dentist-card__name {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.12rem;
+  font-weight: 500;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.dentist-card__creds {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: #7A6662;
+  font-weight: 500;
+}
+
+.dentist-card__action {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--dark-aubergine);
+  transition: all 0.25s ease;
+  flex-shrink: 0;
+}
+
+.dentist-card:hover .dentist-card__action {
+  background: var(--dark-aubergine);
+  color: #FFFFFF;
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   MORE AT AESTHEDENT (One Clinic. Multiple Care.)
+   ========================================================================== */
+.more-services {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 3.5rem 2.5rem;
+}
+
+.more-services__container {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.more-services__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.more-services__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #7A6662;
+}
+
+.more-services__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2rem, 3.2vw, 2.75rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.more-services__cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+
+.service-capsule {
+  position: relative;
+  height: 125px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(36, 13, 24, 0.08);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease;
+}
+
+.service-capsule:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(36, 13, 24, 0.14);
+}
+
+.service-capsule__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.service-capsule__media {
+  position: absolute;
+  inset: 0;
+}
+
+.service-capsule__img {
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.service-capsule:hover .service-capsule__img {
+  transform: scale(1.07);
+}
+
+.service-capsule__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(36, 13, 24, 0.45) 0%, rgba(36, 13, 24, 0.15) 100%);
+  pointer-events: none;
+}
+
+.service-capsule__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  z-index: 2;
+}
+
+.service-capsule__name {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  margin: 0;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.service-capsule__arrow {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+  transition: all 0.25s ease;
+}
+
+.service-capsule:hover .service-capsule__arrow {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   FAQ SECTION
+   ========================================================================== */
+.faq-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 4rem 2.5rem;
+}
+
+.faq-section__container {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 3.5rem;
+  align-items: flex-start;
+}
+
+.faq-section__header {
+  position: sticky;
+  top: 100px;
+}
+
+.faq-section__title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 400;
+  color: var(--dark-aubergine);
+  margin: 0;
+}
+
+.faq-section__dash {
+  opacity: 0.6;
+}
+
+.faq-section__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.faq-item {
+  border-radius: 16px;
+  background: #F1EAE1;
+  overflow: hidden;
+  transition: background-color 0.25s ease;
+}
+
+.faq-item.is-open {
+  background: #EBE3D8;
+}
+
+.faq-item__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.15rem 1.6rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.faq-item__question {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--dark-aubergine);
+}
+
+.faq-item__icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--dark-aubergine);
+}
+
+.faq-item__collapse {
+  overflow: hidden;
+}
+
+.faq-item__content {
+  padding: 0 1.6rem 1.35rem;
+}
+
+.faq-item__answer {
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: #61524F;
+  margin: 0;
+}
+
+/* ==========================================================================
+   DUAL BOTTOM CTA PILLS
+   ========================================================================== */
+.cta-dual-section {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 5rem;
+}
+
+.cta-dual-section__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.cta-pill {
+  border-radius: 24px;
+  padding: 1.6rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 12px 32px rgba(36, 13, 24, 0.08);
+}
+
+.cta-pill--booking {
+  background: #250E1A;
+  color: #FFFFFF;
+}
+
+.cta-pill__book-left {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.cta-pill__cal-icon-wrap {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #FFFFFF;
+}
+
+.cta-pill__book-title {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.35rem;
+  line-height: 1.2;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.cta-pill__book-title:hover {
+  opacity: 0.9;
+}
+
+.cta-pill__divider {
+  width: 1px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.cta-pill__call-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.cta-pill__call-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  transition: all 0.25s ease;
+}
+
+.cta-pill__call-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Location / Map Pill */
+.cta-pill--location {
+  background: #FAF6F0;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.cta-pill__loc-text {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.cta-pill__pin-icon {
+  color: var(--dark-aubergine);
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.cta-pill__address {
+  font-family: var(--font-sans);
+  font-style: normal;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #61524F;
+}
+
+.cta-pill__map-wrap {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  flex-shrink: 0;
+}
+
+.cta-pill__map-img {
+  display: block;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   DENTAL FOOTER
+   ========================================================================== */
+.dental-footer {
+  width: 100%;
+  background: #1C0A14;
+  color: #FFFFFF;
+  padding: 1.75rem 2.5rem;
+}
+
+.dental-footer__container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dental-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.dental-footer__divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.dental-footer__tagline {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dental-footer__nav {
+  display: flex;
+  align-items: center;
+  gap: 1.75rem;
+}
+
+.dental-footer__link {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+}
+
+.dental-footer__link:hover {
+  color: #FFFFFF;
+}
+
+/* ==========================================================================
+   RESPONSIVE BREAKPOINTS FOR DENTAL PAGE
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .dental-hero__container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .dental-hero__stage {
+    height: 400px;
+  }
+  .treatments-section__header {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .treatments-section__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .how-section__container {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .dentists-section__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .more-services__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .faq-section__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .cta-dual-section__container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dental-nav-header {
+    padding: 1rem 1.25rem;
+  }
+  .dental-nav-header__center {
+    display: none;
+  }
+  .dental-nav-header__menu-btn {
+    display: flex;
+  }
+  .dental-hero {
+    padding: 1.5rem 1.25rem 3rem;
+  }
+  .dental-rail {
+    display: none;
+  }
+  .dental-hero__title {
+    font-size: 2.75rem;
+  }
+  .dental-hero__stage {
+    flex-direction: column;
+    height: auto;
+    width: 100%;
+    gap: 0.75rem;
+  }
+  .dental-hero__arch-card {
+    flex: none;
+    width: 100%;
+    height: 320px;
+    border-radius: 60px 16px 16px 16px;
+    position: relative;
+  }
+  .dental-hero__companions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 110px;
+    width: 100%;
+    flex: none;
+    gap: 0.5rem;
+  }
+  .dental-companion {
+    height: 110px;
+    min-width: 0;
+  }
+  .treatments-section {
+    padding: 2.5rem 1.25rem;
+  }
+  .treatments-section__grid {
+    grid-template-columns: 1fr;
+  }
+  .how-section {
+    padding: 2.5rem 1.25rem;
+  }
+  .how-section__steps-list {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .dentists-section {
+    padding: 2rem 1.25rem;
+  }
+  .dentists-section__list {
+    grid-template-columns: 1fr;
+  }
+  .more-services {
+    padding: 2rem 1.25rem;
+  }
+  .more-services__cards {
+    grid-template-columns: 1fr;
+  }
+  .faq-section {
+    padding: 2.5rem 1.25rem;
+  }
+  .cta-dual-section {
+    padding: 1.5rem 1.25rem 3.5rem;
+  }
+  .cta-pill {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.25rem;
+    padding: 1.5rem;
+  }
+  .cta-pill__divider {
+    display: none;
+  }
+  .dental-footer {
+    padding: 2rem 1.25rem;
+  }
+  .dental-footer__container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+  .dental-footer__nav {
+    flex-wrap: wrap;
+    gap: 1rem 1.5rem;
+  }
+}
