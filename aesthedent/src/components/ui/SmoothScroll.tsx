@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, type ReactNode } from "react";
+import { registerSmoothScroller } from "@/lib/smooth-scroll";
 
 /**
  * Lenis is loaded only in the browser and only when motion is welcome,
@@ -17,6 +18,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     import("lenis").then(({ default: Lenis }) => {
       if (disposed) return;
       lenis = new Lenis({ duration: 1.15, smoothWheel: true, wheelMultiplier: 0.9 });
+      registerSmoothScroller(lenis);
 
       const raf = (time: number) => {
         lenis?.raf(time);
@@ -28,6 +30,7 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
     return () => {
       disposed = true;
       cancelAnimationFrame(frame);
+      registerSmoothScroller(null);
       lenis?.destroy();
     };
   }, []);

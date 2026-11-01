@@ -3633,3 +3633,460 @@ svg {
     gap: 1rem 1.5rem;
   }
 }
+
+/* ==========================================================================
+   DENTAL MOTION LAYER
+   ========================================================================== */
+.dental-page-wrapper .masked-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.dental-page-wrapper .masked-line__inner {
+  display: block;
+  will-change: transform;
+}
+
+.dental-nav-progress {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--dark-aubergine);
+  opacity: 0.8;
+  transform-origin: 0 50%;
+  z-index: 2;
+}
+
+.dental-nav-header__menu-btn {
+  width: 44px;
+  height: 44px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.dental-nav-header__menu-btn:hover {
+  background: rgba(58, 21, 48, 0.05);
+  border-color: rgba(58, 21, 48, 0.1);
+}
+
+.dental-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 120;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--bg-stone);
+  padding: clamp(1.1rem, 4vw, 1.6rem) clamp(1.25rem, 4vw, 2rem) 2rem;
+}
+
+.dental-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.dental-menu__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(58, 21, 48, 0.15);
+  background: #faf6f0;
+  cursor: pointer;
+  transition: background-color 0.25s ease, transform 0.25s ease;
+}
+
+.dental-menu__close:hover {
+  background: #ffffff;
+  transform: rotate(8deg);
+}
+
+.dental-menu__nav {
+  display: flex;
+  flex-direction: column;
+  margin-top: clamp(2rem, 6vw, 3.5rem);
+}
+
+.dental-menu__row {
+  border-bottom: 1px solid rgba(58, 21, 48, 0.12);
+}
+
+.dental-menu__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 64px;
+  padding: 0.4rem 0;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: clamp(1.6rem, 6vw, 2rem);
+  color: var(--dark-aubergine);
+}
+
+.dental-menu__link svg {
+  color: #8c7f7a;
+  transition: transform 0.25s ease;
+}
+
+.dental-menu__link:hover svg {
+  transform: translateX(3px);
+}
+
+.dental-menu__link.is-active {
+  color: var(--berry);
+  font-style: italic;
+}
+
+.dental-menu__actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.dental-menu__call,
+.dental-menu__book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.dental-menu__call {
+  padding: 0 1.25rem;
+  border: 1px solid rgba(58, 21, 48, 0.16);
+  background: #faf6f0;
+  color: var(--dark-aubergine);
+}
+
+.dental-menu__book {
+  gap: 0.45rem;
+  padding: 0 1.4rem;
+  background: var(--dark-aubergine);
+  color: #ffffff;
+}
+
+.dental-hero__kicker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.18rem;
+  line-height: 1.3;
+}
+
+.dental-hero__arch-drift {
+  position: absolute;
+  inset: -14px;
+}
+
+.dental-hero__arch-scroll {
+  position: absolute;
+  inset: 0;
+}
+
+.dental-rail__dot {
+  animation: dentalRailPulse 2.6s ease-out infinite;
+}
+
+@keyframes dentalRailPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(58, 21, 48, 0.28);
+  }
+  55% {
+    box-shadow: 0 0 0 5px rgba(58, 21, 48, 0);
+  }
+}
+
+.treatments-section__title .masked-line,
+.more-services__title .masked-line,
+.faq-section__title .masked-line {
+  display: block;
+}
+
+.treatment-card {
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.treatment-card.is-spotlight {
+  border-color: rgba(58, 21, 48, 0.32);
+  box-shadow: 0 18px 36px -28px rgba(36, 13, 24, 0.42);
+}
+
+.treatment-card__icon {
+  width: 28px;
+  height: 28px;
+}
+
+.treatment-card__icon-wrap {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.treatment-card:hover .treatment-card__icon-wrap {
+  transform: translateY(-3px) rotate(-4deg);
+}
+
+.treatment-card__corner {
+  position: absolute;
+  top: 3.5rem;
+  right: 1.55rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--dark-aubergine);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.treatment-card.is-spotlight .treatment-card__corner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.how-section__img-frame {
+  border-radius: clamp(70px, 8vw, 118px) 24px 24px 24px;
+}
+
+.how-section__img-inner {
+  position: absolute;
+  inset: -6%;
+}
+
+.how-step__rule {
+  transform-origin: 0 50%;
+}
+
+.how-step {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.how-step:hover {
+  transform: translateY(-2px);
+}
+
+.how-step__title {
+  transition: color 0.25s ease;
+}
+
+.how-step:hover .how-step__title {
+  color: var(--berry);
+}
+
+.dentist-card.is-active {
+  border-color: rgba(58, 21, 48, 0.24);
+  box-shadow: 0 14px 30px -24px rgba(36, 13, 24, 0.36);
+}
+
+.dentist-card__avatar-wrap {
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dentist-card:hover .dentist-card__avatar-wrap {
+  transform: scale(1.04);
+}
+
+.dental-faq .faq-item {
+  transition: background-color 0.3s ease, box-shadow 0.35s ease;
+}
+
+.dental-faq .faq-item:hover {
+  background: #eee6db;
+}
+
+.dental-faq .faq-item.is-open {
+  box-shadow: 0 14px 26px -26px rgba(36, 13, 24, 0.35);
+}
+
+.dental-faq .faq-item__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.dental-faq__line {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 13px;
+  height: 1px;
+  background: var(--dark-aubergine);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.dental-faq__line--vertical {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.dental-faq .faq-item.is-open .dental-faq__line--vertical {
+  transform: translate(-50%, -50%) rotate(90deg) scaleY(0);
+}
+
+.dental-faq .faq-item__content {
+  padding-right: clamp(1rem, 4vw, 1.6rem);
+}
+
+.dental-faq .faq-item__answer {
+  max-width: 70ch;
+}
+
+.dental-faq .faq-section__botanical {
+  bottom: 1rem;
+  left: 0.75rem;
+  opacity: 0.5;
+  color: #7f6a60;
+}
+
+.dental-footer .brand__word,
+.dental-footer .brand__mark {
+  color: var(--cream);
+}
+
+.dental-footer .brand__tagline {
+  color: rgba(243, 238, 232, 0.5);
+}
+
+.cta-pill__map-img {
+  width: 140px;
+  height: 70px;
+  object-fit: cover;
+}
+
+.dental-faq__branch {
+  width: clamp(120px, 11vw, 172px);
+  height: auto;
+}
+
+@media (min-width: 901px) and (max-width: 1100px) {
+  .dental-hero__container {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+
+  .dental-hero__stage {
+    height: clamp(360px, 44vw, 420px);
+  }
+
+  .dental-hero__actions {
+    gap: 0.75rem;
+  }
+
+  .dental-hero__call-pill {
+    padding: 0 1rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .dental-nav-capsule {
+    display: none;
+  }
+
+  .dental-nav-header__menu-btn {
+    display: flex;
+  }
+}
+
+@media (max-width: 700px) {
+  .dental-nav-header__book {
+    display: none !important;
+  }
+
+  .dental-nav-header {
+    padding: 0.85rem 1.15rem;
+  }
+
+  .dental-nav-header__menu-btn {
+    width: 44px;
+    height: 44px;
+    margin-right: -0.35rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .treatments-section__ctrl-btn,
+  .dentists-section__ctrl-btn,
+  .dentist-card__action {
+    width: 44px;
+    height: 44px;
+  }
+
+  .dental-footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .cta-pill__call-btn {
+    min-height: 44px;
+  }
+
+  .dental-hero__arch-drift {
+    inset: -8px;
+  }
+
+  .dental-hero__arch-card {
+    border-radius: 64px 16px 16px 16px;
+  }
+
+  .dental-menu__actions {
+    gap: 0.6rem;
+  }
+
+  .dental-menu__call,
+  .dental-menu__book {
+    flex: 1;
+    padding: 0 0.9rem;
+    white-space: nowrap;
+  }
+
+  .how-section__img-frame {
+    border-radius: 64px 18px 18px 18px;
+  }
+
+  .how-step:hover {
+    transform: none;
+  }
+
+  .treatment-card__icon {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dental-rail__dot {
+    animation: none;
+  }
+
+  .dental-menu__close:hover,
+  .dental-menu__link:hover svg,
+  .treatment-card:hover .treatment-card__icon-wrap,
+  .how-step:hover,
+  .dentist-card:hover .dentist-card__avatar-wrap {
+    transform: none;
+  }
+
+  .dental-menu,
+  .dental-menu * {
+    scroll-behavior: auto !important;
+  }
+}

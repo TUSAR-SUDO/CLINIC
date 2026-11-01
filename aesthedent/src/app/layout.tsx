@@ -3,6 +3,7 @@ import { Fraunces, Geist } from "next/font/google";
 import type { ReactNode } from "react";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import "./globals.css";
+import "@/styles/skin.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],

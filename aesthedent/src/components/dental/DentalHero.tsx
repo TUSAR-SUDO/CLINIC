@@ -1,41 +1,90 @@
 "use client";
 
-import React from "react";
+import { useRef, type PointerEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import {
+  motion,
+  useMotionValue,
+  useReducedMotion,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "motion/react";
 import { Phone, ArrowRight, ArrowDown } from "lucide-react";
+import { MaskedLine } from "@/components/motion/Reveal";
+import Magnetic from "@/components/hero/Magnetic";
 import { CLINIC } from "@/lib/clinic";
+import { scrollToSection } from "@/lib/smooth-scroll";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 const COMPANIONS = [
-  { id: "skin", name: "Skin", img: "/images/hero/skin.png", href: "/#service-skin" },
-  { id: "hair", name: "Hair", img: "/images/hero/hair.png", href: "/#service-hair" },
-  { id: "pmu", name: "PMU", img: "/images/hero/pmu.png", href: "/#service-pmu" },
+  { id: "skin", name: "Skin", img: "/images/hero/skin.png" },
+  { id: "hair", name: "Hair", img: "/images/hero/hair.png" },
+  { id: "pmu", name: "PMU", img: "/images/hero/pmu.png" },
 ];
 
+const MotionLink = motion.create(Link);
+
+const EASE = [0.16, 1, 0.3, 1] as const;
+
 export default function DentalHero() {
-  const scrollToTreatments = () => {
-    document.getElementById("dental-treatments")?.scrollIntoView({ behavior: "smooth" });
+  const reduceMotion = useReducedMotion();
+  const heroRef = useRef<HTMLElement>(null);
+  const stageRef = useRef<HTMLDivElement>(null);
+
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const driftX = useSpring(pointerX, { stiffness: 80, damping: 20, mass: 0.5 });
+  const driftY = useSpring(pointerY, { stiffness: 80, damping: 20, mass: 0.5 });
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+  const scrollShift = useTransform(scrollYProgress, [0, 1], [0, 26]);
+
+  const handlePointerMove = (event: PointerEvent<HTMLElement>) => {
+    if (reduceMotion || event.pointerType === "touch" || !stageRef.current) return;
+    const rect = stageRef.current.getBoundingClientRect();
+    pointerX.set(((event.clientX - rect.left) / rect.width - 0.5) * 12);
+    pointerY.set(((event.clientY - rect.top) / rect.height - 0.5) * 8);
+  };
+
+  const resetPointer = () => {
+    pointerX.set(0);
+    pointerY.set(0);
   };
 
   return (
-    <section className="dental-hero" aria-label="Dental Care Introduction">
-      {/* Left Vertical Indicator Rail */}
-      <aside className="dental-rail" aria-hidden="true">
-        <div className="dental-rail__steps">
+    <section
+      ref={heroRef}
+      className="dental-hero"
+      aria-labelledby="dental-hero-title"
+      onPointerMove={handlePointerMove}
+      onPointerLeave={resetPointer}
+    >
+      <motion.aside
+        className="dental-rail"
+        aria-label="Dental section progress"
+        initial={{ opacity: 0, x: reduceMotion ? 0 : -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7, delay: 0.45, ease: EASE }}
+      >
+        <div className="dental-rail__steps" aria-hidden="true">
           <div className="dental-rail__item is-active">
             <span className="dental-rail__dot" />
             <span className="dental-rail__num">01</span>
           </div>
-          <div className="dental-rail__line" />
+          <span className="dental-rail__line" />
           <div className="dental-rail__item">
             <span className="dental-rail__num">02</span>
           </div>
-          <div className="dental-rail__line" />
+          <span className="dental-rail__line" />
           <div className="dental-rail__item">
             <span className="dental-rail__num">03</span>
           </div>
-          <div className="dental-rail__line" />
+          <span className="dental-rail__line" />
           <div className="dental-rail__item">
             <span className="dental-rail__num">04</span>
           </div>
@@ -43,98 +92,159 @@ export default function DentalHero() {
 
         <button
           type="button"
-          onClick={scrollToTreatments}
+          onClick={() => scrollToSection("dental-treatments")}
           className="dental-rail__scroll"
-          aria-label="Scroll to treatments"
+          aria-label="Scroll to dental treatments"
         >
           <span>Scroll</span>
           <ArrowDown size={12} className="dental-rail__arrow" />
         </button>
-      </aside>
+      </motion.aside>
 
-      {/* Main Container */}
       <div className="dental-hero__container">
-        {/* Left Column: Typography & CTAs */}
         <div className="dental-hero__content">
-          <nav className="dental-hero__breadcrumb" aria-label="Breadcrumb">
-            <Link href="/" className="dental-hero__bread-link">Home</Link>
-            <span className="dental-hero__bread-sep">/</span>
-            <span className="dental-hero__bread-current">Dental</span>
-          </nav>
+          <motion.nav
+            className="dental-hero__breadcrumb"
+            aria-label="Breadcrumb"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
+            <Link href="/" className="dental-hero__bread-link">
+              Home
+            </Link>
+            <span className="dental-hero__bread-sep" aria-hidden="true">
+              /
+            </span>
+            <span className="dental-hero__bread-current" aria-current="page">
+              Dental
+            </span>
+          </motion.nav>
 
-          <h1 className="dental-hero__title">
-            Dental <span className="dental-hero__dash">—</span>
+          <h1 className="dental-hero__title" id="dental-hero-title">
+            <MaskedLine delay={0.24}>
+              Dental <span className="dental-hero__dash">—</span>
+            </MaskedLine>
           </h1>
 
-          <p className="dental-hero__kicker">
-            HEALTHY SMILES FOR A BRIGHTER YOU.
-          </p>
+          <div className="dental-hero__kicker">
+            <MaskedLine delay={0.34}>HEALTHY SMILES.</MaskedLine>
+            <MaskedLine delay={0.42}>FOR A BRIGHTER YOU.</MaskedLine>
+          </div>
 
-          <p className="dental-hero__subtitle">
-            Comprehensive dental care for every smile — from routine checkups to advanced treatments.
-          </p>
+          <motion.p
+            className="dental-hero__subtitle"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.55, ease: EASE }}
+          >
+            Comprehensive dental care for every smile — from routine checkups to
+            advanced treatments.
+          </motion.p>
 
-          <div className="dental-hero__actions">
-            <LiquidMetalButton
-              label="Book dental consultation"
-              variant="aubergine"
-              width={216}
-              height={44}
-              onClick={() => {
-                window.location.href = CLINIC.bookingHref;
-              }}
-            />
+          <motion.div
+            className="dental-hero__actions"
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.66, ease: EASE }}
+          >
+            <Magnetic>
+              <LiquidMetalButton
+                label="Book dental consultation"
+                variant="aubergine"
+                width={216}
+                height={44}
+                onClick={() => {
+                  window.location.href = CLINIC.bookingHref;
+                }}
+              />
+            </Magnetic>
 
             <a
               href={CLINIC.phone.primaryHref}
               className="dental-hero__call-pill"
-              aria-label={`Call clinic at ${CLINIC.phone.primaryDisplay}`}
+              aria-label={`Call the clinic at ${CLINIC.phone.primaryDisplay}`}
             >
               <Phone size={13} strokeWidth={2} className="dental-hero__call-icon" />
               <span>Call {CLINIC.phone.primaryDisplay}</span>
             </a>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Right Column: Arched Dental Photo + 3 Flush Companion Strips */}
-        <div className="dental-hero__stage">
-          {/* Main Arched Dental Photo */}
-          <div className="dental-hero__arch-card">
-            <Image
-              src="/images/hero/dental.png"
-              alt="Patient with bright healthy smile at Aesthedent"
-              fill
-              priority
-              className="dental-hero__arch-img"
-              sizes="(max-width: 900px) 100vw, 50vw"
-            />
-            <div className="dental-hero__arch-scrim" />
-          </div>
+        <div className="dental-hero__stage" ref={stageRef}>
+          <motion.div
+            className="dental-hero__arch-card"
+            initial={
+              reduceMotion
+                ? { opacity: 0 }
+                : { opacity: 0, clipPath: "inset(100% 0% 0% 0%)" }
+            }
+            animate={{ opacity: 1, clipPath: "inset(0% 0% 0% 0%)" }}
+            transition={
+              reduceMotion
+                ? { duration: 0.28 }
+                : { duration: 1.05, delay: 0.14, ease: EASE }
+            }
+          >
+            <motion.div
+              className="dental-hero__arch-drift"
+              style={{ x: driftX, y: driftY }}
+            >
+              <motion.div
+                className="dental-hero__arch-scroll"
+                style={{ y: reduceMotion ? 0 : scrollShift }}
+              >
+                <Image
+                  src="/images/hero/dental.png"
+                  alt="Patient with a bright, healthy smile at Aesthedent"
+                  fill
+                  preload
+                  loading="eager"
+                  fetchPriority="high"
+                  className="dental-hero__arch-img"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1100px) 70vw, 46vw"
+                  quality={88}
+                />
+              </motion.div>
+            </motion.div>
+            <div className="dental-hero__arch-scrim" aria-hidden="true" />
+          </motion.div>
 
-          {/* 3 Companion Panels: Skin, Hair, PMU */}
-          <div className="dental-hero__companions" role="region" aria-label="Explore other specialties">
-            {COMPANIONS.map((item) => (
-              <Link
+          <div
+            className="dental-hero__companions"
+            role="region"
+            aria-label="Explore other specialties"
+          >
+            {COMPANIONS.map((item, index) => (
+              <MotionLink
                 key={item.id}
-                href={item.href}
+                href={`/#service-${item.id}`}
                 className={`dental-companion dental-companion--${item.id}`}
                 aria-label={`Explore ${item.name}`}
+                initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={
+                  reduceMotion
+                    ? { duration: 0.25, delay: 0.15 + index * 0.04 }
+                    : { duration: 0.85, delay: 0.46 + index * 0.08, ease: EASE }
+                }
               >
                 <Image
                   src={item.img}
-                  alt={item.name}
+                  alt=""
                   fill
                   className="dental-companion__img"
-                  sizes="120px"
+                  sizes="(max-width: 768px) 33vw, 10vw"
+                  quality={84}
                 />
-                <div className="dental-companion__scrim" />
+                <div className="dental-companion__scrim" aria-hidden="true" />
                 <div className="dental-companion__info">
-                  <h3 className="dental-companion__name">{item.name}</h3>
+                  <h2 className="dental-companion__name">{item.name}</h2>
                   <span className="dental-companion__btn" aria-hidden="true">
                     <ArrowRight size={13} strokeWidth={1.8} />
                   </span>
                 </div>
-              </Link>
+              </MotionLink>
             ))}
           </div>
         </div>

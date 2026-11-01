@@ -38,7 +38,7 @@ export const CLINIC = {
   bookingHref: "tel:+919692485602",
   nav: [
     { label: "Dental", href: "/dental" },
-    { label: "Skin", href: "#service-skin" },
+    { label: "Skin", href: "/skin" },
     { label: "Hair", href: "#service-hair" },
     { label: "PMU", href: "#service-pmu" },
     { label: "Doctors", href: "#doctors" },

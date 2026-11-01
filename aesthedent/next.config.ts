@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 84],
+    qualities: [75, 82, 84, 86, 88],
   },
   turbopack: {
     rules: {

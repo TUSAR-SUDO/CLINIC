@@ -10,10 +10,36 @@ import DentalBottomCta from "@/components/dental/DentalBottomCta";
 import DentalFooter from "@/components/dental/DentalFooter";
 import { CLINIC } from "@/lib/clinic";
 
+const title = "Dental Care | Comprehensive Smiles & Treatments | Aesthedent";
+const description =
+  "Explore dental check-ups, cleaning, fillings, root canal treatment, crowns and bridges, and teeth whitening at Aesthedent in Old Town, Bhubaneswar.";
+
 export const metadata: Metadata = {
-  title: "Dental Care | Comprehensive Smiles & Treatments | Aesthedent",
-  description:
-    "Explore precision dental check-ups, cleaning, fillings, root canals, crowns, bridges, and teeth whitening at Aesthedent Clinic in Old Town, Bhubaneswar.",
+  title,
+  description,
+  alternates: { canonical: "/dental" },
+  openGraph: {
+    type: "website",
+    locale: "en_IN",
+    siteName: "Aesthedent",
+    title,
+    description,
+    url: "/dental",
+    images: [
+      {
+        url: "/images/hero/dental.png",
+        width: 1295,
+        height: 1215,
+        alt: "Patient with a bright, healthy smile at Aesthedent",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/images/hero/dental.png"],
+  },
 };
 
 const dentalSchema = {
@@ -23,6 +49,12 @@ const dentalSchema = {
   description:
     "Comprehensive dental treatments including exams, root canal, teeth whitening, crowns, and smile design in Old Town, Bhubaneswar.",
   telephone: CLINIC.phone.primaryHref.replace("tel:", ""),
+  areaServed: { "@type": "City", name: CLINIC.address.city },
+  employee: CLINIC.doctors.map((doctor) => ({
+    "@type": "Person",
+    name: doctor.name,
+    description: doctor.credentials,
+  })),
   address: {
     "@type": "PostalAddress",
     streetAddress: `${CLINIC.address.line1}, ${CLINIC.address.line2}`,
@@ -49,9 +81,9 @@ export default function DentalPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(dentalSchema) }}
       />
-      <div className="dental-page-wrapper">
+      <div className="dental-page-wrapper" id="top">
         <DentalNavbar />
-        <main id="dental-main">
+        <main id="main">
           <DentalHero />
           <TreatmentsGrid />
           <HowItWorks />

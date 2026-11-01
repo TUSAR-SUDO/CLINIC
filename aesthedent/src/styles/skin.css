@@ -1,0 +1,1794 @@
+/* ==========================================================================
+   AESTHEDENT — SKIN SPECIALTY PAGE
+   Editorial layout, flat botanical palette, motion-ready surfaces.
+   ========================================================================== */
+
+.skin-page {
+  --skin-accent: var(--berry);
+  --skin-accent-deep: #4d1425;
+  --skin-paper: #f7f3ec;
+  --skin-ink-soft: #5c4f4b;
+  --skin-line: rgba(58, 21, 48, 0.11);
+  min-height: 100vh;
+  overflow-x: clip;
+  background: var(--skin-paper);
+  color: var(--ink);
+  position: relative;
+}
+
+.skin-page ::selection {
+  background: var(--berry);
+  color: var(--cream);
+}
+
+.skin-page a:focus-visible,
+.skin-page button:focus-visible {
+  outline: 2px solid var(--berry);
+  outline-offset: 3px;
+}
+
+.skin-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skin-page .masked-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+.skin-page .masked-line__inner {
+  display: block;
+  will-change: transform;
+}
+
+.skin-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 110;
+  transform-origin: 0 50%;
+  background: var(--berry);
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   NAVIGATION
+   ========================================================================== */
+
+.skin-nav-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  width: 100%;
+  padding: 1.1rem clamp(1.25rem, 2.5vw, 2.5rem);
+  /* Keep this opaque: a backdrop-filter here creates a containing block and
+     would clamp the fixed mobile sheet to the header height. */
+  background: var(--skin-paper);
+  border-bottom: 1px solid rgba(58, 21, 48, 0.06);
+}
+
+.skin-nav-header__inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skin-nav-header__logo {
+  display: flex;
+  align-items: center;
+  justify-self: start;
+  min-width: 0;
+}
+
+.skin-nav-header__logo .brand__word {
+  color: var(--ink);
+}
+
+.skin-nav-header__logo .brand__mark {
+  color: var(--berry);
+}
+
+.skin-nav-capsule {
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.12rem;
+  padding: 4px;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 1px 2px rgba(58, 21, 48, 0.04),
+    0 10px 26px -20px rgba(58, 21, 48, 0.28),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+}
+
+.skin-nav-capsule__active,
+.skin-nav-capsule__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 0 0.9rem;
+  border-radius: 9999px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.skin-nav-capsule__active {
+  background: var(--berry);
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 3px 10px -4px rgba(58, 21, 48, 0.55);
+  cursor: default;
+}
+
+.skin-nav-capsule__link {
+  color: #5c4b48;
+  font-weight: 450;
+  transition: color 0.22s ease, background-color 0.22s ease;
+}
+
+.skin-nav-capsule__link:hover {
+  color: var(--berry);
+  background: rgba(107, 34, 55, 0.06);
+}
+
+.skin-nav-header__cta {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.skin-page .skin-book-button button:focus-visible {
+  outline: 2px solid var(--berry) !important;
+  outline-offset: 3px !important;
+}
+
+.skin-nav-header__menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--skin-line);
+  background: rgba(255, 255, 255, 0.7);
+  color: var(--berry);
+  cursor: pointer;
+}
+
+.skin-mobile-sheet {
+  position: fixed;
+  inset: 73px 0 0;
+  z-index: 89;
+  overflow-y: auto;
+  padding: clamp(1.5rem, 5vw, 2.5rem) clamp(1.25rem, 6vw, 2.5rem) 2rem;
+  background:
+    linear-gradient(180deg, rgba(247, 243, 236, 0.98), var(--skin-paper) 40%);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--skin-line);
+}
+
+.skin-mobile-sheet__nav {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100svh - 150px);
+}
+
+.skin-mobile-sheet__link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 62px;
+  border-bottom: 1px solid var(--skin-line);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.6rem, 7vw, 2rem);
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.skin-mobile-sheet__link.is-active {
+  color: var(--berry);
+}
+
+.skin-mobile-sheet__actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.skin-mobile-sheet__call,
+.skin-mobile-sheet__book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  min-height: 48px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.skin-mobile-sheet__call {
+  border: 1px solid var(--skin-line);
+  color: var(--berry);
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.skin-mobile-sheet__book {
+  border: 0;
+  background: var(--berry);
+  color: var(--cream);
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   HERO
+   ========================================================================== */
+
+.skin-hero {
+  position: relative;
+  display: flex;
+  gap: clamp(1rem, 2.2vw, 2rem);
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: clamp(1.6rem, 2.8vw, 2.8rem) clamp(1.25rem, 2.5vw, 2.5rem) 0;
+  border-bottom: 1px solid var(--skin-line);
+}
+
+.skin-rail {
+  flex: none;
+  width: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 1.4rem;
+  align-items: center;
+  padding: 0.6rem 0 2.8rem;
+}
+
+.skin-rail__steps {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skin-rail__group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.skin-rail__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.28rem;
+}
+
+.skin-rail__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--berry);
+}
+
+.skin-rail__num {
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #948580;
+}
+
+.skin-rail__item.is-active .skin-rail__num {
+  color: var(--berry);
+  font-weight: 700;
+}
+
+.skin-rail__line {
+  width: 1px;
+  height: 34px;
+  background: rgba(107, 34, 55, 0.18);
+}
+
+.skin-rail__scroll {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.4rem;
+  border: 0;
+  background: none;
+  color: #8b7a76;
+  font-family: var(--font-sans);
+  font-size: 0.64rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.skin-rail__scroll:hover {
+  color: var(--berry);
+}
+
+.skin-rail__arrow {
+  animation: skinFloatArrow 2.2s ease-in-out infinite;
+}
+
+@keyframes skinFloatArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.skin-hero__container {
+  flex: 1;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.38fr);
+  align-items: start;
+  gap: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2.4rem, 4vw, 3.8rem);
+}
+
+.skin-hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+  max-width: 500px;
+  padding-top: 0.55rem;
+}
+
+.skin-hero__breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  letter-spacing: 0.03em;
+  color: #8b7a76;
+}
+
+.skin-hero__bread-link {
+  color: #8b7a76;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.skin-hero__bread-link:hover {
+  color: var(--berry);
+}
+
+.skin-hero__bread-current {
+  color: var(--berry);
+  font-weight: 600;
+}
+
+.skin-hero__title {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(4.2rem, 8.3vw, 7.8rem);
+  font-weight: 400;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
+  color: var(--berry);
+  font-variation-settings: "opsz" 96, "SOFT" 30, "WONK" 0;
+}
+
+.skin-hero__dash {
+  font-size: 0.54em;
+  font-weight: 300;
+  letter-spacing: -0.05em;
+  opacity: 0.6;
+  margin-left: 0.12em;
+  vertical-align: 0.12em;
+}
+
+.skin-hero__kicker {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  margin-top: 0.2rem;
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 0.85vw, 0.82rem);
+  font-weight: 600;
+  line-height: 1.65;
+  letter-spacing: 0.15em;
+  color: #4f3b3c;
+}
+
+.skin-hero__subtitle {
+  max-width: 390px;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.93rem;
+  line-height: 1.6;
+  color: var(--skin-ink-soft);
+}
+
+.skin-hero__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 0.7rem;
+}
+
+.skin-hero__call-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  border: 1px solid rgba(58, 21, 48, 0.13);
+  background: #fbf8f3;
+  color: var(--berry);
+  font-family: var(--font-sans);
+  font-size: 0.79rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  box-shadow: 0 2px 7px rgba(58, 21, 48, 0.04);
+  transition: transform 0.28s var(--ease-out), box-shadow 0.28s ease, background-color 0.28s ease;
+}
+
+.skin-hero__call-pill:hover {
+  background: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 9px 20px -12px rgba(58, 21, 48, 0.35);
+}
+
+.skin-hero__stage {
+  position: relative;
+  min-width: 0;
+  height: clamp(390px, 34vw, 490px);
+  display: flex;
+  align-items: stretch;
+  gap: 0.42rem;
+}
+
+.skin-hero__wash {
+  position: absolute;
+  z-index: 0;
+  top: -11%;
+  left: -7%;
+  width: 76%;
+  height: 118%;
+  border-radius: 50%;
+  background: #efdad5;
+  opacity: 0.62;
+  pointer-events: none;
+}
+
+.skin-hero__arch {
+  position: relative;
+  z-index: 1;
+  flex: 2.02;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: clamp(110px, 16vw, 226px) 5px 0 0;
+  background: #e7d2cd;
+  box-shadow: 0 30px 55px -45px rgba(58, 21, 48, 0.55);
+  isolation: isolate;
+}
+
+.skin-hero__drift,
+.skin-hero__scroll-drift {
+  position: absolute;
+  inset: -5%;
+}
+
+.skin-hero__arch-img {
+  object-fit: cover;
+  object-position: 51% 37%;
+  transform: scale(1.055);
+}
+
+.skin-hero__arch-tint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(58, 21, 48, 0.1) 0%, rgba(58, 21, 48, 0) 26%),
+    linear-gradient(0deg, rgba(107, 34, 55, 0.12) 0%, rgba(107, 34, 55, 0) 32%);
+  pointer-events: none;
+}
+
+.skin-hero__companions {
+  position: relative;
+  z-index: 2;
+  flex: 1.28;
+  min-width: 0;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.skin-companion {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 5px 5px 0 0;
+  color: #fff;
+  isolation: isolate;
+  transition: flex 0.55s var(--ease-out);
+}
+
+.skin-companion:hover {
+  flex: 1.2;
+}
+
+.skin-companion__img {
+  object-fit: cover;
+  transition: transform 0.9s var(--ease-out);
+}
+
+.skin-companion--dental .skin-companion__img {
+  object-position: 49% 34%;
+}
+
+.skin-companion--hair .skin-companion__img {
+  object-position: 34% 42%;
+}
+
+.skin-companion--pmu .skin-companion__img {
+  object-position: 56% 42%;
+}
+
+.skin-companion:hover .skin-companion__img {
+  transform: scale(1.08);
+}
+
+.skin-companion__scrim {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(36, 13, 24, 0.04) 0%, rgba(36, 13, 24, 0.1) 45%, rgba(36, 13, 24, 0.72) 100%);
+  pointer-events: none;
+}
+
+.skin-companion__info {
+  position: absolute;
+  left: 0.7rem;
+  right: 0.6rem;
+  bottom: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+}
+
+.skin-companion__name {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.02rem, 1.3vw, 1.3rem);
+  font-weight: 400;
+  line-height: 1;
+  text-shadow: 0 1px 8px rgba(20, 5, 12, 0.4);
+}
+
+.skin-companion__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s var(--ease-out);
+}
+
+.skin-companion:hover .skin-companion__arrow {
+  background: #fff;
+  color: var(--berry);
+  transform: translateX(2px);
+}
+
+/* ==========================================================================
+   TREATMENTS
+   ========================================================================== */
+
+.skin-treatments.treatments-section {
+  max-width: 1420px;
+  padding-top: clamp(3.5rem, 5.5vw, 5.5rem);
+  padding-bottom: clamp(3.5rem, 5.5vw, 5.5rem);
+}
+
+.skin-treatments .treatments-section__header {
+  grid-template-columns: 355px minmax(0, 1fr);
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.skin-treatments .treatments-section__title-col {
+  gap: 1.1rem;
+}
+
+.skin-treatments .treatments-section__kicker {
+  color: #6d5a56;
+}
+
+.skin-treatments .treatments-section__title {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.35rem, 3.6vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--berry);
+}
+
+.skin-treatments .treatments-section__divider {
+  background: rgba(107, 34, 55, 0.45);
+  transform-origin: 0 50%;
+  margin-top: 0.35rem;
+}
+
+.skin-treatments .treatments-section__controls {
+  margin-top: 0.9rem;
+}
+
+.skin-treatments .treatments-section__ctrl-btn:hover {
+  transform: translateY(-2px) rotate(-4deg);
+}
+
+.skin-treatments__grid {
+  gap: 0.9rem;
+}
+
+.skin-treatment-card {
+  min-height: 174px;
+  padding: 1.5rem 1.45rem 1.35rem;
+  border-radius: 18px;
+  border: 1px solid rgba(58, 21, 48, 0.06);
+  box-shadow: 0 1px 1px rgba(58, 21, 48, 0.02);
+  will-change: transform;
+  transition:
+    box-shadow 0.4s var(--ease-out),
+    border-color 0.4s ease,
+    background-color 0.4s ease;
+}
+
+.skin-treatment-card.treatment-card--blush {
+  background: #f5e7e3;
+}
+
+.skin-treatment-card.treatment-card--cream {
+  background: #fbf6ea;
+}
+
+.skin-treatment-card.treatment-card--blue {
+  background: #e6f0f5;
+}
+
+.skin-treatment-card:hover {
+  box-shadow: 0 24px 45px -30px rgba(58, 21, 48, 0.45);
+  border-color: rgba(107, 34, 55, 0.14);
+}
+
+.skin-treatment-card.is-spotlight {
+  border-color: rgba(107, 34, 55, 0.4);
+  box-shadow: 0 20px 40px -32px rgba(58, 21, 48, 0.55);
+}
+
+.skin-treatment-card__corner {
+  position: absolute;
+  right: 1.55rem;
+  top: 3.45rem;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--berry);
+  opacity: 0;
+  transform: scale(0.4);
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-out);
+}
+
+.skin-treatment-card.is-spotlight .skin-treatment-card__corner {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.skin-treatment-card .treatment-card__head {
+  align-items: center;
+}
+
+.skin-treatment-card .treatment-card__icon-wrap {
+  width: 38px;
+  height: 38px;
+  color: var(--berry);
+  transform-origin: 70% 70%;
+  transition: transform 0.45s var(--ease-out);
+}
+
+.skin-treatment-card .treatment-card__icon {
+  width: 30px;
+  height: 30px;
+}
+
+.skin-treatment-card:hover .treatment-card__icon-wrap {
+  transform: rotate(-6deg) scale(1.07);
+}
+
+.skin-treatment-card .treatment-card__index {
+  color: rgba(58, 21, 48, 0.48);
+  transition: color 0.3s ease;
+}
+
+.skin-treatment-card.is-spotlight .treatment-card__index {
+  color: var(--berry);
+}
+
+.skin-treatment-card .treatment-card__body {
+  margin-top: 1.25rem;
+  gap: 0.3rem;
+}
+
+.skin-treatment-card .treatment-card__name {
+  font-size: 1.24rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--berry);
+}
+
+.skin-treatment-card .treatment-card__desc {
+  max-width: 24ch;
+  font-size: 0.81rem;
+  line-height: 1.5;
+  color: #6d5d59;
+}
+
+.skin-treatment-card .treatment-card__glare {
+  background: radial-gradient(circle at 50% -20%, rgba(255, 255, 255, 0.65), transparent 65%);
+}
+
+/* ==========================================================================
+   HOW A VISIT WORKS
+   ========================================================================== */
+
+.skin-how {
+  position: relative;
+  padding: clamp(2.8rem, 4.5vw, 4.2rem) 0;
+  background:
+    linear-gradient(102deg, #f4e4df 0%, #f7efe8 44%, #f3eee8 100%);
+  border-top: 1px solid rgba(107, 34, 55, 0.06);
+  border-bottom: 1px solid rgba(107, 34, 55, 0.06);
+}
+
+.skin-how__inner {
+  display: grid;
+  grid-template-columns: minmax(300px, 36%) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 5rem);
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.skin-how__media {
+  position: relative;
+  height: clamp(310px, 31vw, 400px);
+  overflow: hidden;
+  border-radius: 0 clamp(80px, 11vw, 160px) 0 0;
+  background: #e5cdc7;
+  isolation: isolate;
+}
+
+.skin-how__media-inner {
+  position: absolute;
+  inset: -6% 0;
+}
+
+.skin-how__img {
+  object-fit: cover;
+  object-position: 50% 42%;
+  transition: transform 1.1s var(--ease-out);
+}
+
+.skin-how__media:hover .skin-how__img {
+  transform: scale(1.04);
+}
+
+.skin-how__media-tint {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(36, 13, 24, 0.12), transparent 42%),
+    linear-gradient(0deg, rgba(107, 34, 55, 0.1), transparent 40%);
+  pointer-events: none;
+}
+
+.skin-how__content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 2.4vw, 2.2rem);
+  padding-right: clamp(1.5rem, 4vw, 4rem);
+}
+
+.skin-how__kicker {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: #6d5a56;
+}
+
+.skin-how__steps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 2.7vw, 2.6rem);
+}
+
+.skin-step {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  min-width: 0;
+}
+
+.skin-step--divided {
+  padding-left: clamp(1.25rem, 2.2vw, 2.2rem);
+  border-left: 1px solid rgba(107, 34, 55, 0.16);
+}
+
+.skin-step__head {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.skin-step__num {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 1.05rem;
+  color: var(--berry);
+}
+
+.skin-step__rule {
+  flex: 1;
+  height: 1px;
+  transform-origin: 0 50%;
+  background: rgba(107, 34, 55, 0.3);
+}
+
+.skin-step__title {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.12rem, 1.45vw, 1.34rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  color: var(--berry);
+}
+
+.skin-step__title.is-italic {
+  font-style: italic;
+}
+
+.skin-step__desc {
+  margin: 0;
+  max-width: 25ch;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: #6d5d59;
+}
+
+/* ==========================================================================
+   SPECIALISTS
+   ========================================================================== */
+
+.skin-specialists.dentists-section {
+  max-width: 1420px;
+  padding-top: clamp(3.2rem, 5vw, 4.6rem);
+  padding-bottom: clamp(3.2rem, 5vw, 4.6rem);
+}
+
+.skin-specialists .dentists-section__container {
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.skin-specialists .dentists-section__kicker {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.65;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #6d5a56;
+}
+
+.skin-specialists .dentists-section__list {
+  gap: 1rem;
+}
+
+.skin-specialist-card {
+  min-height: 124px;
+  padding: 0.9rem 1.25rem;
+  border-radius: 24px;
+  border: 1px solid rgba(58, 21, 48, 0.06);
+  background: #fff;
+  box-shadow: 0 8px 28px -24px rgba(58, 21, 48, 0.28);
+  transition: box-shadow 0.35s ease, border-color 0.35s ease;
+}
+
+.skin-specialist-card.is-active {
+  border-color: rgba(107, 34, 55, 0.22);
+  box-shadow: 0 18px 34px -28px rgba(58, 21, 48, 0.4);
+}
+
+.skin-specialist-card:hover {
+  box-shadow: 0 22px 38px -28px rgba(58, 21, 48, 0.35);
+}
+
+.skin-specialist-card__avatar {
+  flex: none;
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #efe4d9;
+  display: block;
+}
+
+.skin-specialist-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.03);
+}
+
+.skin-specialist-card__info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.skin-specialist-card__name {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.32rem, 1.8vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--berry);
+}
+
+.skin-specialist-card__creds {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  color: #8b7a76;
+}
+
+.skin-specialist-card__action {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid rgba(58, 21, 48, 0.14);
+  background: #fff;
+  color: var(--berry);
+  transition: background-color 0.25s ease, color 0.25s ease, transform 0.25s var(--ease-out);
+}
+
+.skin-specialist-card__action:hover {
+  background: var(--berry);
+  color: #fff;
+  transform: translateX(3px);
+}
+
+/* ==========================================================================
+   MORE AT AESTHEDENT
+   ========================================================================== */
+
+.skin-more.more-services {
+  max-width: 1420px;
+  padding-top: clamp(1.8rem, 2.6vw, 2.8rem);
+  padding-bottom: clamp(3.4rem, 5vw, 5rem);
+}
+
+.skin-more .more-services__container {
+  grid-template-columns: 300px minmax(0, 1fr);
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.skin-more .more-services__kicker {
+  color: #6d5a56;
+}
+
+.skin-more .more-services__title {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(2.1rem, 3.2vw, 3.2rem);
+  line-height: 1.06;
+  letter-spacing: -0.02em;
+  color: var(--berry);
+}
+
+.skin-more__cards {
+  gap: 0.85rem;
+}
+
+.skin-more-card {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+  height: 146px;
+  overflow: hidden;
+  border-radius: 12px;
+  text-decoration: none;
+  isolation: isolate;
+  box-shadow: 0 10px 24px -20px rgba(58, 21, 48, 0.38);
+  transition: transform 0.4s var(--ease-out), box-shadow 0.4s ease;
+}
+
+.skin-more-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 38px -28px rgba(58, 21, 48, 0.48);
+}
+
+.skin-more-card--light {
+  background: #dce9ef;
+  color: var(--berry);
+}
+
+.skin-more-card--dark {
+  background: var(--espresso);
+  color: var(--cream);
+}
+
+.skin-more-card--berry {
+  background: var(--berry);
+  color: var(--cream);
+}
+
+.skin-more-card__bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
+.skin-more-card__content {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.2rem 0 1.2rem 1.35rem;
+}
+
+.skin-more-card__name {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.45rem, 2vw, 1.85rem);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.skin-more-card__arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid currentColor;
+  opacity: 0.85;
+  transition: transform 0.3s var(--ease-out), background-color 0.3s ease, color 0.3s ease;
+}
+
+.skin-more-card:hover .skin-more-card__arrow {
+  transform: translateX(3px);
+  background: currentColor;
+}
+
+.skin-more-card--light:hover .skin-more-card__arrow {
+  color: var(--berry);
+  background: transparent;
+}
+
+.skin-more-card__media {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 57%;
+  z-index: 1;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 32%);
+}
+
+.skin-more-card__img {
+  object-fit: cover;
+  object-position: 50% 40%;
+  transition: transform 1s var(--ease-out);
+}
+
+.skin-more-card:hover .skin-more-card__img {
+  transform: scale(1.07);
+}
+
+/* ==========================================================================
+   FAQ
+   ========================================================================== */
+
+.skin-faq.faq-section {
+  max-width: 1420px;
+  padding-top: clamp(2.8rem, 4.5vw, 4.2rem);
+  padding-bottom: clamp(3.4rem, 5vw, 4.8rem);
+}
+
+.skin-faq .faq-section__container {
+  grid-template-columns: 265px minmax(0, 1fr);
+  gap: clamp(2.5rem, 4vw, 4rem);
+}
+
+.skin-faq .faq-section__title {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: clamp(3rem, 4.6vw, 4.5rem);
+  color: var(--berry);
+}
+
+.skin-faq .faq-section__dash {
+  display: inline-block;
+  margin-left: 0.45rem;
+  font-size: 0.55em;
+  vertical-align: 0.2em;
+  opacity: 0.55;
+}
+
+.skin-faq .faq-section__list {
+  gap: 0.65rem;
+}
+
+.skin-faq .faq-item {
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background: #f0e8dd;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.skin-faq .faq-item.is-open {
+  background: #ede4d8;
+  border-color: rgba(107, 34, 55, 0.1);
+}
+
+.skin-faq .faq-item__trigger {
+  min-height: 58px;
+  padding: 1rem 1.5rem;
+  gap: 1rem;
+}
+
+.skin-faq .faq-item__question {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.93rem;
+  font-weight: 600;
+  color: #3f2630;
+}
+
+.skin-faq .faq-item__icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex: none;
+}
+
+.skin-faq .faq-item__line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 14px;
+  height: 1px;
+  background: var(--berry);
+  transform: translateY(-50%);
+}
+
+.skin-faq .faq-item__line--vertical {
+  transform: translateY(-50%) rotate(90deg);
+  transform-origin: 50% 50%;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.skin-faq .faq-item.is-open .faq-item__line--vertical {
+  transform: translateY(-50%) rotate(90deg) scaleY(0);
+}
+
+.skin-faq .faq-item__content {
+  padding: 0 1.5rem 1.25rem;
+}
+
+.skin-faq .faq-item__answer {
+  max-width: 70ch;
+  font-size: 0.86rem;
+  line-height: 1.6;
+  color: #65524f;
+}
+
+.skin-faq .faq-section__botanical {
+  bottom: -0.75rem;
+  left: -0.5rem;
+  opacity: 0.32;
+  color: #735b53;
+}
+
+.skin-faq__branch {
+  width: clamp(130px, 12vw, 190px);
+  height: auto;
+}
+
+/* ==========================================================================
+   BOOKING + LOCATION
+   ========================================================================== */
+
+.skin-page .cta-dual-section {
+  max-width: 1420px;
+  padding-top: 1rem;
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+}
+
+.skin-booking-pill.cta-pill--booking {
+  background: var(--berry);
+}
+
+.skin-page .cta-pill {
+  border-radius: 18px;
+}
+
+.skin-page .cta-pill--booking {
+  box-shadow: 0 20px 42px -32px rgba(58, 21, 48, 0.55);
+}
+
+.skin-page .cta-pill__book-title {
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+.skin-page .cta-pill--location {
+  background: #fbf7f1;
+}
+
+.skin-page .cta-pill__call-btn {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.skin-page .cta-pill__call-btn:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.skin-page .cta-pill__map-wrap {
+  background: #ece1d4;
+}
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.skin-footer {
+  width: 100%;
+  background: #2a0e1e;
+  color: var(--cream);
+  padding: 1.7rem clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.skin-footer__inner {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.skin-footer__brand {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  min-width: 0;
+}
+
+.skin-footer .brand__word,
+.skin-footer .brand__mark {
+  color: var(--cream);
+}
+
+.skin-footer .brand__tagline {
+  color: rgba(243, 238, 232, 0.55);
+}
+
+.skin-footer__divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(243, 238, 232, 0.18);
+  flex: none;
+}
+
+.skin-footer__tagline {
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 0.92rem;
+  color: rgba(243, 238, 232, 0.66);
+  white-space: nowrap;
+}
+
+.skin-footer__nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 1.8vw, 1.8rem);
+}
+
+.skin-footer__link {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: rgba(243, 238, 232, 0.72);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.skin-footer__link:hover,
+.skin-footer__link.is-active {
+  color: #fff;
+}
+
+.skin-footer__link.is-active {
+  text-decoration: underline;
+  text-underline-offset: 5px;
+  text-decoration-color: rgba(243, 238, 232, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 1180px) {
+  .skin-hero__container {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 1.25rem;
+  }
+
+  .skin-hero__stage {
+    height: clamp(360px, 37vw, 440px);
+  }
+
+  .skin-hero__arch {
+    flex: 1.85;
+  }
+
+  .skin-hero__companions {
+    flex: 1.45;
+  }
+
+  .skin-companion__info {
+    left: 0.5rem;
+    right: 0.45rem;
+  }
+
+  .skin-companion__name {
+    font-size: 0.98rem;
+  }
+
+  .skin-treatments .treatments-section__header {
+    grid-template-columns: 310px minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .skin-treatment-card {
+    min-height: 168px;
+    padding: 1.3rem 1.2rem;
+  }
+
+  .skin-nav-capsule__active,
+  .skin-nav-capsule__link {
+    padding: 0 0.75rem;
+  }
+
+  .skin-hero__actions {
+    gap: 0.55rem;
+  }
+
+  .skin-hero__call-pill {
+    padding: 0 1rem;
+    font-size: 0.76rem;
+  }
+}
+
+@media (max-width: 980px) {
+  .skin-nav-capsule {
+    display: none;
+  }
+
+  .skin-nav-header__book {
+    display: none;
+  }
+
+  .skin-nav-header__menu-btn {
+    display: inline-flex;
+  }
+
+  .skin-nav-header__inner {
+    grid-template-columns: 1fr auto;
+  }
+
+  .skin-hero {
+    padding-top: 1.75rem;
+  }
+
+  .skin-rail {
+    display: none;
+  }
+
+  .skin-hero__container {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    padding-bottom: 2.4rem;
+  }
+
+  .skin-hero__content {
+    max-width: 560px;
+  }
+
+  .skin-hero__title {
+    font-size: clamp(4rem, 10vw, 6rem);
+  }
+
+  .skin-hero__stage {
+    width: 100%;
+    height: clamp(340px, 48vw, 440px);
+  }
+
+  .skin-treatments .treatments-section__header,
+  .skin-specialists .dentists-section__container,
+  .skin-more .more-services__container,
+  .skin-faq .faq-section__container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .skin-treatments .treatments-section__title {
+    font-size: clamp(2.5rem, 5.8vw, 3.8rem);
+  }
+
+  .skin-specialists .dentists-section__header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+
+
+  .skin-how__inner {
+    grid-template-columns: minmax(260px, 40%) minmax(0, 1fr);
+    gap: 2.2rem;
+  }
+
+  .skin-how__steps {
+    grid-template-columns: 1fr;
+    gap: 1.35rem;
+  }
+
+  .skin-step--divided {
+    padding-left: 0;
+    border-left: 0;
+    border-top: 1px solid rgba(107, 34, 55, 0.16);
+    padding-top: 1.2rem;
+  }
+
+  .skin-faq .faq-section__header {
+    position: static;
+  }
+
+  .skin-faq .faq-section__title {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .skin-more__cards {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .skin-more-card {
+    height: 134px;
+  }
+
+  .skin-more-card__content {
+    padding: 1rem 0 1rem 1.05rem;
+  }
+
+  .skin-more-card__name {
+    font-size: 1.5rem;
+  }
+
+  .skin-footer__inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.4rem;
+  }
+}
+
+@media (max-width: 760px) {
+  .skin-nav-header {
+    padding: 0.9rem 1.15rem;
+  }
+
+  .skin-hero {
+    padding: 1.35rem 1.15rem 0;
+  }
+
+  .skin-hero__title {
+    font-size: clamp(3.6rem, 15vw, 5rem);
+  }
+
+  .skin-hero__kicker {
+    font-size: 0.73rem;
+  }
+
+  .skin-hero__stage {
+    flex-direction: column;
+    height: auto;
+    gap: 0.5rem;
+  }
+
+  .skin-hero__wash {
+    width: 88%;
+    height: 62%;
+    top: 0;
+    left: 0;
+  }
+
+  .skin-hero__arch {
+    flex: none;
+    width: 100%;
+    height: clamp(290px, 82vw, 390px);
+    border-radius: clamp(72px, 20vw, 130px) 5px 0 0;
+  }
+
+  .skin-hero__companions {
+    flex: none;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    height: 126px;
+  }
+
+  .skin-hero__container {
+    padding-bottom: 2rem;
+  }
+
+  .skin-treatments.treatments-section,
+  .skin-specialists.dentists-section,
+  .skin-more.more-services,
+  .skin-faq.faq-section,
+  .skin-page .cta-dual-section {
+    padding-left: 1.15rem;
+    padding-right: 1.15rem;
+  }
+
+  .skin-treatments .treatments-section__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skin-treatment-card {
+    min-height: 156px;
+  }
+
+  .skin-how {
+    padding: 2.2rem 0;
+  }
+
+  .skin-how__inner {
+    grid-template-columns: 1fr;
+    gap: 1.7rem;
+  }
+
+  .skin-how__media {
+    height: 300px;
+    border-radius: 0 clamp(70px, 22vw, 120px) 0 0;
+  }
+
+  .skin-how__content {
+    padding: 0 1.15rem;
+  }
+
+  .skin-specialists .dentists-section__list {
+    grid-template-columns: 1fr;
+  }
+
+  .skin-specialist-card {
+    min-height: 112px;
+    padding: 0.8rem 1rem;
+    border-radius: 20px;
+  }
+
+  .skin-specialist-card__avatar {
+    width: 70px;
+    height: 70px;
+  }
+
+  .skin-more__cards {
+    grid-template-columns: 1fr;
+  }
+
+  .skin-more-card {
+    height: 132px;
+  }
+
+  .skin-more-card__media {
+    width: 55%;
+  }
+
+  .skin-faq .faq-section__botanical {
+    opacity: 0.18;
+    left: -2rem;
+  }
+
+  .skin-page .cta-dual-section__container {
+    grid-template-columns: 1fr;
+  }
+
+  .skin-page .cta-pill {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 1.35rem;
+  }
+
+  .skin-page .cta-pill__divider {
+    display: none;
+  }
+
+  .skin-page .cta-pill__call-wrap {
+    width: 100%;
+  }
+
+  .skin-page .cta-pill__call-btn {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .skin-page .cta-pill--location {
+    align-items: center;
+  }
+
+  .skin-page .cta-pill__map-wrap {
+    margin-left: auto;
+  }
+
+  .skin-footer {
+    padding: 1.6rem 1.15rem;
+  }
+
+  .skin-footer__brand {
+    flex-wrap: wrap;
+    gap: 0.85rem;
+  }
+
+  .skin-footer__nav {
+    flex-wrap: wrap;
+    gap: 0.9rem 1.4rem;
+  }
+}
+
+@media (max-width: 460px) {
+  .skin-hero__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .skin-hero__actions > div {
+    align-self: flex-start;
+  }
+
+  .skin-hero__call-pill {
+    width: 100%;
+  }
+
+  .skin-hero__companions {
+    height: 116px;
+  }
+
+  .skin-companion__info {
+    left: 0.5rem;
+    right: 0.4rem;
+    bottom: 0.7rem;
+    gap: 0.4rem;
+  }
+
+  .skin-companion__name {
+    font-size: 1rem;
+  }
+
+  .skin-companion__arrow {
+    width: 26px;
+    height: 26px;
+  }
+
+  .skin-specialist-card__name {
+    font-size: 1.22rem;
+  }
+
+  .skin-specialist-card__action {
+    width: 44px;
+    height: 44px;
+  }
+
+  .skin-treatments .treatments-section__ctrl-btn,
+  .skin-specialists .dentists-section__ctrl-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .skin-page .cta-pill {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .skin-page .cta-pill__map-wrap {
+    margin-left: 0;
+  }
+
+  .skin-footer__divider {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skin-rail__arrow {
+    animation: none;
+  }
+
+  .skin-companion,
+  .skin-companion__img,
+  .skin-more-card,
+  .skin-more-card__img,
+  .skin-how__img,
+  .skin-specialist-card__action,
+  .skin-hero__call-pill {
+    transition: none !important;
+  }
+
+  .skin-treatment-card:hover .treatment-card__icon-wrap {
+    transform: none;
+  }
+}

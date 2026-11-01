@@ -27,6 +27,12 @@ interface PanelProps {
 
 const EASE_OUT = cubicBezier(0.16, 1, 0.3, 1);
 
+/** Specialty pages, once built, are reached from the panel arrow. */
+const SERVICE_HREF: Partial<Record<Service["id"], string>> = {
+  dental: "/dental",
+  skin: "/skin",
+};
+
 export default function Panel({
   service,
   index,
@@ -70,6 +76,7 @@ export default function Panel({
 
   const detailsId = `treatments-${service.id}`;
   const titleId = `title-${service.id}`;
+  const serviceHref = SERVICE_HREF[service.id];
   const styles = {
     "--image-position": service.image.position,
     "--panel-offset": `${service.offset}px`,
@@ -152,11 +159,11 @@ export default function Panel({
         </motion.p>
 
         {/* Circular arrow button underneath descriptor as in Reference Image 2 */}
-        {service.id === "dental" ? (
+        {serviceHref ? (
           <Link
-            href="/dental"
+            href={serviceHref}
             className="panel__circle-arrow"
-            aria-label="View Dental treatments page"
+            aria-label={`View ${service.name} treatments page`}
             onClick={(e) => e.stopPropagation()}
           >
             <ArrowRight size={13} strokeWidth={1.8} />
