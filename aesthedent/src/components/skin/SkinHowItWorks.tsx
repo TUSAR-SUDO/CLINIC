@@ -18,7 +18,7 @@ export default function SkinHowItWorks() {
   const imageY = useTransform(scrollYProgress, [0, 1], ["-4%", "4%"]);
 
   return (
-    <section className="skin-how" aria-labelledby="skin-how-title" ref={sectionRef}>
+    <section className="skin-how" id="skin-how" aria-labelledby="skin-how-title" ref={sectionRef}>
       <div className="skin-how__inner">
         <motion.div
           className="skin-how__media"

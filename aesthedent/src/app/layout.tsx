@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import "./globals.css";
 import "@/styles/skin.css";
+import "@/styles/our-clinic.css";
 
 const fraunces = Fraunces({
   subsets: ["latin"],

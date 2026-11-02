@@ -14,7 +14,7 @@ export default function SkinFAQ() {
   const baseId = useId();
 
   return (
-    <section className="skin-faq faq-section" aria-labelledby="skin-faq-title">
+    <section className="skin-faq faq-section" id="skin-faq" aria-labelledby="skin-faq-title">
       <motion.div
         className="faq-section__botanical"
         aria-hidden="true"

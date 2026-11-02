@@ -110,7 +110,11 @@ export default function Navbar() {
       }
     };
     window.addEventListener("aesthedent:select-service", handleSelect);
-    return () => window.removeEventListener("aesthedent:select-service", handleSelect);
+    window.addEventListener("aesthedent:preview-service", handleSelect);
+    return () => {
+      window.removeEventListener("aesthedent:select-service", handleSelect);
+      window.removeEventListener("aesthedent:preview-service", handleSelect);
+    };
   }, []);
 
   const handleNavChange = (index: number, item: LiquidNavItem) => {

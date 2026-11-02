@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SkinNavbar from "@/components/skin/SkinNavbar";
 import SkinHero from "@/components/skin/SkinHero";
+import SkinPlan from "@/components/skin/SkinPlan";
 import SkinTreatments from "@/components/skin/SkinTreatments";
 import SkinHowItWorks from "@/components/skin/SkinHowItWorks";
 import SkinSpecialists from "@/components/skin/SkinSpecialists";
@@ -84,6 +85,7 @@ export default function SkinPage() {
         <SkinNavbar />
         <main id="main">
           <SkinHero />
+          <SkinPlan />
           <SkinTreatments />
           <SkinHowItWorks />
           <SkinSpecialists />

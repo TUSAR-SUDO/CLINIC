@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" role="img" aria-label="Placeholder clinic team portrait">
+  <title>Placeholder portrait</title>
+  <rect width="160" height="160" fill="#B9CFDB" />
+  <circle cx="124" cy="32" r="42" fill="#F3EEE8" opacity=".24" />
+  <circle cx="80" cy="62" r="27" fill="#2A1A14" opacity=".86" />
+  <path d="M22 160c5-30 28-46 58-46s53 16 58 46Z" fill="#FBF7F2" opacity=".92" />
+  <path d="M54 160c1-24 11-39 26-39s25 15 26 39Z" fill="#3A1530" opacity=".82" />
+  <path d="M80 35c15 0 26 11 26 26 0 4-1 8-2 11" fill="none" stroke="#FBF7F2" strokeWidth="1.4" opacity=".45" strokeLinecap="round" />
+</svg>

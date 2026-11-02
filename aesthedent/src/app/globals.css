@@ -16,6 +16,21 @@
   --color-line: var(--line);
   --color-green: var(--green);
 
+  /* shadcn-compatible tokens used by the team lanyard rail */
+  --color-background: var(--bg-stone);
+  --color-foreground: var(--ink);
+  --color-card: var(--surface);
+  --color-card-foreground: var(--ink);
+  --color-muted: var(--bg-stone-deep);
+  --color-muted-foreground: var(--muted-ink);
+  --color-border: var(--line);
+  --color-ring: var(--dark-aubergine);
+  --color-chart-1: var(--ice-blue);
+  --color-chart-2: var(--blush);
+  --color-chart-3: var(--berry);
+  --color-chart-4: var(--espresso);
+  --color-chart-5: var(--dark-aubergine);
+
   --font-display: var(--font-fraunces);
   --font-sans: var(--font-geist-sans);
 }
@@ -374,6 +389,12 @@ svg {
   color: var(--panel-fg);
   will-change: flex-grow;
   transform: translateZ(0);
+  transition: flex-grow 0.62s var(--ease-soft);
+}
+
+/* Hovered / focused cards ease open while their siblings give way. */
+.panel.is-active {
+  flex-grow: 1.22;
 }
 
 .panel--dental {
@@ -423,6 +444,11 @@ svg {
 .panel__zoom {
   position: absolute;
   inset: 0;
+  transition: transform 1.1s var(--ease-out);
+}
+
+.panel.is-active .panel__zoom {
+  transform: scale(1.03);
 }
 
 .panel__image {

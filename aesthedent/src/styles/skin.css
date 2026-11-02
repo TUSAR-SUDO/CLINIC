@@ -1792,3 +1792,311 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   THE PLAN FOLDER — an interactive index to the skin journey
+   ========================================================================== */
+
+.skin-plan {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1.25rem, 4vw, 4.5rem);
+  background: var(--dark-aubergine);
+  color: var(--cream);
+  border-top: 1px solid rgba(243, 238, 232, 0.1);
+  border-bottom: 1px solid rgba(243, 238, 232, 0.1);
+}
+
+.skin-plan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(58, 21, 48, 0.2), transparent 48%),
+    radial-gradient(80% 100% at 68% 44%, rgba(107, 34, 55, 0.22), transparent 68%);
+  pointer-events: none;
+}
+
+.skin-plan__grid {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.42;
+  background-image: radial-gradient(circle, rgba(243, 238, 232, 0.26) 1px, transparent 1.1px);
+  background-size: 27px 27px;
+  -webkit-mask-image: radial-gradient(62% 82% at 64% 50%, #000 0%, transparent 76%);
+  mask-image: radial-gradient(62% 82% at 64% 50%, #000 0%, transparent 76%);
+  pointer-events: none;
+}
+
+.skin-plan__container {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 1280px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.02fr) minmax(320px, 0.98fr);
+  align-items: center;
+  gap: clamp(2.5rem, 6vw, 6.5rem);
+}
+
+.skin-plan__copy {
+  max-width: 34rem;
+}
+
+.skin-plan__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin: 0 0 clamp(1.5rem, 2.6vw, 2.2rem);
+  font-family: var(--font-sans);
+  font-size: 0.66rem;
+  font-weight: 500;
+  letter-spacing: 0.19em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(243, 238, 232, 0.68);
+}
+
+.skin-plan__eyebrow-rule {
+  width: 2rem;
+  height: 1px;
+  background: rgba(217, 167, 158, 0.65);
+}
+
+.skin-plan__title {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(3.1rem, 5.7vw, 5.7rem);
+  font-weight: 420;
+  font-variation-settings: "opsz" 96, "SOFT" 44, "WONK" 0;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+  color: var(--cream);
+}
+
+.skin-plan__title em {
+  color: var(--blush);
+  font-style: italic;
+}
+
+.skin-plan__lede {
+  max-width: 29rem;
+  margin: clamp(1.5rem, 2.4vw, 2rem) 0 0;
+  font-family: var(--font-sans);
+  font-size: clamp(0.92rem, 1.05vw, 1.06rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: rgba(243, 238, 232, 0.67);
+}
+
+.skin-plan__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.35rem 2rem;
+  margin-top: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.skin-plan__book {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 44px;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid rgba(217, 167, 158, 0.5);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--cream);
+  transition: color 0.35s var(--ease-out), border-color 0.35s var(--ease-out);
+}
+
+.skin-plan__book svg {
+  transition: transform 0.35s var(--ease-out);
+}
+
+.skin-plan__book:hover,
+.skin-plan__book:focus-visible {
+  color: var(--blush);
+  border-color: var(--blush);
+}
+
+.skin-plan__book:hover svg,
+.skin-plan__book:focus-visible svg {
+  transform: translate(2px, -2px);
+}
+
+.skin-plan__phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 44px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 450;
+  letter-spacing: 0.03em;
+  color: rgba(243, 238, 232, 0.72);
+  transition: color 0.35s var(--ease-out);
+}
+
+.skin-plan__phone:hover,
+.skin-plan__phone:focus-visible {
+  color: var(--cream);
+}
+
+.skin-plan__object {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.1rem, 2vw, 1.6rem);
+}
+
+.skin-plan__frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: min(100%, 430px);
+}
+
+.skin-plan__frame .gf-root {
+  max-width: 100%;
+}
+
+.skin-plan__hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.63rem;
+  font-weight: 500;
+  letter-spacing: 0.17em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: rgba(243, 238, 232, 0.62);
+}
+
+.skin-plan__hint-rule {
+  width: 2.2rem;
+  height: 1px;
+  background: rgba(243, 238, 232, 0.24);
+}
+
+.skin-plan a:focus-visible {
+  outline: 2px solid var(--blush);
+  outline-offset: 5px;
+}
+
+.skin-plan .gf-hit:focus-visible {
+  outline: none;
+}
+
+.skin-plan .gf-meta {
+  color: rgba(20, 20, 22, 0.66);
+}
+
+.skin-plan .gf-sheet-meta {
+  color: rgba(24, 24, 27, 0.62);
+}
+
+.skin-plan .gf-hit:focus-visible ~ .gf-label .gf-title {
+  text-decoration-color: var(--berry);
+}
+
+.skin-plan .gf-sheet:focus-visible,
+.skin-plan .gf-key:focus-visible {
+  outline-color: var(--berry);
+}
+
+@media (max-width: 1100px) {
+  .skin-plan__container {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+
+  .skin-plan__title {
+    font-size: clamp(2.9rem, 5.4vw, 4.6rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .skin-plan {
+    padding: clamp(4rem, 9vw, 5.5rem) clamp(1.25rem, 5vw, 2.5rem);
+  }
+
+  .skin-plan__container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.6rem, 6vw, 3.5rem);
+  }
+
+  .skin-plan__copy {
+    max-width: 40rem;
+  }
+
+  .skin-plan__title {
+    font-size: clamp(3rem, 9vw, 5rem);
+  }
+
+  .skin-plan__object {
+    padding-top: 0.5rem;
+  }
+
+  .skin-plan__frame {
+    width: min(100%, 390px);
+  }
+}
+
+@media (max-width: 480px) {
+  .skin-plan {
+    padding: 3.75rem 1.25rem 4rem;
+  }
+
+  .skin-plan__title {
+    font-size: clamp(2.75rem, 13vw, 3.6rem);
+  }
+
+  .skin-plan__lede {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  .skin-plan__actions {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .skin-plan__object {
+    gap: 1rem;
+  }
+
+  .skin-plan__frame {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skin-plan__book,
+  .skin-plan__book svg,
+  .skin-plan__phone {
+    transition: none;
+  }
+}
+
+/* Keep the open fan inside the phone viewport. */
+@media (max-width: 480px) {
+  .skin-plan .gf-root[data-open] {
+    --gf-spread: 16px;
+    --gf-fan: 2.2deg;
+  }
+
+  .skin-plan .gf-menu {
+    right: 10px;
+  }
+}
