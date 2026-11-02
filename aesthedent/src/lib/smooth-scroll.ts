@@ -3,7 +3,7 @@
 type LenisTarget = HTMLElement | string;
 
 interface LenisLike {
-  scrollTo: (target: LenisTarget, options?: { offset?: number; duration?: number }) => void;
+  scrollTo: (target: number | LenisTarget, options?: { offset?: number; duration?: number }) => void;
 }
 
 let activeLenis: LenisLike | null = null;
@@ -28,4 +28,16 @@ export function scrollToSection(id: string) {
   }
 
   target.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+/** Back to the top through the same scroller, or natively when it is off. */
+export function scrollToTop(immediate = false) {
+  if (typeof window === "undefined") return;
+
+  if (activeLenis) {
+    activeLenis.scrollTo(0, { duration: immediate ? 0 : 1.15 });
+    return;
+  }
+
+  window.scrollTo({ top: 0, behavior: immediate ? "auto" : "smooth" });
 }

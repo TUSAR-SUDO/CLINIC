@@ -7,7 +7,6 @@ import MeetDentists from "@/components/dental/MeetDentists";
 import OtherServices from "@/components/dental/OtherServices";
 import DentalFAQ from "@/components/dental/DentalFAQ";
 import DentalBottomCta from "@/components/dental/DentalBottomCta";
-import DentalFooter from "@/components/dental/DentalFooter";
 import { CLINIC } from "@/lib/clinic";
 
 const title = "Dental Care | Comprehensive Smiles & Treatments | Aesthedent";
@@ -92,7 +91,6 @@ export default function DentalPage() {
           <DentalFAQ />
           <DentalBottomCta />
         </main>
-        <DentalFooter />
       </div>
     </>
   );

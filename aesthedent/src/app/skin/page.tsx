@@ -8,7 +8,6 @@ import SkinSpecialists from "@/components/skin/SkinSpecialists";
 import SkinOtherServices from "@/components/skin/SkinOtherServices";
 import SkinFAQ from "@/components/skin/SkinFAQ";
 import SkinBottomCta from "@/components/skin/SkinBottomCta";
-import SkinFooter from "@/components/skin/SkinFooter";
 import ScrollProgress from "@/components/skin/ScrollProgress";
 import { CLINIC } from "@/lib/clinic";
 import { SKIN_TREATMENTS } from "@/lib/skin";
@@ -93,7 +92,6 @@ export default function SkinPage() {
           <SkinFAQ />
           <SkinBottomCta />
         </main>
-        <SkinFooter />
       </div>
     </>
   );

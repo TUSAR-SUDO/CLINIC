@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import Logo from "@/components/hero/Logo";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
-import { CLINIC } from "@/lib/clinic";
 import { CLINIC_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -66,24 +65,6 @@ export default function OurClinicPage() {
           />
         </section>
       </main>
-
-      <footer className="our-clinic__footer">
-        <div className="our-clinic__footer-brand">
-          <p className="our-clinic__footer-word">Aesthedent</p>
-          <p className="our-clinic__footer-tag">Dental · Skin · Hair · PMU</p>
-        </div>
-
-        <address className="our-clinic__address">
-          {CLINIC.address.line1},
-          <br />
-          {CLINIC.address.line2}, {CLINIC.address.city} {CLINIC.address.postalCode}
-        </address>
-
-        <div className="our-clinic__footer-links">
-          <a href={CLINIC.phone.primaryHref}>Call {CLINIC.phone.primaryDisplay}</a>
-          <Link href="/">Back to home</Link>
-        </div>
-      </footer>
     </div>
   );
 }

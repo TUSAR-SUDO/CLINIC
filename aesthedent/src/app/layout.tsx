@@ -1,26 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Geist } from "next/font/google";
 import type { ReactNode } from "react";
+import SiteFooter from "@/components/site/SiteFooter";
 import SmoothScroll from "@/components/ui/SmoothScroll";
+import { fraunces, geist } from "@/lib/fonts";
 import "./globals.css";
 import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
-
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
-  axes: ["SOFT", "WONK", "opsz"],
-  variable: "--font-fraunces",
-  display: "swap",
-});
-
-const geist = Geist({
-  subsets: ["latin"],
-  weight: "variable",
-  variable: "--font-geist-sans",
-  display: "swap",
-});
 
 // TODO(clinic): set NEXT_PUBLIC_SITE_URL to the production domain before launch.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
@@ -74,7 +59,10 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <SmoothScroll>{children}</SmoothScroll>
+        <SmoothScroll>
+          {children}
+          <SiteFooter />
+        </SmoothScroll>
       </body>
     </html>
   );
