@@ -1,4 +1,5 @@
 import Hero from "@/components/hero/Hero";
+import HomeSections from "@/components/home/HomeSections";
 import { CLINIC } from "@/lib/clinic";
 import { SERVICES } from "@/lib/services";
 
@@ -45,6 +46,7 @@ export default function Home() {
       />
       <main id="main">
         <Hero />
+        <HomeSections />
       </main>
     </>
   );

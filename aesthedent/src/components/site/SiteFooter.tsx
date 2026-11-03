@@ -62,6 +62,7 @@ const CREW = [
 export default function SiteFooter() {
   return (
     <DoodleCrewFooter
+      className="site-footer"
       wordmark="AESTHEDENT"
       brand="Aesthedent"
       blurb="A multi-speciality aesthetic clinic in Old Town, Bhubaneswar — dental, skin, hair and PMU care under one roof."
@@ -74,7 +75,7 @@ export default function SiteFooter() {
       crew={[...CREW]}
       doodles={["sparkle", "heart", "star", "spiral", "plane", "bolt"]}
       doodleCount={10}
-      copyright="© 2026 Aesthedent. Dental, skin, hair and PMU in Old Town, Bhubaneswar."
+      copyright="© 2026 Aesthedent · Old Town, Bhubaneswar"
       legal={[]}
       socials={[]}
       palette={{ background: "#2a0e1e", ink: "#f3eee8", accent: "#d9a79e" }}

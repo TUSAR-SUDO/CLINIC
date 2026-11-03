@@ -233,6 +233,66 @@
   box-shadow: 0 50px 110px -80px #000;
 }
 
+/* ---- patient stories ----------------------------------------------------- */
+
+.our-clinic__stories {
+  border-top: 1px solid var(--our-clinic-line);
+}
+
+/* The supplied globe paints its own stage; let the page gradient show through. */
+.our-clinic__globe {
+  background: transparent;
+}
+
+.our-clinic__globe header > p:first-of-type {
+  color: var(--our-clinic-blush);
+  letter-spacing: 0.3em;
+}
+
+.our-clinic__globe h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  font-variation-settings: "opsz" 120, "SOFT" 40, "WONK" 0;
+}
+
+.our-clinic__globe h2 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--our-clinic-blush);
+}
+
+.our-clinic__stories-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 2.75rem;
+  padding: 0 1.15rem;
+  border-radius: var(--radius-pill);
+  background: var(--our-clinic-blush);
+  color: #1a0e12;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.005em;
+  transition:
+    background-color 0.3s var(--ease-out),
+    transform 0.3s var(--ease-out);
+}
+
+.our-clinic__stories-cta svg {
+  transition: transform 0.3s var(--ease-out);
+}
+
+.our-clinic__stories-cta:hover {
+  background: #f0c7bf;
+  transform: translateY(-1px);
+}
+
+.our-clinic__stories-cta:hover svg {
+  transform: translateX(2px);
+}
+
 /* ---- footer -------------------------------------------------------------- */
 
 .our-clinic__footer {
@@ -378,7 +438,9 @@
 @media (prefers-reduced-motion: reduce) {
   .our-clinic__back,
   .our-clinic__back svg,
-  .our-clinic__footer-links a {
+  .our-clinic__footer-links a,
+  .our-clinic__stories-cta,
+  .our-clinic__stories-cta svg {
     transition: none;
   }
 }

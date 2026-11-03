@@ -631,9 +631,15 @@ export default function DoodleCrewFooter({
   const [metrics, setMetrics] = React.useState(() => estimate(word));
   const [play, setPlay] = React.useState(false);
   const [reduced, setReduced] = React.useState(false);
+  const [compact, setCompact] = React.useState(false);
   const [talking, setTalking] = React.useState(-1);
   const [hopping, setHopping] = React.useState(-1);
   const talkTimer = React.useRef(0);
+  const bubbleRef = React.useRef<HTMLDivElement | null>(null);
+
+  // The crew figures shrink with the wordmark. Below tablet width their hit
+  // rectangles are far too small for touch, so keep them decorative there.
+  const canInteract = interactive && !compact;
 
   useIso(() => {
     const run = () => {
@@ -850,6 +856,26 @@ export default function DoodleCrewFooter({
   }, []);
 
   React.useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mq = window.matchMedia("(max-width: 767px)");
+    const on = () => setCompact(mq.matches);
+    on();
+    mq.addEventListener?.("change", on);
+    return () => mq.removeEventListener?.("change", on);
+  }, []);
+
+  // If reduced motion is enabled after the eyes have moved, return them to rest.
+  React.useEffect(() => {
+    if (!reduced) return;
+    for (const eyes of eyeRefs.current) {
+      for (const ref of eyes || []) {
+        ref?.pupil?.removeAttribute("transform");
+        ref?.blink?.removeAttribute("transform");
+      }
+    }
+  }, [reduced]);
+
+  React.useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const s = sim.current;
@@ -877,6 +903,10 @@ export default function DoodleCrewFooter({
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
+    if (reduced) {
+      paintDoodles();
+      return;
+    }
     const s = sim.current;
     let raf = 0;
     let last = performance.now();
@@ -905,7 +935,7 @@ export default function DoodleCrewFooter({
       const world = worldRef.current;
 
       let target = null as null | { x: number; y: number };
-      if (svg && s.inside && interactive) target = svgPoint(svg, s.px, s.py);
+      if (svg && s.inside && canInteract) target = svgPoint(svg, s.px, s.py);
       for (let c = 0; c < placed.length; c++) {
         const p = placed[c];
         const g = (s.gaze[c] ||= {
@@ -934,7 +964,7 @@ export default function DoodleCrewFooter({
         }
         g.blink = Math.max(0, g.blink - dt);
         const lid = g.blink > 0 ? 0.12 + (Math.abs(g.blink - 0.08) / 0.08) * 0.88 : 1;
-        const eyes = eyeRefs.current[c] || [];
+        const eyes = eyeRefs.current[p.i] || [];
         for (let e = 0; e < p.art.eyes.length; e++) {
           const eye = p.art.eyes[e];
           const ex = p.x + eye.x * p.scale * p.flip;
@@ -961,12 +991,17 @@ export default function DoodleCrewFooter({
       }
 
       if (world && s.floaters.length) {
-        const started = play && s.start ? now - s.start > tl.doodles || reduced : false;
+        const started = play && s.start ? now - s.start > tl.doodles : false;
         if (started) {
-          const r = world.getBoundingClientRect();
-          const px = s.inside && interactive ? s.px - r.left : NaN;
-          const py = s.inside && interactive ? s.py - r.top : NaN;
-          if (!reduced) for (const f of s.floaters) stepFloater(f, dt, t, s.w, s.h, px, py, 110, rand);
+          // Only read layout when the pointer is actually over the footer.
+          let px = NaN;
+          let py = NaN;
+          if (s.inside && canInteract) {
+            const r = world.getBoundingClientRect();
+            px = s.px - r.left;
+            py = s.py - r.top;
+          }
+          for (const f of s.floaters) stepFloater(f, dt, t, s.w, s.h, px, py, 110, rand);
           paintDoodles();
         }
       }
@@ -980,11 +1015,44 @@ export default function DoodleCrewFooter({
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [placed, play, reduced, interactive, uid, tl.doodles, paintDoodles]);
+  }, [placed, play, reduced, canInteract, uid, tl.doodles, paintDoodles]);
 
   React.useEffect(() => () => window.clearTimeout(talkTimer.current), []);
 
+  // Keep the bubble inside the stage: clamp it after paint and re-clamp on resize.
+  // Measuring in layout pixels (offsetWidth/offsetLeft) ignores the entrance
+  // scale animation, so the first frame is already in the right place.
+  const bubbleMember = canInteract && talking >= 0 ? placed.find((p) => p.i === talking) : undefined;
+  useIso(() => {
+    const el = bubbleRef.current;
+    const parent = el?.parentElement;
+    if (!el || !parent || !bubbleMember) return;
+
+    const run = () => {
+      el.style.setProperty("--shift", "0px");
+      const width = el.offsetWidth;
+      const parentWidth = parent.clientWidth;
+      const baseLeft = el.offsetLeft - width / 2;
+      const margin = 8;
+      const maxLeft = Math.max(margin, parentWidth - margin - width);
+      const left = Math.min(Math.max(baseLeft, margin), maxLeft);
+      el.style.setProperty("--shift", (left - baseLeft).toFixed(2) + "px");
+    };
+
+    run();
+    window.addEventListener("resize", run);
+    let alive = true;
+    document.fonts?.ready.then(() => {
+      if (alive) run();
+    });
+    return () => {
+      alive = false;
+      window.removeEventListener("resize", run);
+    };
+  }, [talking, bubbleMember, view.x, view.w]);
+
   const onPointerMove = (e: React.PointerEvent) => {
+    if (!canInteract) return;
     const s = sim.current;
     s.px = e.clientX;
     s.py = e.clientY;
@@ -996,10 +1064,10 @@ export default function DoodleCrewFooter({
   };
 
   const poke = (c: number) => {
-    if (!interactive) return;
+    if (!canInteract) return;
     setTalking(c);
     setHopping(-1);
-    requestAnimationFrame(() => setHopping(c));
+    if (!reduced) requestAnimationFrame(() => setHopping(c));
     window.clearTimeout(talkTimer.current);
     talkTimer.current = window.setTimeout(() => {
       setTalking(-1);
@@ -1008,7 +1076,7 @@ export default function DoodleCrewFooter({
   };
 
   const popDoodle = (k: number) => {
-    if (!interactive) return;
+    if (!canInteract || reduced) return;
     const f = sim.current.floaters[k];
     if (f && f.pop <= 0) {
       f.pop = 1.4;
@@ -1097,7 +1165,7 @@ export default function DoodleCrewFooter({
       ref={rootRef}
       className={"dcf" + (className ? " " + className : "")}
       data-play={play || reduced ? "1" : "0"}
-      data-interactive={interactive ? "1" : "0"}
+      data-interactive={canInteract ? "1" : "0"}
       style={vars}
       onPointerMove={onPointerMove}
       onPointerDown={onPointerMove}
@@ -1105,6 +1173,7 @@ export default function DoodleCrewFooter({
       aria-label={brand + " footer"}
     >
       <style>{CSS}</style>
+      <h2 className="dcf-sr">{wordmark}</h2>
 
       <div className="dcf-top dcf-rise" style={{ "--d": "0ms" } as React.CSSProperties}>
         <div className="dcf-brand">
@@ -1134,14 +1203,13 @@ export default function DoodleCrewFooter({
 
       <div className="dcf-world" ref={worldRef}>
         <div className="dcf-stage">
-          <h2 className="dcf-sr">{wordmark}</h2>
           <svg
             ref={svgRef}
             className="dcf-svg"
             viewBox={view.x.toFixed(1) + " " + view.y.toFixed(1) + " " + view.w.toFixed(1) + " " + view.h.toFixed(1)}
-            aria-hidden="false"
-            role="group"
-            aria-label={wordmark + " — meet the crew"}
+            aria-hidden={canInteract ? undefined : true}
+            role={canInteract ? "group" : undefined}
+            aria-label={canInteract ? wordmark + " — meet the crew" : undefined}
           >
             <defs>
               <pattern id={uid + "-hatch"} width="4.6" height="4.6" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
@@ -1236,7 +1304,7 @@ export default function DoodleCrewFooter({
               {placed.filter((p) => p.seat !== "behind").map((p) => renderCrew(p, "body"))}
             </g>
 
-            {interactive &&
+            {canInteract &&
               placed.map((p) => {
                 const bx = p.flip > 0 ? [p.art.box.l, p.art.box.r] : [-p.art.box.r, -p.art.box.l];
                 const top = p.art.box.t;
@@ -1267,10 +1335,11 @@ export default function DoodleCrewFooter({
 
           <div className="dcf-bubbles" aria-live="polite">
             {placed.map((p) =>
-              talking === p.i && p.m.says ? (
+              canInteract && talking === p.i && p.m.says ? (
                 <div
                   key={p.i}
-                  className={"dcf-bubble" + (p.x > view.x + view.w * 0.72 ? " is-left" : "")}
+                  ref={bubbleRef}
+                  className="dcf-bubble"
                   style={{
                     left: pct(p.x, view.x, view.w),
                     top: pct(p.y + p.art.box.t * p.scale - 6, view.y, view.h),
@@ -1365,7 +1434,7 @@ export default function DoodleCrewFooter({
           </ul>
         )}
         {backToTop && (
-          <button type="button" className="dcf-totop" onClick={toTop}>
+          <button type="button" className="dcf-totop" onClick={toTop} aria-label="Back to top">
             <span>Back to top</span>
             <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
               <path d="M12 20 C11 14 12.5 9 12 4 M6 10 C8 8 10 6 12 4 C14 6 16 8 18.5 9.5" />
@@ -1427,10 +1496,8 @@ const CSS =
   ".dcf-hopper.is-hop{animation:dcf-hop .62s cubic-bezier(.3,.7,.4,1)}" +
   ".dcf-arrive{transform-box:fill-box;transform-origin:50% 100%}" +
   ".dcf-bubbles{position:absolute;inset:0;pointer-events:none;z-index:2}" +
-  ".dcf-bubble{position:absolute;transform:translate(-50%,-100%) rotate(-2deg);transform-origin:50% 100%;background:var(--dcf-bg);color:var(--dcf-ink);border:2px solid var(--dcf-ink);border-radius:16px;padding:7px 12px;font-size:13px;font-weight:700;line-height:1.25;white-space:nowrap;box-shadow:3px 3px 0 var(--dcf-ink);animation:dcf-bubble .32s cubic-bezier(.3,1.6,.5,1) both;margin-top:-4px}" +
-  ".dcf-bubble::after{content:'';position:absolute;left:50%;bottom:-9px;width:14px;height:14px;background:var(--dcf-bg);border-right:2px solid var(--dcf-ink);border-bottom:2px solid var(--dcf-ink);transform:translateX(-50%) rotate(45deg) skew(8deg,8deg)}" +
-  ".dcf-bubble.is-left{transform:translate(-88%,-100%) rotate(2deg);transform-origin:88% 100%}" +
-  ".dcf-bubble.is-left::after{left:88%}" +
+  ".dcf-bubble{position:absolute;transform:translate(calc(-50% + var(--shift,0px)),-100%) rotate(-2deg);transform-origin:50% 100%;background:var(--dcf-bg);color:var(--dcf-ink);border:2px solid var(--dcf-ink);border-radius:16px;padding:7px 12px;font-size:13px;font-weight:700;line-height:1.25;white-space:normal;max-width:calc(100% - 16px);box-shadow:3px 3px 0 var(--dcf-ink);animation:dcf-bubble .32s cubic-bezier(.3,1.6,.5,1) both;margin-top:-4px}" +
+  ".dcf-bubble::after{content:'';position:absolute;left:calc(50% - var(--shift,0px));bottom:-9px;width:14px;height:14px;background:var(--dcf-bg);border-right:2px solid var(--dcf-ink);border-bottom:2px solid var(--dcf-ink);transform:translateX(-50%) rotate(45deg) skew(8deg,8deg)}" +
   ".dcf-doodles{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}" +
   ".dcf-doodle{position:absolute;left:0;top:0;pointer-events:auto;cursor:pointer;will-change:transform;touch-action:manipulation}" +
   ".dcf-doodle-in{display:block;width:100%;height:100%}" +
@@ -1460,7 +1527,9 @@ const CSS =
   ".dcf-totop svg{fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}" +
   ".dcf-totop:hover{transform:translateY(-2px)}" +
   ".dcf-totop:hover svg{animation:dcf-up .6s ease-in-out infinite}" +
-  ".dcf[data-play='0'] .dcf-letter,.dcf[data-play='0'] .dcf-arrive,.dcf[data-play='0'] .dcf-word,.dcf[data-play='0'] .dcf-pop,.dcf[data-play='0'] .dcf-rise,.dcf[data-play='0'] .dcf-fade,.dcf[data-play='0'] .dcf-doodle-in{opacity:0}" +
+  // Only decoration waits for the storyboard. Navigation, CTAs and the legal
+  // bar stay visible even before the observer fires or if JavaScript fails.
+  ".dcf[data-play='0'] .dcf-letter,.dcf[data-play='0'] .dcf-arrive,.dcf[data-play='0'] .dcf-fade,.dcf[data-play='0'] .dcf-doodle-in{opacity:0}" +
   ".dcf[data-play='0'] .dcf-draw{stroke-dasharray:1;stroke-dashoffset:1}" +
   ".dcf-letter{transform-box:fill-box;transform-origin:50% 100%}" +
   ".dcf[data-play='1'] .dcf-letter{animation:dcf-stamp .62s cubic-bezier(.2,.8,.25,1.15) var(--d) both}" +
@@ -1494,5 +1563,5 @@ const CSS =
   "@keyframes dcf-wiggle{0%,100%{transform:none}30%{transform:rotate(-14deg) scale(1.15)}60%{transform:rotate(10deg)}}" +
   "@keyframes dcf-up{0%,100%{transform:none}50%{transform:translateY(-3px)}}" +
   "@media (max-width:860px){.dcf-top{grid-template-columns:1fr;grid-template-rows:auto}.dcf-brand,.dcf-blurb,.dcf-cols{grid-column:1;grid-row:auto}.dcf-cols{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:14px;row-gap:22px}.dcf-copy{width:100%;margin-right:0}}" +
-  "@media (max-width:480px){.dcf-btn{height:42px;font-size:13.5px;padding:0 16px 0 13px}.dcf-bubble{font-size:12px;padding:6px 10px}.dcf-totop span{display:none}}" +
+  "@media (max-width:480px){.dcf-btn{height:42px;font-size:13.5px;padding:0 16px 0 13px}.dcf-bubble{font-size:12px;padding:6px 10px}.dcf-totop span{display:none}.dcf-totop{min-width:44px;min-height:44px;justify-content:center;padding:0 12px}}" +
   "@media (prefers-reduced-motion:reduce){.dcf *,.dcf *::before,.dcf *::after{animation:none!important;transition:none!important}.dcf .dcf-letter,.dcf .dcf-arrive,.dcf .dcf-word,.dcf .dcf-pop,.dcf .dcf-rise,.dcf .dcf-fade,.dcf .dcf-doodle-in{opacity:1!important}.dcf .dcf-draw{stroke-dashoffset:0!important}.dcf .dcf-dust{opacity:0!important}}";

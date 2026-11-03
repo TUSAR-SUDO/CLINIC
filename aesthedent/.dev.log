@@ -5,73 +5,151 @@
 ▲ Next.js 16.4.3 (Turbopack)
 - Local:         http://localhost:3100
 - Network:       http://192.168.29.39:3100
-✓ Ready in 1631ms
-✓ Running next.config.ts took 243ms
+✓ Ready in 2.6s
+✓ Running next.config.ts took 151ms
 - Cache Components enabled
 - Partial Prefetching enabled
 
- GET /our-clinic 200 in 1059ms (next.js: 499ms, application-code: 560ms)
- GET /our-clinic 200 in 176ms (next.js: 3ms, application-code: 173ms)
-✓ Compiled in 141ms
-✓ Compiled in 200ms
-✓ Compiled in 119ms
- GET /our-clinic 200 in 127ms (next.js: 11ms, application-code: 116ms)
- GET /our-clinic 200 in 218ms (next.js: 4ms, application-code: 213ms)
- GET /our-clinic 200 in 218ms (next.js: 5ms, application-code: 213ms)
- GET /our-clinic 200 in 194ms (next.js: 3ms, application-code: 191ms)
- GET /our-clinic 200 in 196ms (next.js: 3ms, application-code: 193ms)
+ GET / 200 in 1547ms (next.js: 522ms, application-code: 1025ms)
+ GET /our-clinic 200 in 280ms (next.js: 16ms, application-code: 264ms)
+ GET /our-clinic 200 in 302ms (next.js: 4ms, application-code: 298ms)
+ GET /our-clinic 200 in 316ms (next.js: 4ms, application-code: 312ms)
+ GET /our-clinic 200 in 356ms (next.js: 4ms, application-code: 353ms)
+ GET /our-clinic 200 in 416ms (next.js: 3ms, application-code: 413ms)
+ GET /our-clinic 200 in 339ms (next.js: 4ms, application-code: 335ms)
+ GET / 200 in 253ms (next.js: 3ms, application-code: 250ms)
+ GET / 200 in 319ms (next.js: 5ms, application-code: 314ms)
+ GET / 200 in 280ms (next.js: 3ms, application-code: 277ms)
+ GET / 200 in 315ms (next.js: 4ms, application-code: 310ms)
+ GET / 200 in 323ms (next.js: 3ms, application-code: 320ms)
+ GET / 200 in 295ms (next.js: 3ms, application-code: 292ms)
+✓ Compiled in 320ms
 ✓ Compiled in 133ms
- GET /our-clinic 200 in 93ms (next.js: 5ms, application-code: 88ms)
- GET /our-clinic 200 in 230ms (next.js: 4ms, application-code: 225ms)
- GET /our-clinic 200 in 158ms (next.js: 3ms, application-code: 154ms)
- GET /our-clinic 200 in 189ms (next.js: 1.7ms, application-code: 187ms)
- GET /our-clinic 200 in 191ms (next.js: 3ms, application-code: 188ms)
- GET /dental 200 in 416ms (next.js: 23ms, application-code: 393ms)
-✓ Compiled in 838ms
- GET /dental 200 in 337ms (next.js: 12ms, application-code: 325ms)
- GET /our-clinic 200 in 508ms (next.js: 25ms, application-code: 483ms)
- GET /our-clinic 200 in 229ms (next.js: 46ms, application-code: 182ms)
-✓ Compiled in 251ms
- GET /dental 200 in 282ms (next.js: 13ms, application-code: 269ms)
- GET /our-clinic 200 in 279ms (next.js: 81ms, application-code: 197ms)
- GET /our-clinic 200 in 105ms (next.js: 4ms, application-code: 100ms)
-✓ Compiled in 156ms
- GET /dental 200 in 293ms (next.js: 5ms, application-code: 288ms)
- GET /our-clinic 200 in 200ms (next.js: 10ms, application-code: 190ms)
- GET /our-clinic 200 in 100ms (next.js: 4ms, application-code: 95ms)
-✓ Compiled in 171ms
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- GET /our-clinic 200 in 1226ms (next.js: 6ms, application-code: 1220ms)
- GET /dental 200 in 773ms (next.js: 4ms, application-code: 769ms)
- GET /our-clinic 200 in 355ms (next.js: 4ms, application-code: 351ms)
- GET / 200 in 447ms (next.js: 18ms, application-code: 429ms)
- GET / 200 in 259ms (next.js: 3ms, application-code: 256ms)
- GET / 200 in 279ms (next.js: 5ms, application-code: 274ms)
- GET / 200 in 388ms (next.js: 3ms, application-code: 385ms)
- GET /dental 200 in 436ms (next.js: 3ms, application-code: 433ms)
- GET /our-clinic 200 in 584ms (next.js: 3ms, application-code: 581ms)
- GET /skin 200 in 758ms (next.js: 25ms, application-code: 733ms)
- GET /our-clinic 200 in 297ms (next.js: 3ms, application-code: 295ms)
- GET /our-clinic 200 in 299ms (next.js: 4ms, application-code: 295ms)
- GET /our-clinic 200 in 308ms (next.js: 2ms, application-code: 306ms)
- GET /our-clinic 200 in 289ms (next.js: 3ms, application-code: 286ms)
-✓ Compiled in 163ms
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- GET /our-clinic 200 in 1103ms (next.js: 11ms, application-code: 1093ms)
- GET /dental 200 in 1062ms (next.js: 5ms, application-code: 1057ms)
- GET /our-clinic 200 in 472ms (next.js: 5ms, application-code: 467ms)
- GET / 200 in 368ms (next.js: 5ms, application-code: 363ms)
-✓ Compiled in 215ms
-✓ Compiled in 247ms
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
-⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
- GET /our-clinic 200 in 1328ms (next.js: 8ms, application-code: 1319ms)
- GET /dental 200 in 1259ms (next.js: 4ms, application-code: 1255ms)
- GET /our-clinic 200 in 500ms (next.js: 3ms, application-code: 497ms)
- GET / 200 in 354ms (next.js: 4ms, application-code: 349ms)
-[?25h
+✓ Compiled in 306ms
+✓ Compiled in 448ms
+✓ Compiled in 138ms
+ GET / 200 in 376ms (next.js: 17ms, application-code: 359ms)
+ GET / 200 in 357ms (next.js: 4ms, application-code: 353ms)
+ GET / 200 in 332ms (next.js: 2ms, application-code: 329ms)
+ GET / 200 in 329ms (next.js: 3ms, application-code: 326ms)
+ GET / 200 in 348ms (next.js: 3ms, application-code: 344ms)
+ GET / 200 in 294ms (next.js: 3ms, application-code: 291ms)
+ GET / 200 in 293ms (next.js: 2ms, application-code: 291ms)
+ GET / 200 in 257ms (next.js: 3ms, application-code: 254ms)
+ GET / 200 in 392ms (next.js: 3ms, application-code: 389ms)
+ GET / 200 in 243ms (next.js: 3ms, application-code: 241ms)
+ GET / 200 in 316ms (next.js: 4ms, application-code: 311ms)
+ GET / 200 in 294ms (next.js: 2ms, application-code: 292ms)
+ GET / 200 in 414ms (next.js: 3ms, application-code: 411ms)
+ GET / 200 in 395ms (next.js: 4ms, application-code: 391ms)
+ GET / 200 in 177ms (next.js: 2ms, application-code: 174ms)
+ GET / 200 in 491ms (next.js: 4ms, application-code: 487ms)
+ GET / 200 in 257ms (next.js: 2ms, application-code: 255ms)
+✓ Compiled in 344ms
+✓ Compiled in 134ms
+ GET / 200 in 302ms (next.js: 10ms, application-code: 292ms)
+ GET / 200 in 291ms (next.js: 2.0ms, application-code: 289ms)
+ GET / 200 in 237ms (next.js: 1.9ms, application-code: 235ms)
+ GET / 200 in 254ms (next.js: 3ms, application-code: 252ms)
+ GET /our-clinic 200 in 566ms (next.js: 4ms, application-code: 562ms)
+ GET / 200 in 365ms (next.js: 39ms, application-code: 326ms)
+✓ Compiled in 345ms
+ GET / 200 in 305ms (next.js: 4ms, application-code: 302ms)
+ GET / 200 in 284ms (next.js: 21ms, application-code: 263ms)
+ GET /our-clinic 200 in 170ms (next.js: 9ms, application-code: 161ms)
+✓ Compiled in 207ms
+✓ Compiled in 468ms
+✓ Compiled in 182ms
+ GET / 200 in 386ms (next.js: 73ms, application-code: 313ms)
+ GET / 200 in 101ms (next.js: 7ms, application-code: 94ms)
+ GET /our-clinic 200 in 208ms (next.js: 7ms, application-code: 201ms)
+ GET / 200 in 306ms (next.js: 2ms, application-code: 303ms)
+ GET /our-clinic 200 in 378ms (next.js: 3ms, application-code: 375ms)
+ GET / 200 in 186ms (next.js: 1.3ms, application-code: 185ms)
+ GET / 200 in 279ms (next.js: 3ms, application-code: 277ms)
+✓ Compiled in 119ms
+✓ Compiled in 371ms
+ GET / 200 in 217ms (next.js: 4ms, application-code: 213ms)
+ GET / 200 in 251ms (next.js: 1.5ms, application-code: 250ms)
+ GET / 200 in 236ms (next.js: 1.7ms, application-code: 234ms)
+ GET /our-clinic 200 in 314ms (next.js: 2ms, application-code: 312ms)
+ GET / 200 in 246ms (next.js: 4ms, application-code: 242ms)
+ GET / 200 in 283ms (next.js: 4ms, application-code: 279ms)
+ GET / 200 in 220ms (next.js: 3ms, application-code: 217ms)
+ GET / 200 in 329ms (next.js: 4ms, application-code: 325ms)
+✓ Compiled in 365ms
+✓ Compiled in 193ms
+✓ Compiled in 117ms
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET / 200 in 328ms (next.js: 8ms, application-code: 320ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+✓ Compiled in 421ms
+ GET /dental 200 in 125ms (next.js: 25ms, application-code: 100ms)
+ GET /dental 200 in 411ms (next.js: 4ms, application-code: 407ms)
+ GET / 200 in 224ms (next.js: 3ms, application-code: 221ms)
+ GET / 200 in 218ms (next.js: 1.8ms, application-code: 216ms)
+ GET / 200 in 225ms (next.js: 3ms, application-code: 222ms)
+ GET / 200 in 247ms (next.js: 2ms, application-code: 245ms)
+ GET / 200 in 282ms (next.js: 3ms, application-code: 280ms)
+ GET / 200 in 361ms (next.js: 3ms, application-code: 358ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET / 200 in 485ms (next.js: 5ms, application-code: 480ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET / 200 in 594ms (next.js: 5ms, application-code: 589ms)
+ GET / 200 in 517ms (next.js: 6ms, application-code: 512ms)
+ GET /?v=1793691278795 200 in 324ms (next.js: 5ms, application-code: 318ms)
+ GET /?v=1793691288766 200 in 1992ms (next.js: 12ms, application-code: 1979ms)
+ GET /?v=1793691300510 200 in 1056ms (next.js: 19ms, application-code: 1037ms)
+ GET /?csscheck=1 200 in 429ms (next.js: 4ms, application-code: 425ms)
+ GET / 200 in 298ms (next.js: 4ms, application-code: 294ms)
+ GET / 200 in 267ms (next.js: 3ms, application-code: 264ms)
+✓ Compiled in 461ms
+ GET /?fresh=2 200 in 390ms (next.js: 2ms, application-code: 388ms)
+ GET /?f=1793691682481 200 in 332ms (next.js: 3ms, application-code: 329ms)
+ GET /?f=1793691689719 200 in 298ms (next.js: 3ms, application-code: 295ms)
+ GET / 200 in 401ms (next.js: 2ms, application-code: 398ms)
+ GET /?d=1 200 in 312ms (next.js: 4ms, application-code: 309ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET / 200 in 269ms (next.js: 4ms, application-code: 265ms)
+ GET /?small=final 200 in 295ms (next.js: 3ms, application-code: 292ms)
+✓ Compiled in 498ms
+ GET / 200 in 358ms (next.js: 5ms, application-code: 353ms)
+ GET /?desk=final 200 in 420ms (next.js: 3ms, application-code: 417ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET /?small=last 200 in 271ms (next.js: 3ms, application-code: 268ms)
+✓ Compiled in 441ms
+ GET /?desk=last 200 in 365ms (next.js: 5ms, application-code: 360ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET /?cascade=1 200 in 269ms (next.js: 1.9ms, application-code: 267ms)
+ GET /?small=reallylast 200 in 341ms (next.js: 2ms, application-code: 338ms)
+✓ Compiled in 394ms
+ GET / 200 in 283ms (next.js: 2ms, application-code: 281ms)
+ GET / 200 in 341ms (next.js: 4ms, application-code: 337ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET /?measure=phase2 200 in 332ms (next.js: 3ms, application-code: 329ms)
+ GET /?measure=phase2 200 in 305ms (next.js: 3ms, application-code: 302ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET /?measure=phase2 200 in 283ms (next.js: 2ms, application-code: 281ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET / 200 in 372ms (next.js: 2ms, application-code: 369ms)
+✓ Compiled in 495ms
+ GET / 200 in 275ms (next.js: 34ms, application-code: 241ms)
+ GET / 200 in 253ms (next.js: 28ms, application-code: 224ms)
+ GET / 200 in 258ms (next.js: 84ms, application-code: 174ms)
+ GET /our-clinic 200 in 292ms (next.js: 7ms, application-code: 284ms)
+✓ Compiled in 137ms
+ GET / 200 in 314ms (next.js: 7ms, application-code: 306ms)
+ GET /our-clinic 200 in 438ms (next.js: 11ms, application-code: 426ms)
+ GET / 200 in 216ms (next.js: 10ms, application-code: 206ms)
+ GET / 200 in 108ms (next.js: 5ms, application-code: 103ms)
+✓ Compiled in 150ms
+ GET / 200 in 437ms (next.js: 10ms, application-code: 427ms)
+ GET / 200 in 431ms (next.js: 27ms, application-code: 404ms)
+ GET /our-clinic 200 in 246ms (next.js: 11ms, application-code: 236ms)
+ GET / 200 in 129ms (next.js: 5ms, application-code: 124ms)
+ GET /?phase2=1 200 in 413ms (next.js: 3ms, application-code: 409ms)
+✓ Compiled in 411ms
+ GET /?phase2=1 200 in 340ms (next.js: 3ms, application-code: 337ms)
+ GET /?phase2=1 200 in 359ms (next.js: 3ms, application-code: 357ms)
+[browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
+ GET /?phase2=3 200 in 450ms (next.js: 3ms, application-code: 446ms)

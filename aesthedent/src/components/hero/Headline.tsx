@@ -41,7 +41,7 @@ export default function Headline() {
           animate={{ y: 0, opacity: 1 }}
           transition={lineTransition(0.72)}
         >
-          A COMPLETE AESTHETIC CARE DESTINATION IN OLD TOWN, BHUBANESWAR.
+          Dental, skin, hair and PMU care in Old Town, Bhubaneswar.
         </motion.span>
       </span>
     </h1>

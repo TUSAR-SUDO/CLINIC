@@ -58,7 +58,7 @@ export default function InfoPill() {
             {isOpen === null ? "Clinic hours" : isOpen ? "Open now" : "Closed"}
           </strong>
           <span className="info-pill__status-sub">
-            {isOpen ? "Open today until 8 PM" : "Opens at 10 AM"}
+            {isOpen ? "Until 8 PM" : "Opens 10 AM"}
           </span>
         </span>
       </span>
@@ -71,7 +71,7 @@ export default function InfoPill() {
             window.location.href = CLINIC.phone.primaryHref;
           }}
           variant="aubergine"
-          width={120}
+          width={112}
           height={36}
           ariaLabel={`Call ${CLINIC.phone.primaryDisplay}`}
         >

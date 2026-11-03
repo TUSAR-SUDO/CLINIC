@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import Logo from "@/components/hero/Logo";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
+import { TestimonialGlobe } from "@/components/ui/testimonial-globe";
+import { CLINIC } from "@/lib/clinic";
+import { PATIENT_STORIES, PATIENT_STORY_LABELS } from "@/lib/testimonials";
 import { CLINIC_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
@@ -64,6 +67,31 @@ export default function OurClinicPage() {
             }}
           />
         </section>
+
+        <div className="our-clinic__stories">
+          <TestimonialGlobe
+            items={PATIENT_STORIES}
+            eyebrow="Patient stories"
+            heading={
+              <>
+                Stories from people <em>we&rsquo;ve cared for.</em>
+              </>
+            }
+            caption="A few words from people who have visited us from Bhubaneswar and around the world."
+            action={
+              <a href={CLINIC.bookingHref} className="our-clinic__stories-cta">
+                Book a visit
+                <ArrowRight size={15} strokeWidth={1.8} aria-hidden="true" />
+              </a>
+            }
+            labels={PATIENT_STORY_LABELS}
+            placeMode="city"
+            autoplay
+            interval={6000}
+            size={440}
+            className="our-clinic__globe"
+          />
+        </div>
       </main>
     </div>
   );

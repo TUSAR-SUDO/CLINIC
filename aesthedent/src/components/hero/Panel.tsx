@@ -112,7 +112,7 @@ export default function Panel({
         type="button"
         className="panel__hit"
         aria-expanded={active}
-        aria-controls={detailsId}
+        aria-controls={compact ? undefined : detailsId}
         aria-label={`${active ? "Active" : "Select"} ${service.name} treatments`}
         onClick={onToggle}
       />
@@ -154,6 +154,7 @@ export default function Panel({
           initial={false}
           animate={active || compact ? { opacity: 1, y: 0 } : { opacity: 0, y: -4 }}
           transition={{ duration: 0.3 }}
+          style={compact && !active ? { display: "none" } : undefined}
         >
           {service.descriptor}
         </motion.p>
@@ -174,53 +175,53 @@ export default function Panel({
           </div>
         )}
 
-        <motion.div
-          className="panel__details"
-          id={detailsId}
-          aria-hidden={!active}
-          inert={!active}
-          initial={false}
-          animate={
-            active && !compact
-              ? { height: "auto", opacity: 1 }
-              : { height: 0, opacity: 0 }
-          }
-          transition={{
-            height: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
-            opacity: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
-          }}
-          style={{ overflow: "hidden" }}
-        >
-          <div className="panel__details-inner">
-            <motion.ul
-              className="panel__list"
-              initial={false}
-              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
-              transition={{ duration: 0.35, delay: active ? 0.08 : 0 }}
-            >
-              {service.treatments.map((treatment) => (
-                <li key={treatment}>{treatment}</li>
-              ))}
-            </motion.ul>
+        {!compact && (
+          <motion.div
+            className="panel__details"
+            id={detailsId}
+            aria-hidden={!active}
+            inert={!active}
+            initial={false}
+            animate={active ? { height: "auto", opacity: 1 } : { height: 0, opacity: 0 }}
+            transition={{
+              height: { duration: 0.45, ease: [0.16, 1, 0.3, 1] },
+              opacity: { duration: 0.35, ease: [0.16, 1, 0.3, 1] },
+            }}
+            style={{ overflow: "hidden" }}
+          >
+            <div className="panel__details-inner">
+              <motion.ul
+                className="panel__list"
+                initial={false}
+                animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -8 }}
+                transition={{ duration: 0.35, delay: active ? 0.08 : 0 }}
+              >
+                {service.treatments.map((treatment) => (
+                  <li key={treatment}>{treatment}</li>
+                ))}
+              </motion.ul>
 
-            <motion.div
-              className="panel__actions"
-              initial={false}
-              animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
-              transition={{ duration: 0.35, delay: active ? 0.14 : 0 }}
-            >
-              <Magnetic>
-                <LiquidMetalButton
-                  label={service.bookLabel}
-                  onClick={() => {
-                    window.location.href = CLINIC.bookingHref;
-                  }}
-                  variant={service.ctaTheme === "dark" ? "aubergine" : "cream"}
-                />
-              </Magnetic>
-            </motion.div>
-          </div>
-        </motion.div>
+              <motion.div
+                className="panel__actions"
+                initial={false}
+                animate={active ? { opacity: 1, y: 0 } : { opacity: 0, y: -6 }}
+                transition={{ duration: 0.35, delay: active ? 0.14 : 0 }}
+              >
+                {active && (
+                  <Magnetic>
+                    <LiquidMetalButton
+                      label={service.bookLabel}
+                      onClick={() => {
+                        window.location.href = CLINIC.bookingHref;
+                      }}
+                      variant={service.ctaTheme === "dark" ? "aubergine" : "cream"}
+                    />
+                  </Magnetic>
+                )}
+              </motion.div>
+            </div>
+          </motion.div>
+        )}
 
         <motion.div
           className="panel__rest"
