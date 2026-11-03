@@ -5278,3 +5278,395 @@ svg {
     padding: 0 0.55rem;
   }
 }
+
+
+/* ============================================================
+   FACE REVEAL — "One face, four services" section
+   ============================================================ */
+
+/* ---- Section layout ---- */
+.fr-section {
+  background: var(--bg-stone);
+  padding: 6rem 2.5rem;
+  overflow: hidden;
+}
+
+.fr-section__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 6rem;
+  align-items: center;
+}
+
+/* ---- Text column ---- */
+.fr-section__eyebrow {
+  font-family: var(--font-sans);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dark-aubergine) 45%, transparent);
+  margin: 0 0 1rem;
+}
+
+.fr-section__heading {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-weight: 400;
+  line-height: 1.15;
+  color: var(--dark-aubergine);
+  margin: 0 0 1.5rem;
+  letter-spacing: -0.01em;
+}
+
+.fr-section__body {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: color-mix(in srgb, var(--dark-aubergine) 65%, transparent);
+  max-width: 480px;
+  margin: 0 0 2.5rem;
+}
+
+.fr-section__services {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.4rem;
+}
+
+.fr-section__service {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.fr-section__service-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--blush);
+  flex-shrink: 0;
+}
+
+.fr-section__service-link {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--dark-aubergine);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.fr-section__service-link:hover {
+  color: var(--blush);
+}
+
+/* ---- Image column — arched frame ---- */
+.fr-section__image-col {
+  display: flex;
+  justify-content: center;
+}
+
+.fr-section__arch {
+  width: 100%;
+  max-width: 380px;
+  border-radius: 999px 999px 32px 32px;
+  overflow: hidden;
+  box-shadow:
+    0 2px 8px color-mix(in srgb, var(--dark-aubergine) 8%, transparent),
+    0 16px 48px color-mix(in srgb, var(--dark-aubergine) 12%, transparent);
+  position: relative;
+  background: #f8f2ec;
+}
+
+/* ---- FaceReveal core component ---- */
+.fr {
+  position: relative;
+  width: 100%;
+  cursor: crosshair;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.fr__frame {
+  position: relative;
+  width: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+/* Base portrait image */
+.fr__base {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* Anatomy reveal layer — CSS-mask lens */
+.fr__reveal {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Lens mask: soft radial gradient */
+  -webkit-mask-image: radial-gradient(
+    circle var(--r, 0px) at var(--x, 50%) var(--y, 46%),
+    black 0%,
+    black 55%,
+    transparent 85%
+  );
+  mask-image: radial-gradient(
+    circle var(--r, 0px) at var(--x, 50%) var(--y, 46%),
+    black 0%,
+    black 55%,
+    transparent 85%
+  );
+  will-change: mask-position, opacity;
+}
+
+.fr__reveal-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  pointer-events: none;
+}
+
+/* ---- Hotspot dots ---- */
+.fr__dots {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fr__dot-wrap {
+  position: absolute;
+  pointer-events: auto;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
+.fr__dot {
+  position: relative;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid var(--blush);
+  cursor: pointer;
+  padding: 0;
+  box-shadow:
+    0 0 0 3px color-mix(in srgb, var(--blush) 25%, transparent),
+    0 2px 8px color-mix(in srgb, var(--dark-aubergine) 20%, transparent);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+  animation: fr-pulse 2.5s ease-in-out infinite;
+}
+
+.fr__dot:hover,
+.fr__dot--active {
+  background: var(--blush);
+  transform: scale(1.25);
+  animation: none;
+  box-shadow:
+    0 0 0 5px color-mix(in srgb, var(--blush) 30%, transparent),
+    0 2px 12px color-mix(in srgb, var(--dark-aubergine) 25%, transparent);
+}
+
+.fr__dot:focus-visible {
+  outline: 2px solid var(--blush);
+  outline-offset: 3px;
+}
+
+.fr__dot-ring {
+  display: block;
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1.5px solid color-mix(in srgb, var(--blush) 45%, transparent);
+  animation: fr-ring 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes fr-pulse {
+  0%, 100% { box-shadow: 0 0 0 3px color-mix(in srgb, var(--blush) 22%, transparent), 0 2px 8px color-mix(in srgb, var(--dark-aubergine) 20%, transparent); }
+  50%       { box-shadow: 0 0 0 6px color-mix(in srgb, var(--blush) 12%, transparent), 0 2px 8px color-mix(in srgb, var(--dark-aubergine) 20%, transparent); }
+}
+
+@keyframes fr-ring {
+  0%, 100% { transform: scale(1);   opacity: 0.7; }
+  50%       { transform: scale(1.6); opacity: 0; }
+}
+
+/* ---- Hotspot popover card ---- */
+.fr__card {
+  position: absolute;
+  z-index: 20;
+  min-width: 150px;
+  max-width: 200px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--dark-aubergine) 14%, transparent),
+    0 1px 4px color-mix(in srgb, var(--dark-aubergine) 8%, transparent);
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+.fr__card-label {
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--dark-aubergine) 55%, transparent);
+  margin: 0 0 0.25rem;
+}
+
+.fr__card-text {
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--dark-aubergine);
+  margin: 0 0 0.6rem;
+  line-height: 1.35;
+  white-space: normal;
+}
+
+.fr__card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--blush);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: gap 0.15s ease;
+}
+
+.fr__card-link:hover {
+  gap: 0.5rem;
+}
+
+/* ---- Reduced-motion fallback ---- */
+.fr-reduced {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.fr-reduced__image-wrap {
+  width: 100%;
+  border-radius: 999px 999px 32px 32px;
+  overflow: hidden;
+}
+
+.fr-reduced__img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.fr-reduced__toggle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.25rem;
+  border-radius: 99px;
+  border: 1.5px solid var(--dark-aubergine);
+  background: transparent;
+  color: var(--dark-aubergine);
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.fr-reduced__toggle:hover {
+  background: var(--dark-aubergine);
+  color: white;
+}
+
+/* ---- Debug overlays ---- */
+.fr__debug-marker {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: rgba(0 0 0 / 0.75);
+  color: #fff;
+  font-size: 10px;
+  font-family: monospace;
+  padding: 2px 5px;
+  border-radius: 4px;
+  pointer-events: none;
+  z-index: 99;
+}
+
+.fr__debug-label {
+  position: absolute;
+  top: -18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0 0 0 / 0.7);
+  color: #fff;
+  font-size: 9px;
+  font-family: monospace;
+  padding: 1px 4px;
+  border-radius: 3px;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 99;
+}
+
+/* ---- Reduced-motion overrides ---- */
+@media (prefers-reduced-motion: reduce) {
+  .fr__dot { animation: none; }
+  .fr__dot-ring { animation: none; }
+}
+
+/* ---- Mobile ---- */
+@media (max-width: 900px) {
+  .fr-section {
+    padding: 3.5rem 1.25rem 4rem;
+  }
+
+  .fr-section__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  /* On mobile, text is first in DOM so it appears above image naturally */
+  .fr-section__body {
+    max-width: 100%;
+  }
+
+  .fr-section__arch {
+    max-width: 280px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .fr-section__heading {
+    font-size: 1.75rem;
+  }
+
+  .fr__card {
+    min-width: 130px;
+    max-width: 160px;
+    font-size: 0.75rem;
+    padding: 0.6rem 0.8rem;
+  }
+}
