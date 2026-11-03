@@ -65,19 +65,19 @@ export default function AnatomyCalloutOverlay({
           const isHighlighted = lm.id === activeLandmarkId || lm.id === nearbyId;
           const isVein = lm.category === "vein";
 
-          // Calculate an elbow point for realistic architectural/botanical callout
+          // Calculate an elbow point for architectural callout line
           const elbowX = lm.side === "left"
-            ? lm.origin.x - (lm.origin.x - lm.target.x) * 0.5
-            : lm.origin.x + (lm.target.x - lm.origin.x) * 0.5;
+            ? lm.origin.x - (lm.origin.x - lm.target.x) * 0.55
+            : lm.origin.x + (lm.target.x - lm.origin.x) * 0.55;
           const elbowY = lm.target.y;
 
           const strokeColor = isHighlighted
             ? isVein ? "#27509B" : "#A62B46"
-            : isVein ? "rgba(75, 115, 175, 0.5)" : "rgba(185, 100, 115, 0.5)";
+            : isVein ? "rgba(75, 115, 175, 0.45)" : "rgba(185, 100, 115, 0.45)";
 
           return (
             <g key={lm.id} className="fr-anatomy-line-group">
-              {/* Landmark origin pinpoint */}
+              {/* Landmark origin pinpoint on face */}
               <circle
                 cx={lm.origin.x}
                 cy={lm.origin.y}
@@ -85,7 +85,7 @@ export default function AnatomyCalloutOverlay({
                 fill={isHighlighted ? (isVein ? "#1E3D75" : "#8A1830") : strokeColor}
               />
 
-              {/* Connecting leader line */}
+              {/* Connecting leader line extending out to arch edge */}
               <motion.path
                 d={`M ${lm.origin.x} ${lm.origin.y} L ${elbowX} ${elbowY} L ${lm.target.x} ${lm.target.y}`}
                 fill="none"
@@ -98,12 +98,12 @@ export default function AnatomyCalloutOverlay({
                 animate={{ pathLength: 1 }}
                 transition={{
                   duration: 0.5,
-                  delay: 0.1 + idx * 0.03,
+                  delay: 0.08 + idx * 0.03,
                   ease: [0.22, 1, 0.36, 1],
                 }}
               />
 
-              {/* Terminal tick on label side */}
+              {/* Terminal tick on arch edge where label anchors */}
               <circle
                 cx={lm.target.x}
                 cy={lm.target.y}
@@ -115,11 +115,10 @@ export default function AnatomyCalloutOverlay({
         })}
       </svg>
 
-      {/* Floating Callout Labels */}
+      {/* Floating Callout Labels (Left fans out left, Right fans out right) */}
       <div className="fr-anatomy-labels">
         {ANATOMY_LANDMARKS.map((lm) => {
           const isHighlighted = lm.id === activeLandmarkId || lm.id === nearbyId;
-          const isLeft = lm.side === "left";
 
           return (
             <motion.button
@@ -130,24 +129,17 @@ export default function AnatomyCalloutOverlay({
               style={{
                 left: `${lm.target.x}%`,
                 top: `${lm.target.y}%`,
-                x: isLeft ? "0%" : "-100%",
-                y: "-50%",
               }}
               onClick={() => onSelectLandmark(lm)}
               onMouseEnter={() => onHoverLandmark(lm.id)}
               onMouseLeave={() => onHoverLandmark(null)}
               aria-label={`${lm.name} (${lm.latinName})`}
-              initial={{ opacity: 0, scale: 0.9 }}
+              initial={{ opacity: 0 }}
               animate={{
                 opacity: 1,
-                scale: isHighlighted ? 1.16 : 1,
-                zIndex: isHighlighted ? 50 : 15,
+                zIndex: isHighlighted ? 60 : 15,
               }}
-              transition={{
-                type: "spring",
-                stiffness: 400,
-                damping: 25,
-              }}
+              transition={{ duration: 0.25 }}
             >
               <span className="fr-anatomy-label__name">{lm.name}</span>
               {isHighlighted && (
