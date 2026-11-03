@@ -38,11 +38,10 @@ export default function FaceRevealSection() {
 
         {/* Image / face side */}
         <div className="fr-section__image-col">
-          <div className="fr-section__arch">
-            <FaceReveal />
-          </div>
+          <FaceReveal />
         </div>
       </div>
     </section>
   );
 }
+

@@ -5368,29 +5368,19 @@ svg {
   color: var(--blush);
 }
 
-/* ---- Image column — arched frame ---- */
+/* ---- Image column & arch frame ---- */
 .fr-section__image-col {
   display: flex;
   justify-content: center;
-}
-
-.fr-section__arch {
   width: 100%;
-  max-width: 380px;
-  border-radius: 999px 999px 32px 32px;
-  overflow: hidden;
-  box-shadow:
-    0 2px 8px color-mix(in srgb, var(--dark-aubergine) 8%, transparent),
-    0 16px 48px color-mix(in srgb, var(--dark-aubergine) 12%, transparent);
-  position: relative;
-  background: #f8f2ec;
 }
 
 /* ---- FaceReveal core component ---- */
 .fr {
   position: relative;
   width: 100%;
-  cursor: crosshair;
+  max-width: 420px;
+  margin: 0 auto;
   user-select: none;
   -webkit-user-select: none;
 }
@@ -5398,8 +5388,16 @@ svg {
 .fr__frame {
   position: relative;
   width: 100%;
-  display: block;
+  max-width: 380px;
+  margin: 0 auto;
+  border-radius: 999px 999px 32px 32px;
   overflow: hidden;
+  box-shadow:
+    0 2px 8px color-mix(in srgb, var(--dark-aubergine) 8%, transparent),
+    0 16px 48px color-mix(in srgb, var(--dark-aubergine) 12%, transparent);
+  background: #f8f2ec;
+  display: block;
+  cursor: crosshair;
 }
 
 /* Base portrait image */
@@ -5509,16 +5507,18 @@ svg {
 /* ---- Hotspot popover card ---- */
 .fr__card {
   position: absolute;
-  z-index: 20;
+  z-index: 25;
   min-width: 150px;
-  max-width: 200px;
-  background: white;
+  max-width: 210px;
+  background: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--line);
-  border-radius: 12px;
-  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
   box-shadow:
-    0 4px 16px color-mix(in srgb, var(--dark-aubergine) 14%, transparent),
-    0 1px 4px color-mix(in srgb, var(--dark-aubergine) 8%, transparent);
+    0 8px 24px color-mix(in srgb, var(--dark-aubergine) 14%, transparent),
+    0 2px 6px color-mix(in srgb, var(--dark-aubergine) 8%, transparent);
   pointer-events: auto;
   white-space: nowrap;
 }
@@ -5558,6 +5558,196 @@ svg {
 
 .fr__card-link:hover {
   gap: 0.5rem;
+}
+
+/* ============================================================
+   JEWELLER'S LOUPE & BOTANICAL CALLOUTS
+   ============================================================ */
+
+/* ---- Feature 3: Jeweller's Loupe ---- */
+.fr-loupe {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 12;
+  will-change: transform, left, top, opacity;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fr-loupe__svg {
+  overflow: visible;
+  filter: drop-shadow(0 2px 8px rgba(58, 21, 48, 0.12));
+}
+
+.fr-loupe__rotating-text {
+  transform-origin: 0 0;
+  animation: fr-loupe-spin 45s linear infinite;
+}
+
+.fr-loupe__text {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+@keyframes fr-loupe-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ---- Feature 5: Botanical Leader Lines for Cards ---- */
+.fr-leader-line {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 22;
+}
+
+/* ============================================================
+   AUTHENTIC CLINIC WALL MURAL ANATOMY CALLOUTS
+   ============================================================ */
+.fr-anatomy-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 14;
+}
+
+.fr-anatomy-lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.fr-anatomy-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.fr-anatomy-label {
+  position: absolute;
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(217, 167, 158, 0.45);
+  border-radius: 99px;
+  padding: 2px 8px;
+  font-family: var(--font-display), Georgia, serif;
+  font-style: italic;
+  font-size: 0.67rem;
+  color: #3A1530;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(58, 21, 48, 0.06);
+}
+
+.fr-anatomy-label:hover,
+.fr-anatomy-label--active {
+  background: #ffffff;
+  transform: scale(1.1) !important;
+  box-shadow: 0 4px 14px rgba(58, 21, 48, 0.16);
+  z-index: 30;
+}
+
+.fr-anatomy-label--vein.fr-anatomy-label--active {
+  border-color: #3D6BB3;
+  color: #1E3D75;
+}
+
+.fr-anatomy-label--muscle.fr-anatomy-label--active {
+  border-color: #C45B72;
+  color: #7B1E34;
+}
+
+/* ============================================================
+   Feature 6: GUIDED TOUR PILL BAR UNDER THE ARCH
+   ============================================================ */
+.fr-tour {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  z-index: 30;
+}
+
+.fr-tour__pills {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 5px 6px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  box-shadow:
+    0 4px 16px color-mix(in srgb, var(--dark-aubergine) 8%, transparent),
+    0 1px 3px color-mix(in srgb, var(--dark-aubergine) 4%, transparent);
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.fr-tour__pill {
+  font-family: var(--font-sans);
+  font-size: 0.74rem;
+  font-weight: 500;
+  padding: 0.38rem 0.85rem;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: #6E5A64;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.fr-tour__pill:hover {
+  color: var(--dark-aubergine);
+  background: rgba(217, 167, 158, 0.16);
+}
+
+.fr-tour__pill--active {
+  background: var(--dark-aubergine);
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(58, 21, 48, 0.24);
+}
+
+.fr-tour__pill--active:hover {
+  background: var(--dark-aubergine);
+  color: #ffffff;
+}
+
+.fr-tour__pill--mural {
+  border: 1px dashed rgba(217, 167, 158, 0.7);
+}
+
+.fr-tour__pill--mural.fr-tour__pill--active {
+  border: 1px solid var(--dark-aubergine);
+}
+
+.fr-tour__mural-icon {
+  color: var(--blush);
+  font-size: 0.75rem;
+  transition: transform 0.3s ease;
+}
+
+.fr-tour__pill--active .fr-tour__mural-icon {
+  color: #fff;
+  transform: rotate(45deg);
 }
 
 /* ---- Reduced-motion fallback ---- */
@@ -5652,8 +5842,8 @@ svg {
     max-width: 100%;
   }
 
-  .fr-section__arch {
-    max-width: 280px;
+  .fr__frame {
+    max-width: 290px;
     margin: 0 auto;
   }
 }

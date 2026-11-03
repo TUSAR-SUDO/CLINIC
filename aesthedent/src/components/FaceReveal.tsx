@@ -1,55 +1,45 @@
 "use client";
 
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import {
   motion,
+  AnimatePresence,
   useInView,
   useMotionValue,
   useMotionValueEvent,
   useReducedMotion,
   useSpring,
+  useVelocity,
 } from "motion/react";
+import JewellersLoupe from "./mural/JewellersLoupe";
+import BotanicalLeaderLine from "./mural/BotanicalLeaderLine";
+import AnatomyCalloutOverlay from "./mural/AnatomyCalloutOverlay";
+import {
+  DEFAULT_HOTSPOTS,
+  ANATOMY_LANDMARKS,
+  Hotspot,
+  AnatomyLandmark,
+} from "@/data/faceAnatomyData";
 
 // ============================================================================
-// TYPES & DEFAULT DATA
+// TYPES & PROPS
 // ============================================================================
-export interface Hotspot {
-  id: string;
-  label: string;
-  text: string;
-  /** Horizontal position as a percentage (0–100) from the top-left of the image */
-  x: number;
-  /** Vertical position as a percentage (0–100) from the top-left of the image */
-  y: number;
-  href: string;
-}
-
 export interface FaceRevealProps {
   baseSrc?: string;
   revealSrc?: string;
   hotspots?: Hotspot[];
   /** Diameter of the reveal lens in pixels (default: 180) */
   lensSize?: number;
-  /** Shows coordinate logger on click and hotspot name markers (default: false) */
+  /** Shows coordinate logger on click (default: false) */
   debug?: boolean;
 }
 
-export const DEFAULT_HOTSPOTS: Hotspot[] = [
-  { id: "forehead", label: "Forehead", text: "Skin care", x: 50, y: 38, href: "#skin" },
-  { id: "eyes", label: "Eyes and brows", text: "Brow and eye-line PMU", x: 50, y: 50, href: "#pmu" },
-  { id: "lips", label: "Lips", text: "Lip PMU", x: 50, y: 61, href: "#pmu" },
-  { id: "jaw", label: "Jaw and smile", text: "Dental care", x: 50, y: 70, href: "#dental" },
-  { id: "hair", label: "Flowers and hair", text: "Hair care", x: 18, y: 41, href: "#hair" },
-  { id: "hair2", label: "Flowers and hair", text: "Hair care", x: 79, y: 40, href: "#hair" },
-];
-
-// Default resting position for the lens on touch devices (centre of the face)
+// Default resting position for the lens
 const REST_X_PERCENT = 50;
-const REST_Y_PERCENT = 46;
+const REST_Y_PERCENT = 48;
 
-// ============================================================================
-// COMPONENT
-// ============================================================================
+type ViewMode = "services" | "anatomy";
+
 export default function FaceReveal({
   baseSrc = "/images/mural/skin.webp",
   revealSrc = "/images/mural/anatomy.webp",
@@ -62,18 +52,25 @@ export default function FaceReveal({
   const revealLayerRef = useRef<HTMLDivElement>(null);
 
   const prefersReducedMotion = useReducedMotion();
-  const isInView = useInView(containerRef, { once: true, amount: 0.2 });
+  const isInView = useInView(containerRef, { once: false, amount: 0.25 });
 
-  // Active hotspot card state (only one open at a time)
+  // View mode: Clinical Services vs. Authentic Clinic Wall Anatomy Mural
+  const [viewMode, setViewMode] = useState<ViewMode>("services");
+
+  // Active hotspot card state
   const [activeId, setActiveId] = useState<string | null>(null);
+
+  // Active anatomy landmark (from mural overlay or label hover)
+  const [activeLandmarkId, setActiveLandmarkId] = useState<string | null>(null);
 
   // Reduced-motion toggle state
   const [reducedShowReveal, setReducedShowReveal] = useState(false);
 
-  // Tracks whether the current user interaction is via touch
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
+  // Tracks whether user has manually interacted
+  const [isUserInteracting, setIsUserInteracting] = useState(false);
+  const idleTimerRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Debug state for last clicked percentage coordinates
+  // Debug state for clicked percentage coordinates
   const [debugClick, setDebugClick] = useState<{ x: number; y: number } | null>(null);
 
   // --------------------------------------------------------------------------
@@ -81,22 +78,50 @@ export default function FaceReveal({
   // --------------------------------------------------------------------------
   const baseRadius = lensSize / 2;
 
-  // Pointer coordinates in percentages (0–100) relative to the image frame
+  // Pointer coordinates in percentages (0–100)
   const rawX = useMotionValue(REST_X_PERCENT);
   const rawY = useMotionValue(REST_Y_PERCENT);
-  // Lens radius in pixels & opacity (0–1)
-  const rawRadius = useMotionValue(baseRadius * 0.75);
-  const rawOpacity = useMotionValue(0);
 
-  const springConfig = { stiffness: 260, damping: 28, mass: 0.6 };
-  const scaleSpringConfig = { stiffness: 220, damping: 24 };
+  // Lens radius in pixels & opacity
+  const rawRadius = useMotionValue(baseRadius);
+  const rawOpacity = useMotionValue(0.85);
+
+  // Primary lens springs (snappy, buttery)
+  const springConfig = { stiffness: 240, damping: 26, mass: 0.6 };
+  const scaleSpringConfig = { stiffness: 200, damping: 24 };
 
   const springX = useSpring(rawX, springConfig);
   const springY = useSpring(rawY, springConfig);
   const springRadius = useSpring(rawRadius, scaleSpringConfig);
   const springOpacity = useSpring(rawOpacity, scaleSpringConfig);
 
-  // Sync Motion springs directly to CSS variables on the reveal layer (zero React re-renders)
+  // Secondary softer spring for Jeweller's Loupe parallax
+  const loupeSpringConfig = { stiffness: 170, damping: 22, mass: 0.8 };
+  const loupeX = useSpring(rawX, loupeSpringConfig);
+  const loupeY = useSpring(rawY, loupeSpringConfig);
+
+  // --------------------------------------------------------------------------
+  // Feature 4: Velocity-Reactive Lens (Shrinks on fast swipe, blooms on pause)
+  // --------------------------------------------------------------------------
+  const velX = useVelocity(springX);
+  const velY = useVelocity(springY);
+
+  useMotionValueEvent(velX, "change", () => {
+    if (prefersReducedMotion || !isUserInteracting) return;
+    const vx = velX.get();
+    const vy = velY.get();
+    const speed = Math.sqrt(vx * vx + vy * vy);
+
+    if (speed > 160) {
+      // Fast movement: compress radius slightly for precision feel
+      rawRadius.set(baseRadius * 0.88);
+    } else if (speed < 15 && isUserInteracting) {
+      // Paused / slow inspection: bloom outward
+      rawRadius.set(activeId ? baseRadius * 1.25 : baseRadius * 1.08);
+    }
+  });
+
+  // Sync Motion springs directly to CSS variables on the reveal layer
   useMotionValueEvent(springX, "change", (val) => {
     revealLayerRef.current?.style.setProperty("--x", `${val}%`);
   });
@@ -115,39 +140,87 @@ export default function FaceReveal({
     }
   });
 
-  // Detect coarse pointer (touch screen) on mount
+  // --------------------------------------------------------------------------
+  // Feature 1: Ambient "Discovery Drift" (Figure-8 Choreography When Idle)
+  // --------------------------------------------------------------------------
   useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(pointer: coarse)");
-    const updateTouchMode = (matches: boolean) => {
-      setIsTouchDevice(matches);
-      if (matches) {
-        rawX.set(REST_X_PERCENT);
-        rawY.set(REST_Y_PERCENT);
-        rawRadius.set(baseRadius * 0.9);
-        rawOpacity.set(0.9);
-      } else {
-        rawOpacity.set(0);
+    if (prefersReducedMotion || !isInView) return;
+
+    let animFrame: number;
+    let startTime: number | null = null;
+
+    const driftLoop = (timestamp: number) => {
+      if (!isUserInteracting) {
+        if (!startTime) startTime = timestamp;
+        const elapsed = timestamp - startTime;
+
+        // Hypnotic Lissajous drift curve across key anatomical facial zones
+        const targetX = 50 + 13 * Math.sin(elapsed * 0.0009);
+        const targetY = 50 + 9 * Math.cos(elapsed * 0.0016);
+
+        rawX.set(targetX);
+        rawY.set(targetY);
+        rawRadius.set(baseRadius * 0.95);
+        rawOpacity.set(0.85);
       }
+      animFrame = requestAnimationFrame(driftLoop);
     };
 
-    updateTouchMode(mediaQuery.matches);
-    const handler = (e: MediaQueryListEvent) => updateTouchMode(e.matches);
-    mediaQuery.addEventListener("change", handler);
-    return () => mediaQuery.removeEventListener("change", handler);
-  }, [baseRadius, rawOpacity, rawRadius, rawX, rawY]);
+    animFrame = requestAnimationFrame(driftLoop);
+    return () => cancelAnimationFrame(animFrame);
+  }, [baseRadius, isInView, isUserInteracting, prefersReducedMotion, rawOpacity, rawRadius, rawX, rawY]);
+
+  // Helper to mark user interaction and restart idle countdown
+  const noteUserInteraction = useCallback(() => {
+    setIsUserInteracting(true);
+    if (idleTimerRef.current) clearTimeout(idleTimerRef.current);
+    idleTimerRef.current = setTimeout(() => {
+      setIsUserInteracting(false);
+    }, 4500); // 4.5s idle threshold before resuming discovery drift
+  }, []);
+
+  // --------------------------------------------------------------------------
+  // Feature 2: Magnetic Hotspot Snap & Guided Focus
+  // --------------------------------------------------------------------------
+  const snapToHotspot = useCallback(
+    (spot: Hotspot) => {
+      noteUserInteraction();
+      setActiveId(spot.id);
+      setActiveLandmarkId(null);
+      rawX.set(spot.x);
+      rawY.set(spot.y);
+      rawRadius.set(baseRadius * 1.25); // Bloom on focus
+      rawOpacity.set(1);
+    },
+    [baseRadius, noteUserInteraction, rawOpacity, rawRadius, rawX, rawY],
+  );
+
+  const snapToLandmark = useCallback(
+    (lm: AnatomyLandmark) => {
+      noteUserInteraction();
+      setActiveLandmarkId(lm.id);
+      setActiveId(null);
+      rawX.set(lm.origin.x);
+      rawY.set(lm.origin.y);
+      rawRadius.set(baseRadius * 1.2);
+      rawOpacity.set(1);
+    },
+    [baseRadius, noteUserInteraction, rawOpacity, rawRadius, rawX, rawY],
+  );
 
   // Close open hotspot card when pressing Escape or clicking outside
   useEffect(() => {
-    if (!activeId) return;
-
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setActiveId(null);
+      if (e.key === "Escape") {
+        setActiveId(null);
+        setActiveLandmarkId(null);
+      }
     };
 
     const handlePointerDownOutside = (e: PointerEvent) => {
       if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
         setActiveId(null);
+        setActiveLandmarkId(null);
       }
     };
 
@@ -157,7 +230,7 @@ export default function FaceReveal({
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("pointerdown", handlePointerDownOutside);
     };
-  }, [activeId]);
+  }, []);
 
   // --------------------------------------------------------------------------
   // Pointer & Touch Handlers
@@ -180,37 +253,41 @@ export default function FaceReveal({
   const handlePointerMove = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (e.pointerType === "touch") return;
+      noteUserInteraction();
       updateLensPosition(e.clientX, e.clientY);
     },
-    [updateLensPosition],
+    [noteUserInteraction, updateLensPosition],
   );
 
   const handlePointerEnter = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (e.pointerType === "touch" || prefersReducedMotion) return;
+      noteUserInteraction();
       rawRadius.set(baseRadius);
       rawOpacity.set(1);
       updateLensPosition(e.clientX, e.clientY);
     },
-    [baseRadius, prefersReducedMotion, rawOpacity, rawRadius, updateLensPosition],
+    [baseRadius, noteUserInteraction, prefersReducedMotion, rawOpacity, rawRadius, updateLensPosition],
   );
 
   const handlePointerLeave = useCallback(
     (e: React.PointerEvent<HTMLDivElement>) => {
       if (e.pointerType === "touch" || prefersReducedMotion) return;
-      rawRadius.set(baseRadius * 0.75);
-      rawOpacity.set(0);
+      if (!activeId && !activeLandmarkId) {
+        rawRadius.set(baseRadius * 0.85);
+      }
     },
-    [baseRadius, prefersReducedMotion, rawOpacity, rawRadius],
+    [activeId, activeLandmarkId, baseRadius, rawRadius],
   );
 
   const handleTouchMove = useCallback(
     (e: React.TouchEvent<HTMLDivElement>) => {
       if (prefersReducedMotion) return;
+      noteUserInteraction();
       const touch = e.touches[0];
       if (touch) updateLensPosition(touch.clientX, touch.clientY);
     },
-    [prefersReducedMotion, updateLensPosition],
+    [noteUserInteraction, prefersReducedMotion, updateLensPosition],
   );
 
   const handleClick = useCallback(
@@ -226,27 +303,34 @@ export default function FaceReveal({
     [debug],
   );
 
+  // Active spot info
+  const activeSpot = useMemo(
+    () => hotspots.find((s) => s.id === activeId),
+    [activeId, hotspots],
+  );
+
   // --------------------------------------------------------------------------
-  // Hotspot card position — edge-aware
+  // Hotspot Card Positioning
   // --------------------------------------------------------------------------
-  const getCardPosition = (spot: Hotspot): React.CSSProperties => {
-    const isRight = spot.x > 65;
+  const isRightCard = activeSpot ? activeSpot.x > 62 : false;
+  const isBottomCard = activeSpot ? activeSpot.y > 60 : false;
+
+  const getCardStyle = (spot: Hotspot): React.CSSProperties => {
+    const isRight = spot.x > 62;
     const isBottom = spot.y > 60;
 
     return {
       left: isRight ? "auto" : "50%",
-      right: isRight ? "calc(100% + 12px)" : "auto",
-      top: isBottom ? "auto" : "calc(100% + 12px)",
-      bottom: isBottom ? "calc(100% + 12px)" : "auto",
+      right: isRight ? "calc(100% + 18px)" : "auto",
+      top: isBottom ? "auto" : "calc(100% + 16px)",
+      bottom: isBottom ? "calc(100% + 16px)" : "auto",
       transform: isRight ? "translateY(-50%)" : isBottom ? "translateX(-50%)" : "translateX(-50%)",
     };
   };
 
   // --------------------------------------------------------------------------
-  // Render
+  // Render: Reduced Motion Fallback
   // --------------------------------------------------------------------------
-
-  // Reduced-motion fallback
   if (prefersReducedMotion) {
     return (
       <div className="fr-reduced" ref={containerRef} aria-label="Face illustration">
@@ -270,15 +354,18 @@ export default function FaceReveal({
     );
   }
 
+  // --------------------------------------------------------------------------
+  // Main Render
+  // --------------------------------------------------------------------------
   return (
     <motion.div
       ref={containerRef}
-      className="fr"
+      className={`fr ${viewMode === "anatomy" ? "fr--anatomy-mode" : ""}`}
       initial={{ opacity: 0, y: 32 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Image frame — mouse + touch tracking */}
+      {/* Arched Illustration Frame */}
       <div
         ref={frameRef}
         className="fr__frame"
@@ -289,7 +376,7 @@ export default function FaceReveal({
         onClick={handleClick}
         aria-hidden="true"
       >
-        {/* Base layer */}
+        {/* Base skin illustration */}
         <img
           src={baseSrc}
           alt="Illustrated face showing areas of care"
@@ -299,7 +386,7 @@ export default function FaceReveal({
           draggable={false}
         />
 
-        {/* Reveal / anatomy layer — revealed via CSS mask */}
+        {/* Anatomy reveal layer — revealed via CSS mask */}
         <div
           ref={revealLayerRef}
           className="fr__reveal"
@@ -307,7 +394,7 @@ export default function FaceReveal({
             {
               "--x": `${REST_X_PERCENT}%`,
               "--y": `${REST_Y_PERCENT}%`,
-              "--r": `${baseRadius * 0.75}px`,
+              "--r": `${baseRadius}px`,
             } as React.CSSProperties
           }
         >
@@ -322,7 +409,40 @@ export default function FaceReveal({
           />
         </div>
 
-        {/* Debug click indicator */}
+        {/* Feature 3: Dual-Spring Jeweller's Loupe with Rotating Micro-Type */}
+        <JewellersLoupe
+          x={loupeX}
+          y={loupeY}
+          radius={springRadius}
+          opacity={springOpacity}
+        />
+
+        {/* Feature 5: Botanical Plate Leader Line for Active Hotspot */}
+        <AnimatePresence>
+          {activeSpot && (
+            <BotanicalLeaderLine
+              startX={activeSpot.x}
+              startY={activeSpot.y}
+              isRight={isRightCard}
+              isBottom={isBottomCard}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Authentic Clinic Wall Mural Anatomy Callout Overlay */}
+        <AnimatePresence>
+          {viewMode === "anatomy" && (
+            <AnatomyCalloutOverlay
+              lensX={springX}
+              lensY={springY}
+              activeLandmarkId={activeLandmarkId}
+              onSelectLandmark={snapToLandmark}
+              onHoverLandmark={setActiveLandmarkId}
+            />
+          )}
+        </AnimatePresence>
+
+        {/* Debug Click Indicator */}
         {debug && debugClick && (
           <div
             className="fr__debug-marker"
@@ -334,97 +454,158 @@ export default function FaceReveal({
         )}
       </div>
 
-      {/* Hotspot dots */}
-      <div className="fr__dots" aria-label="Service areas">
-        {hotspots.map((spot, i) => {
-          const isActive = activeId === spot.id;
+      {/* Clinical Service Hotspot Dots */}
+      {viewMode === "services" && (
+        <div className="fr__dots" aria-label="Service areas">
+          {hotspots.map((spot, i) => {
+            const isActive = activeId === spot.id;
 
-          return (
-            <motion.div
-              key={spot.id}
-              className="fr__dot-wrap"
-              style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
-              initial={{ opacity: 0, scale: 0 }}
-              animate={
-                isInView
-                  ? { opacity: 1, scale: 1 }
-                  : { opacity: 0, scale: 0 }
-              }
-              transition={{
-                delay: 0.7 + i * 0.12,
-                duration: 0.4,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-            >
-              {/* The dot button */}
-              <button
-                className={`fr__dot ${isActive ? "fr__dot--active" : ""}`}
-                aria-label={`${spot.label}: ${spot.text}`}
-                aria-expanded={isActive}
-                aria-haspopup="true"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setActiveId(spot.id); // Always open, never toggle closed on click
+            return (
+              <motion.div
+                key={spot.id}
+                className="fr__dot-wrap"
+                style={{ left: `${spot.x}%`, top: `${spot.y}%` }}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={
+                  isInView
+                    ? { opacity: 1, scale: 1 }
+                    : { opacity: 0, scale: 0 }
+                }
+                transition={{
+                  delay: 0.5 + i * 0.1,
+                  duration: 0.4,
+                  ease: [0.22, 1, 0.36, 1],
                 }}
-                onMouseEnter={() => setActiveId(spot.id)}
-                onMouseLeave={() => {
-                  // Small delay so the user can mouse into the card
-                  setTimeout(() => {
-                    setActiveId((current) => (current === spot.id ? null : current));
-                  }, 150);
-                }}
-                onFocus={() => setActiveId(spot.id)}
-                onBlur={() => setActiveId(null)}
               >
-                <span className="fr__dot-ring" aria-hidden="true" />
-              </button>
-
-              {/* Debug label */}
-              {debug && (
-                <span className="fr__debug-label" aria-hidden="true">
-                  {spot.id}({spot.x},{spot.y})
-                </span>
-              )}
-
-              {/* Popover card */}
-              {isActive && (
-                <motion.div
-                  className="fr__card"
-                  role="tooltip"
-                  id={`fr-card-${spot.id}`}
-                  style={getCardPosition(spot)}
-                  initial={{ opacity: 0, scale: 0.88, y: 6 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  exit={{ opacity: 0, scale: 0.88, y: 6 }}
-                  transition={{ duration: 0.18, ease: "easeOut" }}
-                  onMouseEnter={() => setActiveId(spot.id)}
-                  onMouseLeave={() => setActiveId(null)}
+                {/* Magnetic Interactive Dot */}
+                <button
+                  className={`fr__dot ${isActive ? "fr__dot--active" : ""}`}
+                  aria-label={`${spot.label}: ${spot.text}`}
+                  aria-expanded={isActive}
+                  aria-haspopup="true"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    snapToHotspot(spot);
+                  }}
+                  onMouseEnter={() => snapToHotspot(spot)}
+                  onFocus={() => snapToHotspot(spot)}
                 >
-                  <p className="fr__card-label">{spot.label}</p>
-                  <p className="fr__card-text">{spot.text}</p>
-                  <a href={spot.href} className="fr__card-link">
-                    Learn more
-                    <svg
-                      width="12"
-                      height="12"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      aria-hidden="true"
-                    >
-                      <path
-                        d="M2.5 6h7M6.5 3l3 3-3 3"
-                        stroke="currentColor"
-                        strokeWidth="1.4"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                </motion.div>
-              )}
-            </motion.div>
-          );
-        })}
+                  <span className="fr__dot-ring" aria-hidden="true" />
+                </button>
+
+                {/* Popover Card */}
+                {isActive && (
+                  <motion.div
+                    className="fr__card"
+                    role="tooltip"
+                    id={`fr-card-${spot.id}`}
+                    style={getCardStyle(spot)}
+                    initial={{ opacity: 0, scale: 0.88, y: 6 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.88, y: 6 }}
+                    transition={{ duration: 0.22, ease: "easeOut" }}
+                  >
+                    <p className="fr__card-label">{spot.label}</p>
+                    <p className="fr__card-text">{spot.text}</p>
+                    <a href={spot.href} className="fr__card-link">
+                      Explore care
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 12 12"
+                        fill="none"
+                        aria-hidden="true"
+                      >
+                        <path
+                          d="M2.5 6h7M6.5 3l3 3-3 3"
+                          stroke="currentColor"
+                          strokeWidth="1.4"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </a>
+                  </motion.div>
+                )}
+              </motion.div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* Feature 6: Interactive "Guided Tour" Pill Bar Under the Arch */}
+      <div className="fr-tour" aria-label="Interactive guide">
+        <div className="fr-tour__pills">
+          <button
+            className={`fr-tour__pill ${
+              viewMode === "services" && activeId === "forehead" ? "fr-tour__pill--active" : ""
+            }`}
+            onClick={() => {
+              setViewMode("services");
+              const spot = hotspots.find((h) => h.id === "forehead");
+              if (spot) snapToHotspot(spot);
+            }}
+          >
+            Skin
+          </button>
+
+          <button
+            className={`fr-tour__pill ${
+              viewMode === "services" && (activeId === "eyes" || activeId === "lips")
+                ? "fr-tour__pill--active"
+                : ""
+            }`}
+            onClick={() => {
+              setViewMode("services");
+              const spot = hotspots.find((h) => h.id === "eyes");
+              if (spot) snapToHotspot(spot);
+            }}
+          >
+            PMU
+          </button>
+
+          <button
+            className={`fr-tour__pill ${
+              viewMode === "services" && activeId === "jaw" ? "fr-tour__pill--active" : ""
+            }`}
+            onClick={() => {
+              setViewMode("services");
+              const spot = hotspots.find((h) => h.id === "jaw");
+              if (spot) snapToHotspot(spot);
+            }}
+          >
+            Dental
+          </button>
+
+          <button
+            className={`fr-tour__pill ${
+              viewMode === "services" && activeId === "hair" ? "fr-tour__pill--active" : ""
+            }`}
+            onClick={() => {
+              setViewMode("services");
+              const spot = hotspots.find((h) => h.id === "hair");
+              if (spot) snapToHotspot(spot);
+            }}
+          >
+            Hair
+          </button>
+
+          {/* Mode Switcher Pill: Clinic Wall Mural View */}
+          <button
+            className={`fr-tour__pill fr-tour__pill--mural ${
+              viewMode === "anatomy" ? "fr-tour__pill--active" : ""
+            }`}
+            onClick={() => {
+              setViewMode((m) => (m === "anatomy" ? "services" : "anatomy"));
+              noteUserInteraction();
+              rawRadius.set(baseRadius * 1.15);
+            }}
+            title="Toggle authentic clinic wall mural with vascular & muscular labelling"
+          >
+            <span className="fr-tour__mural-icon" aria-hidden="true">✦</span>
+            Clinic Mural View
+          </button>
+        </div>
       </div>
     </motion.div>
   );
