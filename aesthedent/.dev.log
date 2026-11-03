@@ -153,3 +153,4 @@
  GET /?phase2=1 200 in 359ms (next.js: 3ms, application-code: 357ms)
 [browser] Image with src "/images/services/skin.png" has "fill" and parent element with invalid "position". Provided "static" should be one of absolute,fixed,relative.
  GET /?phase2=3 200 in 450ms (next.js: 3ms, application-code: 446ms)
+ GET / 200 in 386ms (next.js: 4ms, application-code: 382ms)
