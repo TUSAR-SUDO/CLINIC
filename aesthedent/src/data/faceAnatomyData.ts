@@ -93,7 +93,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 44, y: 34 },
-    target: { x: 5, y: 26 },
+    target: { x: 2, y: 26 },
   },
   {
     id: "superficial-temporal-vein",
@@ -102,7 +102,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 33, y: 39 },
-    target: { x: 4, y: 33 },
+    target: { x: 0, y: 33 },
   },
   {
     id: "supraorbital-vein",
@@ -111,7 +111,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 38, y: 44 },
-    target: { x: 5, y: 41 },
+    target: { x: 1, y: 41 },
   },
   {
     id: "angular-vein",
@@ -120,7 +120,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 43, y: 49 },
-    target: { x: 4, y: 49 },
+    target: { x: 0, y: 49 },
   },
   {
     id: "facial-vein",
@@ -129,7 +129,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 40, y: 57 },
-    target: { x: 5, y: 58 },
+    target: { x: 2, y: 58 },
   },
   {
     id: "retromandibular-vein",
@@ -138,7 +138,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "left",
     category: "vein",
     origin: { x: 34, y: 64 },
-    target: { x: 4, y: 66 },
+    target: { x: 0, y: 66 },
   },
 
   // --- Right Side: Facial Muscles ---
@@ -149,7 +149,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 58, y: 34 },
-    target: { x: 96, y: 27 },
+    target: { x: 98, y: 27 },
   },
   {
     id: "procerus-muscle",
@@ -158,7 +158,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 50, y: 41 },
-    target: { x: 95, y: 35 },
+    target: { x: 98, y: 35 },
   },
   {
     id: "orbicularis-oculi",
@@ -167,7 +167,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 62, y: 45 },
-    target: { x: 96, y: 43 },
+    target: { x: 99, y: 43 },
   },
   {
     id: "zygomaticus-muscle",
@@ -176,7 +176,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 60, y: 52 },
-    target: { x: 95, y: 51 },
+    target: { x: 98, y: 51 },
   },
   {
     id: "masseter-muscle",
@@ -185,7 +185,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 67, y: 58 },
-    target: { x: 96, y: 59 },
+    target: { x: 99, y: 59 },
   },
   {
     id: "buccinator-muscle",
@@ -194,7 +194,7 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 58, y: 61 },
-    target: { x: 95, y: 67 },
+    target: { x: 98, y: 67 },
   },
   {
     id: "platysma",
@@ -203,6 +203,6 @@ export const ANATOMY_LANDMARKS: AnatomyLandmark[] = [
     side: "right",
     category: "muscle",
     origin: { x: 61, y: 72 },
-    target: { x: 96, y: 75 },
+    target: { x: 99, y: 75 },
   },
 ];

@@ -138,10 +138,21 @@ export default function AnatomyCalloutOverlay({
               onMouseLeave={() => onHoverLandmark(null)}
               aria-label={`${lm.name} (${lm.latinName})`}
               initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, ease: "easeOut" }}
+              animate={{
+                opacity: 1,
+                scale: isHighlighted ? 1.16 : 1,
+                zIndex: isHighlighted ? 50 : 15,
+              }}
+              transition={{
+                type: "spring",
+                stiffness: 400,
+                damping: 25,
+              }}
             >
               <span className="fr-anatomy-label__name">{lm.name}</span>
+              {isHighlighted && (
+                <span className="fr-anatomy-label__latin">{lm.latinName}</span>
+              )}
             </motion.button>
           );
         })}

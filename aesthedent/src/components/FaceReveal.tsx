@@ -365,7 +365,7 @@ export default function FaceReveal({
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 32 }}
       transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
-      {/* Arched Illustration Frame */}
+      {/* Arched Illustration Frame (Bounds for interaction & overlays) */}
       <div
         ref={frameRef}
         className="fr__frame"
@@ -376,37 +376,40 @@ export default function FaceReveal({
         onClick={handleClick}
         aria-hidden="true"
       >
-        {/* Base skin illustration */}
-        <img
-          src={baseSrc}
-          alt="Illustrated face showing areas of care"
-          className="fr__base"
-          width={454}
-          height={900}
-          draggable={false}
-        />
-
-        {/* Anatomy reveal layer — revealed via CSS mask */}
-        <div
-          ref={revealLayerRef}
-          className="fr__reveal"
-          style={
-            {
-              "--x": `${REST_X_PERCENT}%`,
-              "--y": `${REST_Y_PERCENT}%`,
-              "--r": `${baseRadius}px`,
-            } as React.CSSProperties
-          }
-        >
+        {/* Arched Window (Strictly clips only the base image & X-ray reveal layer) */}
+        <div className="fr__window">
+          {/* Base skin illustration */}
           <img
-            src={revealSrc}
-            alt=""
-            aria-hidden="true"
-            className="fr__reveal-img"
+            src={baseSrc}
+            alt="Illustrated face showing areas of care"
+            className="fr__base"
             width={454}
             height={900}
             draggable={false}
           />
+
+          {/* Anatomy reveal layer — revealed via CSS mask */}
+          <div
+            ref={revealLayerRef}
+            className="fr__reveal"
+            style={
+              {
+                "--x": `${REST_X_PERCENT}%`,
+                "--y": `${REST_Y_PERCENT}%`,
+                "--r": `${baseRadius}px`,
+              } as React.CSSProperties
+            }
+          >
+            <img
+              src={revealSrc}
+              alt=""
+              aria-hidden="true"
+              className="fr__reveal-img"
+              width={454}
+              height={900}
+              draggable={false}
+            />
+          </div>
         </div>
 
         {/* Feature 3: Dual-Spring Jeweller's Loupe with Rotating Micro-Type */}
@@ -429,7 +432,7 @@ export default function FaceReveal({
           )}
         </AnimatePresence>
 
-        {/* Authentic Clinic Wall Mural Anatomy Callout Overlay */}
+        {/* Authentic Clinic Wall Mural Anatomy Callout Overlay (Unclipped, 3D Pop-Out) */}
         <AnimatePresence>
           {viewMode === "anatomy" && (
             <AnatomyCalloutOverlay
@@ -537,9 +540,8 @@ export default function FaceReveal({
       <div className="fr-tour" aria-label="Interactive guide">
         <div className="fr-tour__pills">
           <button
-            className={`fr-tour__pill ${
-              viewMode === "services" && activeId === "forehead" ? "fr-tour__pill--active" : ""
-            }`}
+            className={`fr-tour__pill ${viewMode === "services" && activeId === "forehead" ? "fr-tour__pill--active" : ""
+              }`}
             onClick={() => {
               setViewMode("services");
               const spot = hotspots.find((h) => h.id === "forehead");
@@ -550,11 +552,10 @@ export default function FaceReveal({
           </button>
 
           <button
-            className={`fr-tour__pill ${
-              viewMode === "services" && (activeId === "eyes" || activeId === "lips")
+            className={`fr-tour__pill ${viewMode === "services" && (activeId === "eyes" || activeId === "lips")
                 ? "fr-tour__pill--active"
                 : ""
-            }`}
+              }`}
             onClick={() => {
               setViewMode("services");
               const spot = hotspots.find((h) => h.id === "eyes");
@@ -565,9 +566,8 @@ export default function FaceReveal({
           </button>
 
           <button
-            className={`fr-tour__pill ${
-              viewMode === "services" && activeId === "jaw" ? "fr-tour__pill--active" : ""
-            }`}
+            className={`fr-tour__pill ${viewMode === "services" && activeId === "jaw" ? "fr-tour__pill--active" : ""
+              }`}
             onClick={() => {
               setViewMode("services");
               const spot = hotspots.find((h) => h.id === "jaw");
@@ -578,9 +578,8 @@ export default function FaceReveal({
           </button>
 
           <button
-            className={`fr-tour__pill ${
-              viewMode === "services" && activeId === "hair" ? "fr-tour__pill--active" : ""
-            }`}
+            className={`fr-tour__pill ${viewMode === "services" && activeId === "hair" ? "fr-tour__pill--active" : ""
+              }`}
             onClick={() => {
               setViewMode("services");
               const spot = hotspots.find((h) => h.id === "hair");
@@ -592,9 +591,8 @@ export default function FaceReveal({
 
           {/* Mode Switcher Pill: Clinic Wall Mural View */}
           <button
-            className={`fr-tour__pill fr-tour__pill--mural ${
-              viewMode === "anatomy" ? "fr-tour__pill--active" : ""
-            }`}
+            className={`fr-tour__pill fr-tour__pill--mural ${viewMode === "anatomy" ? "fr-tour__pill--active" : ""
+              }`}
             onClick={() => {
               setViewMode((m) => (m === "anatomy" ? "services" : "anatomy"));
               noteUserInteraction();
