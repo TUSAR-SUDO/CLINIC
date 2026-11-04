@@ -123,9 +123,8 @@ export default function AnatomyCalloutOverlay({
           return (
             <motion.button
               key={lm.id}
-              className={`fr-anatomy-label fr-anatomy-label--${lm.side} ${
-                isHighlighted ? "fr-anatomy-label--active" : ""
-              } fr-anatomy-label--${lm.category}`}
+              className={`fr-anatomy-label fr-anatomy-label--${lm.side} ${isHighlighted ? "fr-anatomy-label--active" : ""
+                } fr-anatomy-label--${lm.category}`}
               style={{
                 left: `${lm.target.x}%`,
                 top: `${lm.target.y}%`,
