@@ -4167,13 +4167,71 @@ svg {
     display: none !important;
   }
 
-  /* Phones should show the complete first paint; the desktop reveal
-     choreography leaves the header and headline clipped for too long. */
-  .hero__nav,
-  .hero__footer,
-  .hero__headline .mask-line__inner {
-    opacity: 1 !important;
-    transform: none !important;
+  /* Phones orchestrated luxury load-in:
+     Header drops softly, headline lines cascade upwards smoothly,
+     service marquee & card float in, and doctors pill docks at the bottom. */
+  @keyframes mobile-enter-down {
+    from {
+      opacity: 0;
+      transform: translate3d(0, -8px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes mobile-enter-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 14px, 0);
+    }
+    to {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .hero__nav {
+    animation: mobile-enter-down 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both !important;
+  }
+
+  .hero__headline .hero__kicker {
+    animation: mobile-enter-up 0.48s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both !important;
+  }
+
+  .hero__headline .hero__title {
+    animation: mobile-enter-up 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both !important;
+  }
+
+  .hero__headline .hero__subtitle {
+    animation: mobile-enter-up 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.28s both !important;
+  }
+
+  .hero__mobile-cta {
+    animation: mobile-enter-up 0.52s cubic-bezier(0.16, 1, 0.3, 1) 0.34s both !important;
+  }
+
+  .mobile-service-showcase {
+    animation: mobile-enter-up 0.58s cubic-bezier(0.16, 1, 0.3, 1) 0.4s both !important;
+  }
+
+  .hero__footer {
+    animation: mobile-enter-up 0.58s cubic-bezier(0.16, 1, 0.3, 1) 0.48s both !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero__nav,
+    .hero__headline .hero__kicker,
+    .hero__headline .hero__title,
+    .hero__headline .hero__subtitle,
+    .hero__mobile-cta,
+    .mobile-service-showcase,
+    .hero__footer {
+      animation: none !important;
+      opacity: 1 !important;
+      transform: none !important;
+    }
   }
 
   .nav-cta {
@@ -4288,6 +4346,88 @@ svg {
     padding: 0 1.15rem;
   }
 
+  /* Editorial marquee ribbon above mobile card */
+  .mobile-service-marquee {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 0.65rem;
+    padding: 0.3rem 0;
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 14%,
+      black 86%,
+      transparent 100%
+    );
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      black 14%,
+      black 86%,
+      transparent 100%
+    );
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .mobile-service-marquee__track {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: mobile-marquee-scroll 26s linear infinite;
+  }
+
+  .mobile-service-marquee__group {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 1.35rem;
+    padding-right: 1.35rem;
+  }
+
+  .mobile-service-marquee__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.35rem;
+    font-family: var(--font-display), Georgia, serif;
+    font-size: 0.74rem;
+    font-style: italic;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--dark-aubergine);
+    opacity: 0.58;
+  }
+
+  .mobile-service-marquee__dot {
+    display: inline-block;
+    width: 3.5px;
+    height: 3.5px;
+    border-radius: 50%;
+    background-color: var(--blush);
+  }
+
+  @keyframes mobile-marquee-scroll {
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+    to {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mobile-service-marquee__track {
+      animation: none !important;
+    }
+  }
+
+  .mobile-service__swipe-container {
+    touch-action: pan-y;
+    user-select: none;
+  }
+
   .mobile-service {
     overflow: hidden;
     border-radius: 1.6rem;
@@ -4295,7 +4435,6 @@ svg {
     box-shadow:
       0 20px 42px -28px rgba(58, 21, 48, 0.38),
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    animation: mobile-service-in 0.38s var(--ease-out);
   }
 
   .mobile-service__media {
@@ -4435,6 +4574,47 @@ svg {
     width: 1px;
     height: 1px;
     scroll-margin-top: 1rem;
+  }
+
+  .mobile-service__pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.85rem;
+  }
+
+  .mobile-service__dot-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    touch-action: manipulation;
+  }
+
+  .mobile-service__dot-pill {
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(58, 21, 48, 0.22);
+    transition:
+      width 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .mobile-service__dot-btn--active .mobile-service__dot-pill {
+    width: 22px;
+    background: var(--dark-aubergine);
+  }
+
+  .mobile-service__link-inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
   }
 
   .hero__footer {
@@ -5224,6 +5404,12 @@ svg {
     padding-top: 0.35rem;
   }
 
+  /* The floating doodles sit at percentage positions in the reduced
+     footer world, which puts them over the tagline and CTA buttons. */
+  .dcf.site-footer .dcf-doodles {
+    display: none;
+  }
+
   .dcf.site-footer .dcf-cta {
     gap: 0.7rem;
     padding: 0.35rem 0 1.1rem;
@@ -5287,7 +5473,8 @@ svg {
 /* ---- Section layout ---- */
 .fr-section {
   background: var(--bg-stone);
-  padding: 6rem 2.5rem;
+  /* Right-hand rail keeps the mural's muscle callouts inside the viewport. */
+  padding: 6rem 8.5rem 6rem 2.5rem;
   overflow: hidden;
 }
 
@@ -5393,6 +5580,10 @@ svg {
   overflow: visible;
   display: block;
   cursor: crosshair;
+  /* The lens follows a held touch. Keeping the gesture local prevents the
+     page from scrolling underneath it. */
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 /* Arched window clips only the base illustration and anatomy mask */
@@ -5647,6 +5838,7 @@ svg {
 
 .fr-anatomy-label {
   position: absolute;
+  width: max-content;
   pointer-events: auto;
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
@@ -5933,23 +6125,6 @@ svg {
     max-width: 100%;
   }
 
-  .fr__frame {
-    max-width: 250px;
-    margin: 0 auto;
-  }
-
-  .fr-anatomy-label {
-    font-size: 0.6rem;
-    padding: 2px 7px;
-  }
-
-  .fr-anatomy-label--left {
-    margin-left: -3px;
-  }
-
-  .fr-anatomy-label--right {
-    margin-left: 3px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -5962,5 +6137,228 @@ svg {
     max-width: 160px;
     font-size: 0.75rem;
     padding: 0.6rem 0.8rem;
+  }
+}
+
+/* Anatomy interaction lock: dragging the dial must not scroll the page. */
+.fr--anatomy-mode .fr__frame {
+  touch-action: none;
+  overscroll-behavior: contain;
+}
+
+/* Keep the connected callouts on phones: shrink the arch and let the
+   labels wrap inside the side gutters instead of pushing off-screen. */
+@media (max-width: 900px) {
+  .fr__frame {
+    max-width: min(55vw, 250px);
+    margin: 0 auto;
+  }
+
+  .fr-anatomy-label {
+    max-width: min(20vw, 96px);
+    padding: 2px 6px;
+    font-size: 0.56rem;
+    line-height: 1.12;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .fr-anatomy-label__latin {
+    display: none;
+  }
+
+  .fr-anatomy-label--left {
+    margin-left: -4px;
+  }
+
+  .fr-anatomy-label--right {
+    margin-left: 4px;
+  }
+
+  /* Keep the active callout inside the phone gutter rather than scaling
+     its already-narrow pill off the edge. */
+  .fr-anatomy-label--left:hover,
+  .fr-anatomy-label--left.fr-anatomy-label--active {
+    transform: translate3d(-100%, calc(-50% - 4px), 0) !important;
+  }
+
+  .fr-anatomy-label--right:hover,
+  .fr-anatomy-label--right.fr-anatomy-label--active {
+    transform: translate3d(0, calc(-50% - 4px), 0) !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .fr__frame {
+    max-width: 54vw;
+  }
+
+  .fr-anatomy-label {
+    max-width: 21vw;
+    padding: 2px 5px;
+    font-size: 0.5rem;
+    line-height: 1.08;
+  }
+}
+
+/* ============================================================
+   FOOTER LOCATION MAP
+   ============================================================ */
+
+.site-map {
+  padding: clamp(2.6rem, 4.8vw, 4.5rem) var(--page-gutter);
+  border-top: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  scroll-margin-top: 1rem;
+}
+
+.site-map__inner {
+  display: grid;
+  grid-template-columns: minmax(15rem, 0.58fr) minmax(0, 1.42fr);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+}
+
+.site-map__copy {
+  min-width: 0;
+}
+
+.site-map__eyebrow {
+  margin: 0;
+  color: var(--muted-ink);
+  font-size: 0.64rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.site-map__title {
+  max-width: 9ch;
+  margin: 0.65rem 0 0;
+  color: var(--dark-aubergine);
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.5rem, 3.6vw, 3.7rem);
+  font-weight: 450;
+  font-variation-settings: "opsz" 60, "SOFT" 40, "WONK" 0;
+  letter-spacing: -0.05em;
+  line-height: 0.94;
+  text-wrap: balance;
+}
+
+.site-map__title em {
+  color: var(--berry);
+  font-style: italic;
+  font-weight: 400;
+}
+
+.site-map__address {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  max-width: 30ch;
+  margin: 1.15rem 0 0;
+  color: var(--muted-ink);
+  font-size: 0.84rem;
+  line-height: 1.55;
+}
+
+.site-map__address svg {
+  flex: 0 0 auto;
+  margin-top: 0.15rem;
+  color: var(--berry);
+}
+
+.site-map__directions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  min-height: 2.85rem;
+  margin-top: 1.25rem;
+  padding: 0 1rem 0 1.05rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  color: var(--dark-aubergine);
+  font-size: 0.73rem;
+  font-weight: 650;
+  letter-spacing: -0.005em;
+  transition:
+    background-color 0.2s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    transform 0.2s var(--ease-out);
+}
+
+.site-map__directions:hover {
+  border-color: var(--dark-aubergine);
+  background: color-mix(in srgb, var(--blush) 13%, transparent);
+  transform: translateY(-1px);
+}
+
+.site-map__frame {
+  position: relative;
+  overflow: hidden;
+  height: clamp(15rem, 24vw, 21rem);
+  border: 1px solid var(--line-strong);
+  border-radius: 1.5rem;
+  background: #e9e1d8;
+  box-shadow: 0 22px 48px -36px rgba(58, 21, 48, 0.5);
+}
+
+.site-map__frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: saturate(0.78) contrast(1.03);
+}
+
+@media (max-width: 900px) {
+  .site-map__inner {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.4rem;
+  }
+
+  .site-map__title {
+    max-width: 12ch;
+  }
+
+  .site-map__frame {
+    height: clamp(13rem, 40vw, 17rem);
+    border-radius: 1.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .site-map {
+    padding: 2.5rem 1.15rem 2.75rem;
+  }
+
+  .site-map__eyebrow {
+    font-size: 0.6rem;
+  }
+
+  .site-map__title {
+    margin-top: 0.55rem;
+    font-size: clamp(2.35rem, 11vw, 2.9rem);
+  }
+
+  .site-map__address {
+    margin-top: 0.95rem;
+    font-size: 0.8rem;
+  }
+
+  .site-map__directions {
+    width: 100%;
+    min-height: 2.8rem;
+    margin-top: 1.05rem;
+  }
+
+  .site-map__frame {
+    height: 15.5rem;
   }
 }

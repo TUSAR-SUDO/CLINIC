@@ -16,9 +16,8 @@ import BotanicalLeaderLine from "./mural/BotanicalLeaderLine";
 import AnatomyCalloutOverlay from "./mural/AnatomyCalloutOverlay";
 import {
   DEFAULT_HOTSPOTS,
-  ANATOMY_LANDMARKS,
-  Hotspot,
-  AnatomyLandmark,
+  type Hotspot,
+  type AnatomyLandmark,
 } from "@/data/faceAnatomyData";
 
 // ============================================================================
@@ -55,7 +54,7 @@ export default function FaceReveal({
   const isInView = useInView(containerRef, { once: false, amount: 0.25 });
 
   // View mode: Clinical Services vs. Authentic Clinic Wall Anatomy Mural
-  const [viewMode, setViewMode] = useState<ViewMode>("services");
+  const [viewMode, setViewMode] = useState<ViewMode>("anatomy");
 
   // Active hotspot card state
   const [activeId, setActiveId] = useState<string | null>(null);
@@ -277,7 +276,17 @@ export default function FaceReveal({
         rawRadius.set(baseRadius * 0.85);
       }
     },
-    [activeId, activeLandmarkId, baseRadius, rawRadius],
+    [activeId, activeLandmarkId, baseRadius, prefersReducedMotion, rawRadius],
+  );
+
+  const handleTouchStart = useCallback(
+    (e: React.TouchEvent<HTMLDivElement>) => {
+      if (prefersReducedMotion) return;
+      noteUserInteraction();
+      const touch = e.touches[0];
+      if (touch) updateLensPosition(touch.clientX, touch.clientY);
+    },
+    [noteUserInteraction, prefersReducedMotion, updateLensPosition],
   );
 
   const handleTouchMove = useCallback(
@@ -372,8 +381,10 @@ export default function FaceReveal({
         onPointerMove={handlePointerMove}
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
+        onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onClick={handleClick}
+        data-lenis-prevent={viewMode === "anatomy" ? "" : undefined}
         aria-hidden="true"
       >
         {/* Arched Window (Strictly clips only the base image & X-ray reveal layer) */}

@@ -35,6 +35,36 @@ export function Reveal({
   );
 }
 
+export function RevealListItem({
+  children,
+  className,
+  delay = 0,
+  y = 20,
+}: {
+  children: ReactNode;
+  className?: string;
+  delay?: number;
+  y?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.li
+      className={className}
+      initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={
+        reduceMotion
+          ? { duration: 0.25, delay }
+          : { duration: 0.75, delay, ease: EASE }
+      }
+    >
+      {children}
+    </motion.li>
+  );
+}
+
 export function MaskedLine({
   children,
   className,

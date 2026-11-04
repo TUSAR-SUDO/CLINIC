@@ -1,4 +1,5 @@
 import DoodleCrewFooter from "@/components/ui/doodle-crew-footer";
+import SiteMap from "@/components/site/SiteMap";
 import { CLINIC } from "@/lib/clinic";
 import { fraunces } from "@/lib/fonts";
 
@@ -61,28 +62,31 @@ const CREW = [
 
 export default function SiteFooter() {
   return (
-    <DoodleCrewFooter
-      className="site-footer"
-      wordmark="AESTHEDENT"
-      brand="Aesthedent"
-      blurb="A multi-speciality aesthetic clinic in Old Town, Bhubaneswar — dental, skin, hair and PMU care under one roof."
-      tagline="Dental, skin, hair and PMU — considered care, all under one roof."
-      columns={COLUMNS}
-      actions={[
-        { label: "Book a visit", href: CLINIC.bookingHref, icon: "sparkle", variant: "solid" },
-        { label: "Call the clinic", href: CLINIC.phone.primaryHref, icon: "heart", variant: "outline" },
-      ]}
-      crew={[...CREW]}
-      doodles={["sparkle", "heart", "star", "spiral", "plane", "bolt"]}
-      doodleCount={10}
-      copyright="© 2026 Aesthedent · Old Town, Bhubaneswar"
-      legal={[]}
-      socials={[]}
-      palette={{ background: "#2a0e1e", ink: "#f3eee8", accent: "#d9a79e" }}
-      fontFamily={fraunces.style.fontFamily}
-      serifFamily={fraunces.style.fontFamily}
-      tracking={-0.03}
-      height="720px"
-    />
+    <div className="site-footer-region">
+      <SiteMap />
+      <DoodleCrewFooter
+        className="site-footer"
+        wordmark="AESTHEDENT"
+        brand="Aesthedent"
+        blurb="A multi-speciality aesthetic clinic in Old Town, Bhubaneswar — dental, skin, hair and PMU care under one roof."
+        tagline="Dental, skin, hair and PMU — considered care, all under one roof."
+        columns={COLUMNS}
+        actions={[
+          { label: "Book a visit", href: CLINIC.bookingHref, icon: "sparkle", variant: "solid" },
+          { label: "Call the clinic", href: CLINIC.phone.primaryHref, icon: "heart", variant: "outline" },
+        ]}
+        crew={[...CREW]}
+        doodles={["sparkle", "heart", "star", "spiral", "plane", "bolt"]}
+        doodleCount={10}
+        copyright="© 2026 Aesthedent · Old Town, Bhubaneswar"
+        legal={[]}
+        socials={[]}
+        palette={{ background: "#2a0e1e", ink: "#f3eee8", accent: "#d9a79e" }}
+        fontFamily={fraunces.style.fontFamily}
+        serifFamily={fraunces.style.fontFamily}
+        tracking={-0.03}
+        height="720px"
+      />
+    </div>
   );
 }

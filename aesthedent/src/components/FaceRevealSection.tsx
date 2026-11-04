@@ -1,11 +1,12 @@
 import FaceReveal from "./FaceReveal";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function FaceRevealSection() {
   return (
     <section className="fr-section" aria-labelledby="fr-section-heading">
       <div className="fr-section__inner">
         {/* Text side */}
-        <div className="fr-section__text">
+        <Reveal className="fr-section__text">
           <p className="fr-section__eyebrow">One face, four services</p>
           <h2 id="fr-section-heading" className="fr-section__heading">
             Art and science of natural aesthetics
@@ -34,12 +35,12 @@ export default function FaceRevealSection() {
               <span className="fr-section__service-link">PMU</span>
             </li>
           </ul>
-        </div>
+        </Reveal>
 
         {/* Image / face side */}
-        <div className="fr-section__image-col">
+        <Reveal className="fr-section__image-col" delay={0.12} y={18}>
           <FaceReveal />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
