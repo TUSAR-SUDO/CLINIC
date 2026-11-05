@@ -630,6 +630,7 @@ export default function DoodleCrewFooter({
 
   const [metrics, setMetrics] = React.useState(() => estimate(word));
   const [play, setPlay] = React.useState(false);
+  const [onScreen, setOnScreen] = React.useState(false);
   const [reduced, setReduced] = React.useState(false);
   const [compact, setCompact] = React.useState(false);
   const [talking, setTalking] = React.useState(-1);
@@ -881,13 +882,17 @@ export default function DoodleCrewFooter({
     const s = sim.current;
     if (typeof IntersectionObserver === "undefined") {
       s.visible = true;
-      const id = requestAnimationFrame(() => setPlay(true));
+      const id = requestAnimationFrame(() => {
+        setOnScreen(true);
+        setPlay(true);
+      });
       return () => cancelAnimationFrame(id);
     }
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           s.visible = e.isIntersecting;
+          setOnScreen(e.isIntersecting);
           if (e.isIntersecting && e.intersectionRatio > 0.12) setPlay(true);
         }
       },
@@ -903,7 +908,7 @@ export default function DoodleCrewFooter({
 
   React.useEffect(() => {
     if (typeof window === "undefined") return;
-    if (reduced) {
+    if (reduced || !onScreen) {
       paintDoodles();
       return;
     }
@@ -1015,7 +1020,7 @@ export default function DoodleCrewFooter({
     };
     raf = requestAnimationFrame(frame);
     return () => cancelAnimationFrame(raf);
-  }, [placed, play, reduced, canInteract, uid, tl.doodles, paintDoodles]);
+  }, [onScreen, placed, play, reduced, canInteract, uid, tl.doodles, paintDoodles]);
 
   React.useEffect(() => () => window.clearTimeout(talkTimer.current), []);
 
@@ -1166,6 +1171,7 @@ export default function DoodleCrewFooter({
       className={"dcf" + (className ? " " + className : "")}
       data-play={play || reduced ? "1" : "0"}
       data-interactive={canInteract ? "1" : "0"}
+      data-onscreen={onScreen ? "1" : "0"}
       style={vars}
       onPointerMove={onPointerMove}
       onPointerDown={onPointerMove}
@@ -1492,6 +1498,7 @@ const CSS =
   ".dcf-art.dcf-sway{transform-box:fill-box;transform-origin:50% 100%;animation:dcf-swing 4s ease-in-out infinite}" +
   ".dcf-art.dcf-peck{transform-box:fill-box;transform-origin:50% 100%;animation:dcf-peck 5.5s ease-in-out infinite}" +
   ".dcf-tail{transform-box:fill-box;transform-origin:0% 100%;animation:dcf-tail 2.8s ease-in-out infinite}" +
+  ".dcf[data-onscreen='0'] .dcf-art,.dcf[data-onscreen='0'] .dcf-tail{animation-play-state:paused}" +
   ".dcf-hopper{transform-box:fill-box;transform-origin:50% 100%}" +
   ".dcf-hopper.is-hop{animation:dcf-hop .62s cubic-bezier(.3,.7,.4,1)}" +
   ".dcf-arrive{transform-box:fill-box;transform-origin:50% 100%}" +

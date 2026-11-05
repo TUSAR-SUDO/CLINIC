@@ -1,0 +1,71 @@
+
+> aesthedent@0.1.0 dev
+> next dev --port 3100
+
+▲ Next.js 16.4.3 (Turbopack)
+- Local:         http://localhost:3100
+- Network:       http://192.168.29.39:3100
+✓ Ready in 1862ms
+✓ Running next.config.ts took 159ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+○ Compiling / ...
+ GET / 200 in 1331ms (next.js: 414ms, application-code: 917ms)
+ GET / 200 in 1391ms (next.js: 5ms, application-code: 1386ms)
+ GET / 200 in 513ms (next.js: 5ms, application-code: 508ms)
+ GET / 200 in 382ms (next.js: 3ms, application-code: 378ms)
+ GET / 200 in 294ms (next.js: 5ms, application-code: 289ms)
+ GET / 200 in 304ms (next.js: 4ms, application-code: 300ms)
+ GET / 200 in 398ms (next.js: 4ms, application-code: 394ms)
+ GET / 200 in 328ms (next.js: 3ms, application-code: 324ms)
+[browser] Image with src "/images/services/dental.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[browser] Image with src "/images/services/hair.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+✓ Compiled in 208ms
+✓ Compiled in 149ms
+✓ Compiled in 150ms
+⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 371ms (next.js: 4ms, application-code: 367ms)
+ GET / 200 in 466ms (next.js: 4ms, application-code: 461ms)
+✓ Compiled in 198ms
+⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+⚠ Fast Refresh had to perform a full reload when ./src/components/ui/doodle-crew-footer.tsx changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 418ms (next.js: 4ms, application-code: 414ms)
+ GET / 200 in 480ms (next.js: 7ms, application-code: 474ms)
+ GET / 200 in 382ms (next.js: 2ms, application-code: 380ms)
+ GET / 200 in 350ms (next.js: 3ms, application-code: 347ms)
+ GET /dental 200 in 355ms (next.js: 20ms, application-code: 335ms)
+ GET /skin 200 in 340ms (next.js: 16ms, application-code: 324ms)
+ GET /skin 200 in 363ms (next.js: 3ms, application-code: 360ms)
+[browser] Image with src "/images/hero/dental.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET / 200 in 397ms (next.js: 3ms, application-code: 394ms)
+✓ Compiled in 250ms
+ GET /skin 200 in 313ms (next.js: 3ms, application-code: 310ms)
+ GET /our-clinic 200 in 320ms (next.js: 17ms, application-code: 303ms)
+ GET /our-clinic 200 in 278ms (next.js: 2.0ms, application-code: 276ms)
+ GET /skin 200 in 279ms (next.js: 3ms, application-code: 276ms)
+[browser] Image with src "/images/hero/dental.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[browser] Image with src "/images/hero/hair.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+[browser] Image with src "/images/hero/pmu.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET /skin 200 in 298ms (next.js: 2ms, application-code: 296ms)
+[browser] Image with src "/images/hero/dental.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+✓ Compiled in 154ms
+ GET /skin 200 in 235ms (next.js: 4ms, application-code: 231ms)
+[browser] Image with src "/images/hero/dental.png" was detected as the Largest Contentful Paint (LCP). Please add the `loading="eager"` property if this image is above the fold.
+Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
+ GET / 200 in 321ms (next.js: 4ms, application-code: 317ms)
+ GET /our-clinic 200 in 279ms (next.js: 4ms, application-code: 275ms)
+✓ Compiled in 141ms
+ GET / 200 in 339ms (next.js: 3ms, application-code: 336ms)
+ GET / 200 in 487ms (next.js: 3ms, application-code: 484ms)
+ GET /our-clinic 200 in 343ms (next.js: 2ms, application-code: 341ms)
+ GET / 200 in 381ms (next.js: 3ms, application-code: 378ms)
+ GET /skin 200 in 103ms (next.js: 4ms, application-code: 98ms)

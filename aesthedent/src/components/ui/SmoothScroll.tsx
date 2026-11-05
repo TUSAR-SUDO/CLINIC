@@ -4,12 +4,21 @@ import { useEffect, type ReactNode } from "react";
 import { registerSmoothScroller } from "@/lib/smooth-scroll";
 
 /**
- * Lenis is loaded only in the browser and only when motion is welcome,
- * keeping it out of the critical bundle.
+ * Lenis is a desktop-mouse enhancement, not a phone feature. Touch browsers
+ * already have momentum scrolling; routing them through another animation
+ * loop makes scrolling heavier and less predictable. Load it only for a fine
+ * pointer at desktop widths, and only when motion is welcome.
  */
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (
+      !window.matchMedia(
+        "(min-width: 1024px) and (hover: hover) and (pointer: fine)",
+      ).matches
+    ) {
+      return;
+    }
 
     let disposed = false;
     let frame = 0;

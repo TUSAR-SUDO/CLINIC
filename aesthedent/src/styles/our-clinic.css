@@ -233,6 +233,19 @@
   box-shadow: 0 50px 110px -80px #000;
 }
 
+/* The dark stage makes the light browser scrollbar look like a cropped right
+   edge on phones. Phones use transient scrollbars, so let the stage run full
+   bleed instead of reserving a light gutter. */
+@media (max-width: 700px) {
+  html:has(.our-clinic) {
+    scrollbar-width: none;
+  }
+
+  html:has(.our-clinic)::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* ---- patient stories ----------------------------------------------------- */
 
 .our-clinic__stories {

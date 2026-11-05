@@ -3,7 +3,30 @@
 import { liquidMetalFragmentShader, ShaderMount } from "@paper-design/shaders";
 import { Sparkles, ArrowRight } from "lucide-react";
 import type React from "react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+
+const SHADER_QUERY =
+  "(min-width: 700px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)";
+
+function subscribeShaderPreference(onChange: () => void) {
+  const query = window.matchMedia(SHADER_QUERY);
+  query.addEventListener("change", onChange);
+  return () => query.removeEventListener("change", onChange);
+}
+
+function getShaderPreference() {
+  return typeof window !== "undefined" && window.matchMedia(SHADER_QUERY).matches;
+}
+
+function getServerShaderPreference() {
+  return false;
+}
 
 export interface LiquidMetalButtonProps {
   label?: string;
@@ -32,6 +55,13 @@ export function LiquidMetalButton({
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
+  // Phones and reduced-motion visitors get the static rim instead of a
+  // continuously animated WebGL canvas for every button.
+  const shaderEnabled = useSyncExternalStore(
+    subscribeShaderPreference,
+    getShaderPreference,
+    getServerShaderPreference,
+  );
   const [ripples, setRipples] = useState<
     Array<{ x: number; y: number; id: number }>
   >([]);
@@ -76,40 +106,44 @@ export function LiquidMetalButton({
     if (typeof document === "undefined") return;
 
     const styleId = "shader-canvas-style-exploded";
-    if (!document.getElementById(styleId)) {
-      const style = document.createElement("style");
-      style.id = styleId;
-      style.textContent = `
-        .shader-container-exploded canvas {
-          width: 100% !important;
-          height: 100% !important;
-          display: block !important;
-          position: absolute !important;
-          top: 0 !important;
-          left: 0 !important;
-          border-radius: 100px !important;
+    if (document.getElementById(styleId)) return;
+
+    const style = document.createElement("style");
+    style.id = styleId;
+    style.textContent = `
+      .shader-container-exploded canvas {
+        width: 100% !important;
+        height: 100% !important;
+        display: block !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        border-radius: 100px !important;
+      }
+      @keyframes ripple-animation {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0.6;
         }
-        @keyframes ripple-animation {
-          0% {
-            transform: translate(-50%, -50%) scale(0);
-            opacity: 0.6;
-          }
-          100% {
-            transform: translate(-50%, -50%) scale(4);
-            opacity: 0;
-          }
+        100% {
+          transform: translate(-50%, -50%) scale(4);
+          opacity: 0;
         }
-      `;
-      document.head.appendChild(style);
-    }
+      }
+    `;
+    document.head.appendChild(style);
+  }, []);
+
+  useEffect(() => {
+    if (!shaderEnabled) return;
 
     let isMounted = true;
 
     const loadShader = async () => {
       try {
         if (shaderRef.current && isMounted) {
-          if (shaderMount.current?.destroy) {
-            shaderMount.current.destroy();
+          if (shaderMount.current?.dispose) {
+            shaderMount.current.dispose();
           }
 
           shaderMount.current = new ShaderMount(
@@ -142,14 +176,14 @@ export function LiquidMetalButton({
 
     return () => {
       isMounted = false;
-      if (shaderMount.current?.destroy) {
+      if (shaderMount.current?.dispose) {
         try {
-          shaderMount.current.destroy();
+          shaderMount.current.dispose();
         } catch {}
         shaderMount.current = null;
       }
     };
-  }, []);
+  }, [shaderEnabled]);
 
   const handleMouseEnter = () => {
     setIsHovered(true);
@@ -362,6 +396,7 @@ export function LiquidMetalButton({
               <div
                 ref={shaderRef}
                 className="shader-container-exploded"
+                aria-hidden="true"
                 style={{
                   borderRadius: "100px",
                   overflow: "hidden",
@@ -369,6 +404,9 @@ export function LiquidMetalButton({
                   width: `${dimensions.shaderWidth}px`,
                   maxWidth: `${dimensions.shaderWidth}px`,
                   height: `${dimensions.shaderHeight}px`,
+                  background: shaderEnabled
+                    ? "transparent"
+                    : "linear-gradient(135deg, #f7ead9 0%, #a97f63 20%, #3a1530 48%, #cba588 76%, #f8ecdd 100%)",
                   transition: "width 0.4s ease, height 0.4s ease",
                 }}
               />

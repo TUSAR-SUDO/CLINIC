@@ -375,8 +375,10 @@ export function LiquidNavbar({
       step(dt, now)
       draw()
       const busy = s.moving || s.rips.length || s.sats.length || s.mouse.s > 0.01 || Math.abs(s.a.x - s.t.x) > 0.3 || Math.abs(s.b.x - s.t.x) > 0.3
-      // ambient water keeps moving while visible; reduced-motion only animates on change
-      if (s.visible && (!s.reduce || busy)) s.raf = requestAnimationFrame(tick)
+      // The shader has an ambient ripple. The CSS fallback should only run
+      // while the active pill is actually settling, otherwise it is idle work.
+      const keepAnimating = s.glc ? (!s.reduce || busy) : busy
+      if (s.visible && keepAnimating) s.raf = requestAnimationFrame(tick)
       else s.raf = 0
     }
     s.raf = requestAnimationFrame(tick)
@@ -420,11 +422,16 @@ export function LiquidNavbar({
   }, [current, loop])
 
   React.useEffect(() => {
-    setRefract(supportsRefraction())
+    // Phones get the CSS water pill instead of a per-frame WebGL shader.
+    // The nav remains fully interactive and the active pill still springs.
+    const shaderAllowed = window.matchMedia(
+      "(min-width: 700px) and (hover: hover) and (pointer: fine)",
+    ).matches
+    setRefract(shaderAllowed && supportsRefraction())
     const s = st.current
     s.reduce = !!window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
     const cv = canvasRef.current
-    s.glc = cv ? initGL(cv) : null
+    s.glc = shaderAllowed && cv ? initGL(cv) : null
     if (!s.glc) setGl("off")
     const lost = (e: Event) => { e.preventDefault(); s.glc = null; setGl("off") }
     cv?.addEventListener("webglcontextlost", lost)
@@ -462,7 +469,7 @@ export function LiquidNavbar({
   }
   const ripple = (x: number, y: number, amp: number) => {
     const s = st.current
-    if (s.reduce) return
+    if (s.reduce || !s.glc) return
     s.rips.push({ x, y, age: 0, amp })
     loop()
   }
