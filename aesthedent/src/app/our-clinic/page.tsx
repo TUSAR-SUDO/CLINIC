@@ -4,7 +4,6 @@ import { ArrowLeft, ArrowRight, Sparkles, Shield, Scan, HeartHandshake } from "l
 import Logo from "@/components/hero/Logo";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
 import { TestimonialGlobe } from "@/components/ui/testimonial-globe";
-import ClinicSpacesTour from "@/components/clinic/ClinicSpacesTour";
 import ClinicStandards from "@/components/clinic/ClinicStandards";
 import SiteFooter from "@/components/site/SiteFooter";
 import { CLINIC } from "@/lib/clinic";
@@ -12,9 +11,9 @@ import { PATIENT_STORIES, PATIENT_STORY_LABELS } from "@/lib/testimonials";
 import { CLINIC_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "Our Clinic | Spaces, Team & Technology | Aesthedent",
+  title: "Our Clinic & Members | Team & Standards | Aesthedent",
   description:
-    "Explore Aesthedent's clinical spaces, meet our doctors, and discover our hospital-grade sterilization and digital technology in Old Town, Bhubaneswar.",
+    "Meet our doctors and aesthetic team at Aesthedent in Old Town, Bhubaneswar. Dental, skin, hair and PMU care under one roof.",
 };
 
 export default function OurClinicPage() {
@@ -23,7 +22,7 @@ export default function OurClinicPage() {
       {/* Luminous Top Navigation Bar */}
       <header className="our-clinic__bar">
         <Logo href="/" className="our-clinic__brand" />
-        <span className="our-clinic__bar-label">Our clinic & spaces</span>
+        <span className="our-clinic__bar-label">Our clinic & members</span>
         <Link href="/" className="our-clinic__back">
           <ArrowLeft size={14} strokeWidth={1.8} aria-hidden="true" />
           <span>Home</span>
@@ -31,18 +30,18 @@ export default function OurClinicPage() {
       </header>
 
       <main id="main">
-        {/* Luminous Hero Section */}
+        {/* Hero Section */}
         <section className="our-clinic__hero">
           <p className="our-clinic__eyebrow">Old Town · Bhubaneswar</p>
           <h1 className="our-clinic__title">
-            Where clinical precision
+            Our clinic,
             <br />
-            <em>meets calm sanctuary.</em>
+            <em>our members.</em>
           </h1>
           <p className="our-clinic__lede">
-            Dental, skin, hair and PMU care under one roof. Designed from the ground up to
-            balance hospital-grade clinical standards with an unhurried, reassuring environment
-            where you always feel heard.
+            Dental, skin, hair and PMU care under one roof — and a dedicated clinical team
+            that keeps the entire visit unhurried, reassuring, and personal from the first hello
+            to aftercare.
           </p>
 
           {/* Quick Trust Badges Strip */}
@@ -66,21 +65,18 @@ export default function OurClinicPage() {
           </div>
         </section>
 
-        {/* 1. Interactive Clinic Spatial Tour */}
-        <ClinicSpacesTour />
-
-        {/* 2. Meet the Team (Luminous Lanyard Rail) */}
+        {/* 1. Meet the Team (Luminous Lanyard Rail in First Position) */}
         <section className="our-clinic__team" aria-labelledby="our-clinic-team-title">
           <div className="our-clinic__team-head">
             <div>
-              <p className="our-clinic__kicker">The People Behind Your Care</p>
+              <p className="our-clinic__kicker">Meet the Team</p>
               <h2 className="our-clinic__h2" id="our-clinic-team-title">
-                Considered care, <em>familiar faces.</em>
+                The people behind <em>your care.</em>
               </h2>
             </div>
             <p className="our-clinic__team-copy">
               Our dental surgeons, aesthetic specialists, and clinic team work together under one
-              roof. Hover, drag the rail, or flip any badge to view credentials and background.
+              roof. Hover or drag the rail, pull a badge, or flip it to read credentials and background.
             </p>
           </div>
 
@@ -96,10 +92,10 @@ export default function OurClinicPage() {
           />
         </section>
 
-        {/* 3. Clinical Standards & Technology Matrix */}
+        {/* 2. Clinical Standards & Technology Matrix */}
         <ClinicStandards />
 
-        {/* 4. Patient Stories (Luminous 3D Globe) */}
+        {/* 3. Patient Stories (Luminous 3D Globe) */}
         <div className="our-clinic__stories">
           <TestimonialGlobe
             items={PATIENT_STORIES}

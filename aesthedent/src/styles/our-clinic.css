@@ -210,411 +210,13 @@
 }
 
 /* ===========================================================================
-   1. INTERACTIVE CLINIC SPACES TOUR
-   =========================================================================== */
-
-.clinic-spaces {
-  width: min(100%, 1440px);
-  margin-inline: auto;
-  padding: clamp(2.5rem, 5vw, 4.5rem) var(--page-gutter);
-}
-
-.clinic-spaces__inner {
-  width: 100%;
-}
-
-.clinic-spaces__head {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: clamp(1.5rem, 4vw, 4rem);
-  padding-bottom: clamp(1.5rem, 2.8vw, 2.2rem);
-}
-
-.clinic-spaces__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin: 0 0 0.6rem;
-  font-size: 0.64rem;
-  font-weight: 650;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--berry);
-}
-
-.clinic-spaces__title {
-  margin: 0;
-  max-width: 18ch;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
-  font-weight: 400;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-  color: var(--dark-aubergine);
-}
-
-.clinic-spaces__title em {
-  font-style: italic;
-  font-weight: 350;
-  color: var(--berry);
-}
-
-.clinic-spaces__head-copy {
-  max-width: 28rem;
-  margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.65;
-  color: var(--our-clinic-ink-soft);
-}
-
-/* Tabs */
-.clinic-spaces__tabs {
-  display: flex;
-  overflow-x: auto;
-  gap: 0.5rem;
-  padding: 0.35rem 0 1.25rem;
-  scrollbar-width: none;
-}
-
-.clinic-spaces__tabs::-webkit-scrollbar {
-  display: none;
-}
-
-.clinic-spaces__tab {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.65rem 1.15rem;
-  border: 1px solid rgba(58, 21, 48, 0.08);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.65);
-  backdrop-filter: blur(8px);
-  color: var(--our-clinic-ink-soft);
-  font-family: var(--font-sans);
-  font-size: 0.8rem;
-  font-weight: 550;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
-}
-
-.clinic-spaces__tab:hover {
-  color: var(--dark-aubergine);
-  background: rgba(255, 255, 255, 0.9);
-}
-
-.clinic-spaces__tab--active {
-  color: var(--dark-aubergine);
-  font-weight: 650;
-  border-color: rgba(58, 21, 48, 0.16);
-  background: #ffffff;
-  box-shadow: 0 6px 18px -8px rgba(58, 21, 48, 0.12);
-}
-
-.clinic-spaces__tab-num {
-  font-size: 0.68rem;
-  opacity: 0.6;
-}
-
-.clinic-spaces__tab-indicator {
-  position: absolute;
-  inset: -1px;
-  border: 1.5px solid var(--berry);
-  border-radius: 999px;
-  pointer-events: none;
-}
-
-/* Showcase Card */
-.clinic-spaces__stage {
-  margin-top: 0.5rem;
-}
-
-.clinic-spaces__card {
-  display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 3.5rem);
-  align-items: center;
-  padding: clamp(1.25rem, 2.5vw, 2.25rem);
-  border: 1px solid rgba(58, 21, 48, 0.09);
-  border-radius: clamp(1.5rem, 2.5vw, 2.5rem);
-  background: #fffaf7;
-  box-shadow:
-    0 24px 60px -32px rgba(58, 21, 48, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
-}
-
-/* Media Column */
-.clinic-spaces__media {
-  position: relative;
-  width: 100%;
-}
-
-.clinic-spaces__frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 11;
-  overflow: hidden;
-  border-radius: clamp(1.15rem, 2vw, 1.8rem);
-  background: #ebd8cc;
-  box-shadow: 0 16px 36px -20px rgba(58, 21, 48, 0.25);
-}
-
-.clinic-spaces__img {
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-out);
-}
-
-.clinic-spaces__frame:hover .clinic-spaces__img {
-  transform: scale(1.025);
-}
-
-.clinic-spaces__scrim {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    180deg,
-    rgba(20, 8, 16, 0.15) 0%,
-    transparent 40%,
-    rgba(20, 8, 16, 0.35) 100%
-  );
-}
-
-/* Hotspots */
-.clinic-spaces__hotspot-wrap {
-  position: absolute;
-  transform: translate(-50%, -50%);
-  z-index: 20;
-}
-
-.clinic-spaces__hotspot-pin {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  padding: 0;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  touch-action: manipulation;
-}
-
-.clinic-spaces__hotspot-ring {
-  position: absolute;
-  width: 28px;
-  height: 28px;
-  border: 1.5px solid rgba(255, 255, 255, 0.9);
-  border-radius: 50%;
-  background: rgba(107, 34, 55, 0.35);
-  animation: hotspot-pulse 2.2s infinite ease-in-out;
-}
-
-.clinic-spaces__hotspot-dot {
-  position: relative;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: #ffffff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
-  transition: transform 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
-}
-
-.clinic-spaces__hotspot-pin:hover .clinic-spaces__hotspot-dot,
-.clinic-spaces__hotspot-pin--active .clinic-spaces__hotspot-dot {
-  transform: scale(1.35);
-  background: var(--blush);
-}
-
-@keyframes hotspot-pulse {
-  0% {
-    transform: scale(0.85);
-    opacity: 0.9;
-  }
-  50% {
-    transform: scale(1.4);
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(0.85);
-    opacity: 0.9;
-  }
-}
-
-/* Detail Popover */
-.clinic-spaces__popover {
-  position: absolute;
-  top: calc(100% + 8px);
-  left: 50%;
-  transform: translateX(-50%);
-  min-width: 190px;
-  max-width: 240px;
-  padding: 0.75rem 0.9rem;
-  border: 1px solid rgba(58, 21, 48, 0.12);
-  border-radius: 0.95rem;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(12px);
-  box-shadow: 0 14px 32px -12px rgba(58, 21, 48, 0.32);
-  z-index: 40;
-  pointer-events: none;
-}
-
-.clinic-spaces__popover-head {
-  display: flex;
-  align-items: center;
-  gap: 0.35rem;
-  color: var(--berry);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
-
-.clinic-spaces__popover-body {
-  margin: 0.3rem 0 0;
-  color: var(--dark-aubergine);
-  font-size: 0.68rem;
-  line-height: 1.45;
-}
-
-.clinic-spaces__hint {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.65rem;
-  font-size: 0.7rem;
-  color: var(--our-clinic-ink-soft);
-  opacity: 0.8;
-}
-
-.clinic-spaces__hint svg {
-  color: var(--berry);
-}
-
-/* Body Column */
-.clinic-spaces__body {
-  display: flex;
-  flex-direction: column;
-}
-
-.clinic-spaces__meta-strip {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.75rem;
-}
-
-.clinic-spaces__number {
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--berry);
-}
-
-.clinic-spaces__badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: 999px;
-  background: rgba(107, 34, 55, 0.08);
-  color: var(--berry);
-  font-size: 0.68rem;
-  font-weight: 650;
-}
-
-.clinic-spaces__room-title {
-  margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: clamp(1.8rem, 3.2vw, 2.5rem);
-  font-weight: 450;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
-  color: var(--dark-aubergine);
-}
-
-.clinic-spaces__room-subtitle {
-  margin: 0.35rem 0 0;
-  font-size: 0.86rem;
-  font-weight: 600;
-  color: var(--berry);
-}
-
-.clinic-spaces__room-desc {
-  margin: 1rem 0 0;
-  font-size: 0.92rem;
-  line-height: 1.65;
-  color: var(--our-clinic-ink-soft);
-}
-
-.clinic-spaces__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 1.25rem;
-}
-
-.clinic-spaces__tag {
-  padding: 0.32rem 0.7rem;
-  border: 1px solid rgba(58, 21, 48, 0.1);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.85);
-  color: var(--dark-aubergine);
-  font-size: 0.72rem;
-  font-weight: 550;
-}
-
-/* Nav */
-.clinic-spaces__nav {
-  display: flex;
-  align-items: center;
-  gap: 0.85rem;
-  margin-top: clamp(1.4rem, 2.5vw, 2rem);
-  padding-top: 1.25rem;
-  border-top: 1px solid rgba(58, 21, 48, 0.08);
-}
-
-.clinic-spaces__nav-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(58, 21, 48, 0.12);
-  border-radius: 50%;
-  background: #ffffff;
-  color: var(--dark-aubergine);
-  cursor: pointer;
-  transition:
-    background-color 0.2s var(--ease-out),
-    border-color 0.2s var(--ease-out),
-    color 0.2s var(--ease-out),
-    transform 0.2s var(--ease-out);
-}
-
-.clinic-spaces__nav-btn:hover {
-  background: var(--dark-aubergine);
-  border-color: var(--dark-aubergine);
-  color: #ffffff;
-  transform: scale(1.05);
-}
-
-.clinic-spaces__nav-count {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: var(--our-clinic-ink-soft);
-}
-
-/* ===========================================================================
-   2. LUMINOUS TEAM LANYARD RAIL OVERHAUL
+   1. MEET THE TEAM — LUMINOUS TEAM LANYARD RAIL
    =========================================================================== */
 
 .our-clinic__team {
   width: min(100%, 1480px);
   margin-inline: auto;
-  padding: clamp(2.5rem, 5vw, 4.5rem) var(--page-gutter);
+  padding: clamp(1.5rem, 3.5vw, 3rem) var(--page-gutter) clamp(2.5rem, 5vw, 4.5rem);
 }
 
 .our-clinic__team-head {
@@ -665,7 +267,7 @@
 .our-clinic__rail {
   --bg-stone: #faf6f2;
   --color-background: #faf6f2;
-  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: clamp(1.2rem, 2.5vw, 2rem);
   padding-inline: clamp(0rem, 1vw, 0.75rem);
   border: 1px solid rgba(58, 21, 48, 0.08);
   border-radius: clamp(1.25rem, 2vw, 2rem);
@@ -905,18 +507,8 @@
    =========================================================================== */
 
 @media (max-width: 960px) {
-  .clinic-spaces__card {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
   .clinic-standards__grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  .clinic-spaces__head {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.8rem;
   }
 }
 
@@ -945,7 +537,7 @@
 
   .our-clinic__hero {
     padding-top: clamp(2.8rem, 10vw, 4rem);
-    padding-bottom: 2rem;
+    padding-bottom: 1.5rem;
   }
 
   .our-clinic__title {
@@ -967,28 +559,8 @@
     font-size: 0.7rem;
   }
 
-  .clinic-spaces {
-    padding-top: 1.5rem;
-  }
-
-  .clinic-spaces__tab {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.74rem;
-  }
-
-  .clinic-spaces__card {
-    padding: 1.15rem;
-    border-radius: 1.35rem;
-  }
-
-  .clinic-spaces__popover {
-    min-width: 170px;
-    max-width: 210px;
-    padding: 0.6rem 0.75rem;
-  }
-
   .our-clinic__team {
-    padding-top: 2rem;
+    padding-top: 1.25rem;
   }
 
   .our-clinic__h2 {
@@ -1006,7 +578,6 @@
   .our-clinic__back svg,
   .our-clinic__stories-cta,
   .our-clinic__stories-cta svg,
-  .clinic-spaces__hotspot-ring,
   .clinic-standards__card {
     transition: none !important;
     animation: none !important;
