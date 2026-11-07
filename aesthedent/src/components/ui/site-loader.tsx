@@ -12,8 +12,8 @@ interface SiteLoaderContextType {
 }
 
 const SiteLoaderContext = React.createContext<SiteLoaderContextType>({
-  isRevealed: true,
-  isLoaded: true,
+  isRevealed: false,
+  isLoaded: false,
   skipIntro: () => {},
 });
 
@@ -24,7 +24,6 @@ export interface SiteLoaderProviderProps {
 }
 
 export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
-  const [isMounted, setIsMounted] = React.useState(false);
   const [isRevealed, setIsRevealed] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
 
@@ -46,8 +45,6 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
   }, [handleReveal]);
 
   React.useEffect(() => {
-    setIsMounted(true);
-
     // Respect user's reduced-motion preference
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       handleReveal();
@@ -91,11 +88,11 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
 
   const value = React.useMemo(
     () => ({
-      isRevealed: !isMounted || isRevealed,
-      isLoaded: !isMounted || isLoaded,
+      isRevealed,
+      isLoaded,
       skipIntro: handleSkip,
     }),
-    [isMounted, isRevealed, isLoaded, handleSkip]
+    [isRevealed, isLoaded, handleSkip]
   );
 
   return (
@@ -104,15 +101,14 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
       <div
         className={cn(
           "site-content-root",
-          isMounted && !isRevealed && "site-content-root--hidden",
-          isMounted && isRevealed && "site-content-root--revealed"
+          !isRevealed ? "site-content-root--hidden" : "site-content-root--revealed"
         )}
       >
         {children}
       </div>
 
-      {/* The Fullscreen Logo Reveal Loading Screen */}
-      {isMounted && !isLoaded && (
+      {/* The Fullscreen Logo Reveal Loading Screen (in initial HTML to prevent flash of site) */}
+      {!isLoaded && (
         <aside
           className={cn("site-loader", isRevealed && "site-loader--revealing")}
           role="dialog"

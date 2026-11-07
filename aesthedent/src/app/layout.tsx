@@ -61,6 +61,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
   return (
     <html lang="en-IN" className={`${fraunces.variable} ${geist.variable}`}>
       <body>
+        <noscript>
+          <style>{`
+            .site-loader { display: none !important; }
+            .site-content-root { opacity: 1 !important; transform: none !important; pointer-events: auto !important; }
+          `}</style>
+        </noscript>
         <a href="#main" className="skip-link">
           Skip to content
         </a>
