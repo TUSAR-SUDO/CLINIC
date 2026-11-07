@@ -3,12 +3,14 @@ import type { ReactNode } from "react";
 import SiteFooter from "@/components/site/SiteFooter";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import { fraunces, geist } from "@/lib/fonts";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
+import "@/styles/specialty.css";
+import "@/styles/system.css";
 
-// TODO(clinic): set NEXT_PUBLIC_SITE_URL to the production domain before launch.
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+const siteUrl = SITE_URL;
 
 const title = "Aesthedent — Dental, Skin, Hair & PMU in Old Town, Bhubaneswar";
 const description =

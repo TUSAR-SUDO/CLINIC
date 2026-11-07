@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Aesthedent
 
-## Getting Started
+Multi-speciality aesthetic clinic site for Aesthedent, Old Town, Bhubaneswar — dental, skin, hair and PMU care.
 
-First, run the development server:
+Built with Next.js (App Router), React and TypeScript. Styling is plain CSS in `src/styles`, using the cream / aubergine identity with Fraunces for display type.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev          # http://localhost:3000
+npm run build        # production build
+npm start            # serve the production build
+npm run lint
+npx tsc --noEmit
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Routes
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Route | Purpose |
+| --- | --- |
+| `/` | Home: hero, four care panels, face hotspots, doctors card, clinic info |
+| `/dental` | Dental speciality |
+| `/skin` | Skin speciality |
+| `/hair` | Hair speciality |
+| `/pmu` | Permanent makeup speciality |
+| `/our-clinic` | Clinic story and team (`#our-clinic-team` anchor) |
+| `/sitemap.xml`, `/robots.txt` | Generated from `src/app/sitemap.ts` and `src/app/robots.ts` |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+In-page anchors: home `#doctors`, `#clinic-info`, `#top`; dental `#dentists`, `#contact-info`; skin `#skin-specialists`, `#skin-contact`; our clinic `#our-clinic-team`.
 
-## Learn More
+## Configuration
 
-To learn more about Next.js, take a look at the following resources:
+Copy `.env.example` to `.env.local` and set:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+NEXT_PUBLIC_SITE_URL=https://your-production-domain
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+`src/lib/site.ts` reads this for canonical URLs, Open Graph metadata, `sitemap.xml` and `robots.txt`. It falls back to `http://localhost:3000`; set it before deploying so metadata points at the real domain.
 
-## Deploy on Vercel
+Booking CTAs use `CLINIC.bookingHref` in `src/lib/clinic.ts` (currently `tel:+919692485602`). Clinic address, phone numbers and navigation live in the same file.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Content still to supply
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+These are intentionally generic placeholders and should be replaced before launch:
+
+- Doctor and team names, credentials, bios and photos (`src/app/our-clinic/page.tsx`, `src/components/hero/DoctorsCard.tsx`)
+- Detailed treatment lists for all four care pages (`src/lib/specialty.ts`)
+- Equipment and facility details
+- Patient testimonial stories (`src/lib/testimonials.ts`)

@@ -5,7 +5,6 @@ import Logo from "@/components/hero/Logo";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
 import { TestimonialGlobe } from "@/components/ui/testimonial-globe";
 import ClinicStandards from "@/components/clinic/ClinicStandards";
-import SiteFooter from "@/components/site/SiteFooter";
 import { CLINIC } from "@/lib/clinic";
 import { PATIENT_STORIES, PATIENT_STORY_LABELS } from "@/lib/testimonials";
 import { CLINIC_TEAM } from "@/lib/team";
@@ -14,6 +13,7 @@ export const metadata: Metadata = {
   title: "Our Clinic & Members | Team & Standards | Aesthedent",
   description:
     "Meet our doctors and aesthetic team at Aesthedent in Old Town, Bhubaneswar. Dental, skin, hair and PMU care under one roof.",
+  alternates: { canonical: "/our-clinic" },
 };
 
 export default function OurClinicPage() {
@@ -66,7 +66,11 @@ export default function OurClinicPage() {
         </section>
 
         {/* 1. Meet the Team (Luminous Lanyard Rail in First Position) */}
-        <section className="our-clinic__team" aria-labelledby="our-clinic-team-title">
+        <section
+          id="our-clinic-team"
+          className="our-clinic__team"
+          aria-labelledby="our-clinic-team-title"
+        >
           <div className="our-clinic__team-head">
             <div>
               <p className="our-clinic__kicker">Meet the Team</p>
@@ -121,9 +125,6 @@ export default function OurClinicPage() {
           />
         </div>
       </main>
-
-      {/* Unified Location Map & Footer */}
-      <SiteFooter />
     </div>
   );
 }

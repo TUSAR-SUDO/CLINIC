@@ -19,8 +19,8 @@ import { scrollToSection } from "@/lib/smooth-scroll";
 const NAV_LINKS = [
   { label: "Dental", href: "/dental", active: true },
   { label: "Skin", href: "/skin", active: false },
-  { label: "Hair", href: "/#service-hair", active: false },
-  { label: "PMU", href: "/#service-pmu", active: false },
+  { label: "Hair", href: "/hair", active: false },
+  { label: "PMU", href: "/pmu", active: false },
   { label: "Doctors", href: "#dentists", active: false },
   { label: "Contact", href: "#contact-info", active: false },
 ];

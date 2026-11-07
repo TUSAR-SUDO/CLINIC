@@ -26,6 +26,8 @@ const getServerSnapshot = () => false;
 const SERVICE_LINK: Partial<Record<ServiceId, string>> = {
   dental: "/dental",
   skin: "/skin",
+  hair: "/hair",
+  pmu: "/pmu",
 };
 
 const SERVICE_SUMMARY: Record<ServiceId, string> = {
@@ -38,8 +40,8 @@ const SERVICE_SUMMARY: Record<ServiceId, string> = {
 const SERVICE_ACTION: Record<ServiceId, string> = {
   dental: "Explore dental",
   skin: "Explore skin",
-  hair: "Ask about hair",
-  pmu: "Ask about PMU",
+  hair: "Explore hair",
+  pmu: "Explore PMU",
 };
 
 export default function MobileServiceShowcase() {

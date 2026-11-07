@@ -39,7 +39,7 @@ export const DEFAULT_HOTSPOTS: Hotspot[] = [
     category: "pmu",
     x: 50,
     y: 50,
-    href: "#pmu",
+    href: "/pmu",
   },
   {
     id: "lips",
@@ -48,7 +48,7 @@ export const DEFAULT_HOTSPOTS: Hotspot[] = [
     category: "pmu",
     x: 50,
     y: 61,
-    href: "#pmu",
+    href: "/pmu",
   },
   {
     id: "jaw",
@@ -66,7 +66,7 @@ export const DEFAULT_HOTSPOTS: Hotspot[] = [
     category: "hair",
     x: 18,
     y: 41,
-    href: "#hair",
+    href: "/hair",
   },
   {
     id: "hair2",
@@ -75,7 +75,7 @@ export const DEFAULT_HOTSPOTS: Hotspot[] = [
     category: "hair",
     x: 79,
     y: 40,
-    href: "#hair",
+    href: "/hair",
   },
 ];
 

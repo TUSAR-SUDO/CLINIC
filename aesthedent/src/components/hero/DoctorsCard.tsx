@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
 
@@ -33,14 +34,14 @@ export default function DoctorsCard() {
         </div>
       </div>
 
-      <a
+      <Link
         className="doctors-card__arrow"
-        href={CLINIC.bookingHref}
-        aria-label="Book with the doctors at Aesthedent"
-        title="Book consult"
+        href="/our-clinic#our-clinic-team"
+        aria-label="Meet the doctors at Aesthedent"
+        title="Meet the team"
       >
         <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />
-      </a>
+      </Link>
     </aside>
   );
 }

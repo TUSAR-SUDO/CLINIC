@@ -249,21 +249,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.href}
                   className="menu-sheet__link"
-                  onClick={() => {
-                    closeMenu();
-                    const serviceKey = link.label.toLowerCase();
-                    if (serviceKey === "dental") {
-                      window.location.href = "/dental";
-                      return;
-                    }
-                    if (["dental", "skin", "hair", "pmu"].includes(serviceKey)) {
-                      window.dispatchEvent(
-                        new CustomEvent("aesthedent:select-service", {
-                          detail: serviceKey,
-                        }),
-                      );
-                    }
-                  }}
+                  onClick={closeMenu}
                 >
                   {link.label}
                   <span>{String(index + 1).padStart(2, "0")}</span>

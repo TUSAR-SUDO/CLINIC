@@ -13,15 +13,16 @@ const COLUMNS = [
     links: [
       { label: "Dental", href: "/dental" },
       { label: "Skin", href: "/skin" },
-      { label: "Hair", href: "/#service-hair" },
-      { label: "PMU", href: "/#service-pmu" },
+      { label: "Hair", href: "/hair" },
+      { label: "PMU", href: "/pmu" },
     ],
   },
   {
     title: "Clinic",
     links: [
       { label: "Home", href: "/" },
-      { label: "Doctors", href: "/#doctors" },
+      { label: "Our clinic", href: "/our-clinic" },
+      { label: "Doctors", href: "/our-clinic#our-clinic-team" },
       { label: "Contact", href: "/#clinic-info" },
       { label: "Book a visit", href: CLINIC.bookingHref },
     ],

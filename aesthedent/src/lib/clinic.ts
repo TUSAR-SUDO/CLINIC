@@ -39,10 +39,11 @@ export const CLINIC = {
   nav: [
     { label: "Dental", href: "/dental" },
     { label: "Skin", href: "/skin" },
-    { label: "Hair", href: "#service-hair" },
-    { label: "PMU", href: "#service-pmu" },
+    { label: "Hair", href: "/hair" },
+    { label: "PMU", href: "/pmu" },
     { label: "Doctors", href: "#doctors" },
     { label: "Contact", href: "#clinic-info" },
+    { label: "Our clinic", href: "/our-clinic" },
   ],
 } as const;
 

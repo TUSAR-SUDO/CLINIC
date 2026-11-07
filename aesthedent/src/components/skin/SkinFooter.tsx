@@ -8,8 +8,8 @@ import { scrollToSection } from "@/lib/smooth-scroll";
 const FOOTER_LINKS = [
   { label: "Dental", href: "/dental" },
   { label: "Skin", href: "/skin", active: true },
-  { label: "Hair", href: "/#service-hair" },
-  { label: "PMU", href: "/#service-pmu" },
+  { label: "Hair", href: "/hair" },
+  { label: "PMU", href: "/pmu" },
   { label: "Doctors", href: "#skin-specialists" },
   { label: "Contact", href: "#skin-contact" },
 ] as const;

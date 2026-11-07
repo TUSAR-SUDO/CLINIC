@@ -92,3 +92,4 @@ Read more: https://nextjs.org/docs/app/api-reference/components/image#loading
  GET /our-clinic 200 in 699ms (next.js: 3ms, application-code: 695ms)
 ✓ Compiled in 195ms
 ✓ Compiled in 170ms
+[?25h

@@ -8,8 +8,8 @@ import { scrollToSection } from "@/lib/smooth-scroll";
 const LINKS = [
   { label: "Dental", href: "/dental" },
   { label: "Skin", href: "/skin" },
-  { label: "Hair", href: "/#service-hair" },
-  { label: "PMU", href: "/#service-pmu" },
+  { label: "Hair", href: "/hair" },
+  { label: "PMU", href: "/pmu" },
   { label: "Doctors", href: "#dentists" },
   { label: "Contact", href: "#contact-info" },
 ];

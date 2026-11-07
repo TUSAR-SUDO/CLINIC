@@ -19,9 +19,9 @@ import { scrollToSection } from "@/lib/smooth-scroll";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 const COMPANIONS = [
-  { id: "skin", name: "Skin", img: "/images/hero/skin.png" },
-  { id: "hair", name: "Hair", img: "/images/hero/hair.png" },
-  { id: "pmu", name: "PMU", img: "/images/hero/pmu.png" },
+  { id: "skin", name: "Skin", img: "/images/hero/skin.png", href: "/skin" },
+  { id: "hair", name: "Hair", img: "/images/hero/hair.png", href: "/hair" },
+  { id: "pmu", name: "PMU", img: "/images/hero/pmu.png", href: "/pmu" },
 ];
 
 const MotionLink = motion.create(Link);
@@ -218,7 +218,7 @@ export default function DentalHero() {
             {COMPANIONS.map((item, index) => (
               <MotionLink
                 key={item.id}
-                href={`/#service-${item.id}`}
+                href={item.href}
                 className={`dental-companion dental-companion--${item.id}`}
                 aria-label={`Explore ${item.name}`}
                 initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 30 }}

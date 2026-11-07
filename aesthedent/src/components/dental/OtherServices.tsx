@@ -18,14 +18,14 @@ const SERVICES_LIST = [
     id: "hair",
     name: "Hair",
     image: "/images/services/hair.png",
-    href: "/#service-hair",
+    href: "/hair",
     alt: "Editorial close-up of glossy dark hair, representing hair care",
   },
   {
     id: "pmu",
     name: "PMU",
     image: "/images/services/pmu.png",
-    href: "/#service-pmu",
+    href: "/pmu",
     alt: "Editorial close-up of an eyebrow and eye, representing permanent makeup",
   },
 ];

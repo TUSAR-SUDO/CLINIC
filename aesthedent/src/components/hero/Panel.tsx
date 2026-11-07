@@ -31,6 +31,8 @@ const EASE_OUT = cubicBezier(0.16, 1, 0.3, 1);
 const SERVICE_HREF: Partial<Record<Service["id"], string>> = {
   dental: "/dental",
   skin: "/skin",
+  hair: "/hair",
+  pmu: "/pmu",
 };
 
 export default function Panel({

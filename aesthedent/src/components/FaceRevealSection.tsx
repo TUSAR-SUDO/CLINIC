@@ -28,11 +28,11 @@ export default function FaceRevealSection() {
             </li>
             <li className="fr-section__service">
               <span className="fr-section__service-dot" aria-hidden="true" />
-              <span className="fr-section__service-link">Hair</span>
+              <a href="/hair" className="fr-section__service-link">Hair</a>
             </li>
             <li className="fr-section__service">
               <span className="fr-section__service-dot" aria-hidden="true" />
-              <span className="fr-section__service-link">PMU</span>
+              <a href="/pmu" className="fr-section__service-link">PMU</a>
             </li>
           </ul>
         </Reveal>

@@ -7,6 +7,8 @@ import { SERVICES, type ServiceId } from "@/lib/services";
 const SERVICE_ROUTES: Partial<Record<ServiceId, string>> = {
   dental: "/dental",
   skin: "/skin",
+  hair: "/hair",
+  pmu: "/pmu",
 };
 
 const CARE_NOTES: Record<ServiceId, string> = {

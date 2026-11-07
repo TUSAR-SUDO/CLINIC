@@ -1,0 +1,130 @@
+.system-page {
+  display: grid;
+  place-items: center;
+  min-height: 72svh;
+  padding: clamp(4rem, 11vw, 9rem) var(--page-gutter);
+  background:
+    radial-gradient(70% 90% at 15% 12%, color-mix(in srgb, var(--blush) 28%, transparent), transparent 65%),
+    var(--bg-stone);
+  color: var(--ink);
+}
+
+.system-page__inner {
+  width: min(100%, 860px);
+}
+
+.system-page__eyebrow {
+  margin: 0 0 1.35rem;
+  font-size: 0.66rem;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted-ink);
+}
+
+.system-page__title {
+  max-width: 11ch;
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(3.3rem, 8.4vw, 7.4rem);
+  font-weight: 430;
+  font-variation-settings: "opsz" 120, "SOFT" 45, "WONK" 0;
+  letter-spacing: -0.06em;
+  line-height: 0.92;
+}
+
+.system-page__title em {
+  color: var(--berry);
+  font-weight: 400;
+}
+
+.system-page__lede {
+  max-width: 36rem;
+  margin: 1.8rem 0 0;
+  font-size: clamp(0.92rem, 1.1vw, 1.04rem);
+  line-height: 1.65;
+  color: var(--muted-ink);
+}
+
+.system-page__actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+  margin-top: 2.3rem;
+}
+
+.system-page__primary,
+.system-page__call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.9rem;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 550;
+  transition: background-color 0.3s var(--ease-out), color 0.3s var(--ease-out);
+}
+
+.system-page__primary {
+  background: var(--dark-aubergine);
+  color: var(--cream);
+}
+
+.system-page__primary:hover {
+  background: var(--berry);
+}
+
+.system-page__call {
+  border: 1px solid var(--line-strong);
+  color: var(--ink);
+}
+
+.system-page__call:hover {
+  background: var(--surface);
+}
+
+.system-page__care {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 1.4rem;
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--line);
+}
+
+.system-page__care-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--muted-ink);
+  transition: color 0.25s var(--ease-out);
+}
+
+.system-page__care-link:hover {
+  color: var(--ink);
+}
+
+@media (max-width: 600px) {
+  .system-page {
+    min-height: 64svh;
+    padding-block: 3.5rem;
+  }
+
+  .system-page__title {
+    max-width: 100%;
+  }
+
+  .system-page__actions {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .system-page__primary,
+  .system-page__call {
+    justify-content: center;
+  }
+}
