@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     url: "/skin",
     images: [
       {
-        url: "/images/hero/skin.png",
+        url: "/images/hero/skin.webp",
         width: 1295,
         height: 1215,
         alt: "Close-up portrait of healthy, luminous skin",
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/hero/skin.png"],
+    images: ["/images/hero/skin.webp"],
   },
 };
 

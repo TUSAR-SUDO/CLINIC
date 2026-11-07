@@ -19,9 +19,9 @@ import { scrollToSection } from "@/lib/smooth-scroll";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 const COMPANIONS = [
-  { id: "skin", name: "Skin", img: "/images/hero/skin.png", href: "/skin" },
-  { id: "hair", name: "Hair", img: "/images/hero/hair.png", href: "/hair" },
-  { id: "pmu", name: "PMU", img: "/images/hero/pmu.png", href: "/pmu" },
+  { id: "skin", name: "Skin", img: "/images/hero/skin.webp", href: "/skin" },
+  { id: "hair", name: "Hair", img: "/images/hero/hair.webp", href: "/hair" },
+  { id: "pmu", name: "PMU", img: "/images/hero/pmu.webp", href: "/pmu" },
 ];
 
 const MotionLink = motion.create(Link);
@@ -195,7 +195,7 @@ export default function DentalHero() {
                 style={{ y: reduceMotion ? 0 : scrollShift }}
               >
                 <Image
-                  src="/images/hero/dental.png"
+                  src="/images/hero/dental.webp"
                   alt="Patient with a bright, healthy smile at Aesthédent"
                   fill
                   preload

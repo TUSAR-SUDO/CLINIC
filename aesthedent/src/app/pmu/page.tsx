@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url: "/pmu",
     images: [
       {
-        url: "/images/hero/pmu.png",
+        url: "/images/hero/pmu.webp",
         width: 1295,
         height: 1215,
         alt: "Editorial close-up of an eyebrow and eye at Aesthédent",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/hero/pmu.png"],
+    images: ["/images/hero/pmu.webp"],
   },
 };
 

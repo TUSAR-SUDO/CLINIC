@@ -30,7 +30,7 @@ export const SERVICES: readonly Service[] = [
     descriptor: "HEALTHY SMILES FOR A BRIGHTER YOU.",
     treatments: ["Check-ups & cleaning", "Aesthetic dentistry", "Smile care", "Braces"],
     image: {
-      src: "/images/services/dental.png",
+      src: "/images/services/dental.webp",
       alt: "Editorial portrait of a woman smiling, representing dental care",
       position: "50% 48%",
     },
@@ -48,7 +48,7 @@ export const SERVICES: readonly Service[] = [
     descriptor: "HEALTHY SKIN. FOR A BRIGHT YOU.",
     treatments: ["Acne care", "Pigmentation", "Anti-ageing", "Skin rejuvenation", "Medical facials"],
     image: {
-      src: "/images/services/skin.png",
+      src: "/images/services/skin.webp",
       alt: "Editorial portrait of a woman with luminous skin, representing skin care",
       position: "47% 40%",
     },
@@ -66,7 +66,7 @@ export const SERVICES: readonly Service[] = [
     descriptor: "STRONGER HAIR. HEALTHIER YOU.",
     treatments: ["Hair-fall care", "Scalp treatments"],
     image: {
-      src: "/images/services/hair.png",
+      src: "/images/services/hair.webp",
       alt: "Editorial close-up of glossy dark hair, representing hair care",
       position: "32% 44%",
     },
@@ -84,7 +84,7 @@ export const SERVICES: readonly Service[] = [
     descriptor: "NATURAL ENHANCEMENT. LASTING CONFIDENCE.",
     treatments: ["Brows", "Lips", "Eyeliner"],
     image: {
-      src: "/images/services/pmu.png",
+      src: "/images/services/pmu.webp",
       alt: "Editorial close-up of an eyebrow and eye, representing permanent makeup",
       position: "55% 44%",
     },

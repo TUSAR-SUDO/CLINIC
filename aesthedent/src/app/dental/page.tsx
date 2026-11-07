@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     url: "/dental",
     images: [
       {
-        url: "/images/hero/dental.png",
+        url: "/images/hero/dental.webp",
         width: 1295,
         height: 1215,
         alt: "Patient with a bright, healthy smile at Aesthédent",
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/hero/dental.png"],
+    images: ["/images/hero/dental.webp"],
   },
 };
 

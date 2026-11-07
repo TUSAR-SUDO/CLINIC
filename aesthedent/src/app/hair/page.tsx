@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     url: "/hair",
     images: [
       {
-        url: "/images/hero/hair.png",
+        url: "/images/hero/hair.webp",
         width: 1295,
         height: 1215,
         alt: "Editorial close-up of glossy dark hair at Aesthédent",
@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title,
     description,
-    images: ["/images/hero/hair.png"],
+    images: ["/images/hero/hair.webp"],
   },
 };
 

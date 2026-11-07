@@ -172,7 +172,7 @@ export default function SkinHero() {
                 style={{ y: reduceMotion ? 0 : scrollShift }}
               >
                 <Image
-                  src="/images/hero/skin.png"
+                  src="/images/hero/skin.webp"
                   alt="Close-up portrait of a woman with healthy, luminous skin"
                   fill
                   preload

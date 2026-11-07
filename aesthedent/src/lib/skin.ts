@@ -124,21 +124,21 @@ export const SKIN_COMPANIONS = [
   {
     id: "dental",
     name: "Dental",
-    image: "/images/hero/dental.png",
+    image: "/images/hero/dental.webp",
     href: "/dental",
     alt: "Editorial portrait of a woman smiling, representing dental care",
   },
   {
     id: "hair",
     name: "Hair",
-    image: "/images/hero/hair.png",
+    image: "/images/hero/hair.webp",
     href: "/hair",
     alt: "Editorial close-up of glossy dark hair, representing hair care",
   },
   {
     id: "pmu",
     name: "PMU",
-    image: "/images/hero/pmu.png",
+    image: "/images/hero/pmu.webp",
     href: "/pmu",
     alt: "Editorial close-up of an eyebrow and eye, representing permanent makeup",
   },
@@ -148,7 +148,7 @@ export const SKIN_OTHER_SERVICES = [
   {
     id: "dental",
     name: "Dental",
-    image: "/images/services/dental.png",
+    image: "/images/services/dental.webp",
     href: "/dental",
     tone: "light" as const,
     alt: "Editorial portrait of a woman smiling, representing dental care",
@@ -156,7 +156,7 @@ export const SKIN_OTHER_SERVICES = [
   {
     id: "hair",
     name: "Hair",
-    image: "/images/services/hair.png",
+    image: "/images/services/hair.webp",
     href: "/hair",
     tone: "dark" as const,
     alt: "Editorial close-up of glossy dark hair, representing hair care",
@@ -164,7 +164,7 @@ export const SKIN_OTHER_SERVICES = [
   {
     id: "pmu",
     name: "PMU",
-    image: "/images/services/pmu.png",
+    image: "/images/services/pmu.webp",
     href: "/pmu",
     tone: "berry" as const,
     alt: "Editorial close-up of an eyebrow and eye, representing permanent makeup",
