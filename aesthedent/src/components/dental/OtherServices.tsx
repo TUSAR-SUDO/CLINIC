@@ -43,7 +43,7 @@ export default function OtherServices() {
       <div className="more-services__container">
         <div className="more-services__intro">
           <Reveal>
-            <span className="more-services__kicker">MORE AT AESTHEDENT</span>
+            <span className="more-services__kicker">MORE AT AESTHÉDENT</span>
           </Reveal>
           <h2 className="more-services__title" id="dental-more-title">
             <MaskedLine>One Clinic.</MaskedLine>
@@ -69,7 +69,7 @@ export default function OtherServices() {
               <Link
                 href={service.href}
                 className="service-capsule__link"
-                aria-label={`Explore ${service.name} at Aesthedent`}
+                aria-label={`Explore ${service.name} at Aesthédent`}
               >
                 <div className="service-capsule__media">
                   <Image

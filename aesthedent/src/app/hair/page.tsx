@@ -8,14 +8,15 @@ import CareGlobe from "@/components/specialty/CareGlobe";
 import CrossLinks from "@/components/specialty/CrossLinks";
 import SpecialtyFaq from "@/components/specialty/SpecialtyFaq";
 import ClosingCta from "@/components/specialty/ClosingCta";
+import BookingDock from "@/components/specialty/BookingDock";
 import { CLINIC } from "@/lib/clinic";
 import { SPECIALTIES } from "@/lib/specialty";
 
 const data = SPECIALTIES.hair;
 
-const title = "Hair Care | Hair-Fall & Scalp Treatments | Aesthedent";
+const title = "Hair Care | Hair-Fall & Scalp Treatments | Aesthédent";
 const description =
-  "Hair-fall care and scalp treatments at Aesthedent in Old Town, Bhubaneswar. Begin with a consultation and a plan explained clearly.";
+  "Hair-fall care and scalp treatments at Aesthédent in Old Town, Bhubaneswar. Begin with a consultation and a plan explained clearly.";
 
 export const metadata: Metadata = {
   title,
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Aesthedent",
+    siteName: "Aesthédent",
     title,
     description,
     url: "/hair",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
         url: "/images/hero/hair.png",
         width: 1295,
         height: 1215,
-        alt: "Editorial close-up of glossy dark hair at Aesthedent",
+        alt: "Editorial close-up of glossy dark hair at Aesthédent",
       },
     ],
   },
@@ -48,9 +49,9 @@ export const metadata: Metadata = {
 const schema = {
   "@context": "https://schema.org",
   "@type": ["MedicalClinic", "MedicalBusiness"],
-  name: "Aesthedent Hair Care",
+  name: "Aesthédent Hair Care",
   description:
-    "Hair-fall care and scalp treatments at Aesthedent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
+    "Hair-fall care and scalp treatments at Aesthédent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
   telephone: CLINIC.phone.primaryHref.replace("tel:", ""),
   address: {
     "@type": "PostalAddress",
@@ -93,6 +94,7 @@ export default function HairPage() {
           <ClosingCta data={data} />
         </main>
       </div>
+      <BookingDock bookingLabel={data.bookingLabel} theme="dark" />
     </>
   );
 }

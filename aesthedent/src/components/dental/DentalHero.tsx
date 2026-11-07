@@ -196,7 +196,7 @@ export default function DentalHero() {
               >
                 <Image
                   src="/images/hero/dental.png"
-                  alt="Patient with a bright, healthy smile at Aesthedent"
+                  alt="Patient with a bright, healthy smile at Aesthédent"
                   fill
                   preload
                   loading="eager"

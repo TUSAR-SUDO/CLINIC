@@ -20,7 +20,7 @@ export default function DentalFooter() {
   return (
     <motion.footer
       className="dental-footer"
-      aria-label="Aesthedent footer"
+      aria-label="Aesthédent footer"
       initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "0px 0px -6% 0px" }}

@@ -84,7 +84,7 @@ export default function DentalBottomCta() {
           <div className="cta-pill__map-wrap">
             <Image
               src="/images/dental/map-card.png"
-              alt="Map location of Aesthedent Clinic in Old Town, Bhubaneswar"
+              alt="Map location of Aesthédent Clinic in Old Town, Bhubaneswar"
               width={140}
               height={70}
               className="cta-pill__map-img"

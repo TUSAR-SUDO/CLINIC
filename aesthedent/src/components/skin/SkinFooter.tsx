@@ -16,7 +16,7 @@ const FOOTER_LINKS = [
 
 export default function SkinFooter() {
   return (
-    <footer className="skin-footer" aria-label="Aesthedent footer">
+    <footer className="skin-footer" aria-label="Aesthédent footer">
       <div className="skin-footer__inner">
         <div className="skin-footer__brand">
           <Logo href="/" />

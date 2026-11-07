@@ -27,7 +27,7 @@ import {
  * - Open (click, Enter, Space): the files rise out and fan, each one a button.
  * - More: a frosted menu you can drive from the keyboard.
  *
- * Adapted for Aesthedent: brand type, no remote images, and a gallery-grade
+ * Adapted for Aesthédent: brand type, no remote images, and a gallery-grade
  * lighting pass on the generated artwork.
  */
 

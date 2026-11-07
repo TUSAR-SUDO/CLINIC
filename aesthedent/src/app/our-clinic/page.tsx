@@ -5,14 +5,15 @@ import Logo from "@/components/hero/Logo";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
 import { TestimonialGlobe } from "@/components/ui/testimonial-globe";
 import ClinicStandards from "@/components/clinic/ClinicStandards";
+import { BrandGlassReveal } from "@/components/ui/glass-icon-reveal";
 import { CLINIC } from "@/lib/clinic";
 import { PATIENT_STORIES, PATIENT_STORY_LABELS } from "@/lib/testimonials";
 import { CLINIC_TEAM } from "@/lib/team";
 
 export const metadata: Metadata = {
-  title: "Our Clinic & Members | Team & Standards | Aesthedent",
+  title: "Our Clinic & Members | Team & Standards | Aesthédent",
   description:
-    "Meet our doctors and aesthetic team at Aesthedent in Old Town, Bhubaneswar. Dental, skin, hair and PMU care under one roof.",
+    "Meet our doctors and aesthetic team at Aesthédent in Old Town, Bhubaneswar. Dental, skin, hair and PMU care under one roof.",
   alternates: { canonical: "/our-clinic" },
 };
 
@@ -62,6 +63,21 @@ export default function OurClinicPage() {
               <HeartHandshake size={14} aria-hidden="true" />
               <span>Unhurried 1-on-1 Consultations</span>
             </div>
+          </div>
+        </section>
+
+        {/* Brand reveal: the mark inside a clear glass tile */}
+        <section className="our-clinic__mark" aria-labelledby="our-clinic-mark-title">
+          <BrandGlassReveal className="our-clinic__mark-tile" label={`${CLINIC.name} mark`} />
+          <div className="our-clinic__mark-copy">
+            <p className="our-clinic__kicker">The mark</p>
+            <h2 className="our-clinic__h2" id="our-clinic-mark-title">
+              A tooth, <em>a face.</em>
+            </h2>
+            <p className="our-clinic__mark-text">
+              {CLINIC.name} draws one shape for four kinds of care: a tooth that holds a face in
+              profile. Click the glass to see it form again.
+            </p>
           </div>
         </section>
 

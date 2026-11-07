@@ -1,0 +1,711 @@
+/* ==========================================================================
+   HAIR & PMU — PHONE PASS
+   Everything here is scoped to <= 767px so the approved desktop layout is
+   untouched. Layered after specialty.css on purpose.
+   ========================================================================== */
+
+@media (max-width: 767px) {
+  /* ---- header --------------------------------------------------------- */
+
+  .spec-header__inner {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 0.5rem;
+    padding: 0.5rem 0.85rem;
+  }
+
+  /* Magnetic sets display inline, so the rule in specialty.css never wins. */
+  .spec-header__book {
+    display: none !important;
+  }
+
+  .spec-header .brand {
+    gap: 0.45rem;
+  }
+
+  .spec-header .brand__mark,
+  .spec-header .brand__mark img {
+    width: 1.55rem;
+  }
+
+  .spec-header .brand__word {
+    font-size: 1.15rem;
+    letter-spacing: -0.03em;
+  }
+
+  .spec-menu__trigger {
+    height: 2.25rem;
+    padding: 0 0.7rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+  }
+
+  .spec-menu__panel {
+    top: calc(100% + 0.45rem);
+    right: 0;
+    width: min(78vw, 17rem);
+  }
+
+  /* Anchored scrolling has to clear the sticky header. */
+  .spec-page section[id],
+  .spec-page [id^="hair-"],
+  .spec-page [id^="pmu-"] {
+    scroll-margin-top: 4.6rem;
+  }
+
+  /* ---- hero ----------------------------------------------------------- */
+
+  .spec-hero {
+    padding-top: 1.1rem;
+    padding-bottom: 0;
+  }
+
+  .spec-hero__inner {
+    padding-inline: 1rem;
+    gap: 1.5rem;
+  }
+
+  .spec-hero__breadcrumb {
+    font-size: 0.58rem;
+    letter-spacing: 0.14em;
+  }
+
+  .spec-hero__eyebrow {
+    font-size: 0.56rem;
+    letter-spacing: 0.2em;
+  }
+
+  .spec-hero__title {
+    font-size: clamp(3.15rem, 15.5vw, 4.6rem);
+    line-height: 0.94;
+  }
+
+  .spec-page--pmu .spec-hero__title {
+    font-size: clamp(2.9rem, 14vw, 4.2rem);
+  }
+
+  .spec-hero__lede {
+    font-size: 0.92rem;
+    line-height: 1.62;
+    max-width: 34ch;
+  }
+
+  .spec-hero__actions {
+    gap: 0.55rem;
+    width: 100%;
+  }
+
+  .spec-hero__call {
+    width: 100%;
+    height: 2.85rem;
+  }
+
+  /* Full-bleed image panel with a taller arch, so it reads on a phone. */
+  .spec-hero__stage {
+    height: min(62vh, 480px);
+    min-height: 360px;
+    margin-inline: -1rem;
+    width: calc(100% + 2rem);
+    margin-top: 0.6rem;
+  }
+
+  .spec-hero__frame,
+  .spec-hero--pmu .spec-hero__frame {
+    inset: 0 0 2.6rem;
+    border-radius: 44% 44% 0 0 / 26% 26% 0 0;
+  }
+
+  .spec-hero__caption {
+    font-size: 0.56rem;
+    letter-spacing: 0.16em;
+  }
+
+  .spec-hero__scroll-cue {
+    left: 1rem;
+    bottom: 0.55rem;
+    font-size: 0.54rem;
+    letter-spacing: 0.16em;
+  }
+
+  .spec-hero__scroll-cue svg {
+    animation: spec-cue-bob 2.4s cubic-bezier(0.33, 1, 0.68, 1) infinite;
+  }
+
+  .spec-hero__skip {
+    margin: 0 1rem 1rem;
+    height: 2.75rem;
+    font-size: 0.68rem;
+  }
+
+  .spec-ticker {
+    margin-top: 1rem;
+  }
+
+  .spec-ticker__track {
+    padding: 0.7rem 0;
+    font-size: 0.66rem;
+    letter-spacing: 0.14em;
+  }
+
+  /* ---- focus ---------------------------------------------------------- */
+
+  .spec-focus {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  /* specialty.css hides the frame but leaves its Reveal wrapper taking space. */
+  .spec-focus__preview-wrap {
+    display: none !important;
+  }
+
+  .spec-focus__aside {
+    gap: 0.7rem;
+  }
+
+  .spec-focus__title {
+    font-size: clamp(2.5rem, 11.5vw, 3.4rem);
+    line-height: 1;
+  }
+
+  .spec-focus__lede {
+    font-size: 0.9rem;
+    line-height: 1.62;
+  }
+
+  .spec-focus__list {
+    margin-top: 1.6rem;
+    border-top: 1px solid var(--spec-line, rgba(58, 21, 48, 0.14));
+  }
+
+  .spec-focus__item {
+    position: relative;
+  }
+
+  /* The active row lifts into a card instead of just expanding in place. */
+  .spec-focus__item.is-active {
+    background: color-mix(in srgb, currentColor 4%, transparent);
+    border-radius: 0.85rem;
+    padding-inline: 0.75rem;
+    margin-inline: -0.75rem;
+    box-shadow: 0 22px 44px -38px currentColor;
+    transition:
+      background 0.4s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+      box-shadow 0.4s var(--ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  }
+
+  .spec-focus__item.is-active::before {
+    content: "";
+    position: absolute;
+    left: 0.1rem;
+    top: 1.15rem;
+    bottom: 1.15rem;
+    width: 2px;
+    border-radius: 2px;
+    background: currentColor;
+    opacity: 0.4;
+    transform-origin: 50% 0;
+    animation: spec-rule-in 0.55s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .spec-focus__row {
+    padding: 1.15rem 0;
+    grid-template-columns: 1.9rem minmax(0, 1fr) 2.2rem;
+    gap: 0.55rem;
+  }
+
+  .spec-focus__num {
+    font-size: 0.62rem;
+  }
+
+  .spec-focus__name {
+    font-size: clamp(1.6rem, 7.6vw, 2.1rem);
+    line-height: 1.05;
+  }
+
+  .spec-focus__kicker {
+    font-size: 0.55rem;
+    letter-spacing: 0.16em;
+  }
+
+  .spec-focus__arrow {
+    width: 2.1rem;
+    height: 2.1rem;
+  }
+
+  .spec-focus__detail-inner {
+    padding: 0 0 1.2rem 2.45rem;
+  }
+
+  .spec-focus__detail-inner p {
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .spec-focus__ask {
+    font-size: 0.72rem;
+  }
+
+  /* ---- folder --------------------------------------------------------- */
+
+  .spec-folder {
+    padding-top: 3.2rem;
+    padding-bottom: 3.2rem;
+  }
+
+  .spec-folder__title {
+    font-size: clamp(2.3rem, 10.8vw, 3.2rem);
+  }
+
+  .spec-folder__lede {
+    font-size: 0.9rem;
+    line-height: 1.62;
+  }
+
+  /* The folder carries its own pixel width, which otherwise props the whole
+     grid column open and clips the copy at 360px. */
+  .spec-folder__inner,
+  .spec-steps__inner,
+  .spec-faq__inner,
+  .spec-close__inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .spec-folder__copy,
+  .spec-folder__object,
+  .spec-close__copy,
+  .spec-close__aside {
+    min-width: 0;
+  }
+
+  .spec-folder__object {
+    margin-top: 2rem;
+    max-width: 100%;
+  }
+
+  .spec-folder__frame {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .spec-folder__book,
+  .spec-folder__phone {
+    height: 2.75rem;
+    font-size: 0.72rem;
+  }
+
+  /* ---- steps: a drawn timeline ---------------------------------------- */
+
+  .spec-steps {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .spec-steps__title {
+    font-size: clamp(2.3rem, 11vw, 3.2rem);
+  }
+
+  .spec-steps__list {
+    position: relative;
+    margin-top: 2rem;
+    gap: 0;
+    grid-template-columns: 1fr;
+    padding-left: 2.15rem;
+  }
+
+  .spec-steps__list::before {
+    content: "";
+    position: absolute;
+    left: 0.62rem;
+    top: 0.5rem;
+    bottom: 1.2rem;
+    width: 1px;
+    background: linear-gradient(
+      to bottom,
+      currentColor 0%,
+      currentColor 72%,
+      transparent 100%
+    );
+    opacity: 0.22;
+    transform-origin: 50% 0;
+    animation: spec-rule-grow 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .spec-step {
+    position: relative;
+    display: block;
+    min-height: 0;
+    padding: 1.35rem 0;
+  }
+
+  .spec-step__number {
+    position: absolute;
+    left: -2.15rem;
+    top: 1.45rem;
+    width: 1.3rem;
+    height: 1.3rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+    background: var(--spec-bg, #f3eee8);
+    font-size: 0.52rem;
+    letter-spacing: 0.04em;
+    opacity: 0.75;
+  }
+
+  .spec-step__title {
+    font-size: clamp(1.35rem, 6.2vw, 1.75rem);
+    line-height: 1.15;
+  }
+
+  .spec-step__copy {
+    margin-top: 0.5rem;
+    font-size: 0.86rem;
+    line-height: 1.65;
+  }
+
+  .spec-step__rule {
+    margin-top: 1.1rem;
+    opacity: 0.35;
+  }
+
+  /* ---- globe ---------------------------------------------------------- */
+
+  .spec-globe {
+    padding-top: 2.6rem;
+    padding-bottom: 2.6rem;
+  }
+
+  .spec-globe__stage {
+    padding: 0.7rem;
+    border-radius: 1.1rem;
+  }
+
+  .spec-globe__cta {
+    height: 2.75rem;
+    font-size: 0.72rem;
+  }
+
+  /* ---- cross links: a swipeable rail ---------------------------------- */
+
+  .spec-more {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .spec-more__title {
+    font-size: clamp(2.2rem, 10.5vw, 3rem);
+  }
+
+  .spec-more__grid {
+    display: flex;
+    flex-wrap: nowrap;
+    grid-template-columns: none;
+    gap: 0.85rem;
+    margin-inline: -1rem;
+    padding: 0.35rem 1rem 1.3rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 1rem;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .spec-more__grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .spec-more__grid > * {
+    flex: 0 0 min(78%, 20rem);
+    scroll-snap-align: center;
+  }
+
+  .spec-more__card {
+    height: 21rem;
+  }
+
+  .spec-more__image {
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .spec-more__card:active .spec-more__image {
+    transform: scale(1.04);
+  }
+
+  .spec-more__name {
+    font-size: 1.6rem;
+  }
+
+  .spec-more__note {
+    font-size: 0.78rem;
+    line-height: 1.5;
+  }
+
+  /* ---- faq ------------------------------------------------------------ */
+
+  .spec-faq {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .spec-faq__title {
+    font-size: clamp(2.2rem, 10.5vw, 3rem);
+  }
+
+  .spec-faq__trigger {
+    padding: 1.1rem 0;
+    gap: 1rem;
+  }
+
+  .spec-faq__question {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .spec-faq__answer {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    padding-bottom: 1.2rem;
+  }
+
+  .spec-faq__icon {
+    width: 1.9rem;
+    height: 1.9rem;
+    flex: none;
+  }
+
+  /* ---- closing -------------------------------------------------------- */
+
+  .spec-close {
+    padding-top: 3.2rem;
+    /* Room for the booking dock. */
+    padding-bottom: 7rem;
+  }
+
+  .spec-close__title {
+    font-size: clamp(2.3rem, 11vw, 3.2rem);
+  }
+
+  .spec-close__lede {
+    font-size: 0.9rem;
+    line-height: 1.62;
+  }
+
+  .spec-close__stamp {
+    width: 6.5rem;
+    height: 6.5rem;
+  }
+
+  .spec-close__word {
+    font-size: clamp(7rem, 40vw, 12rem);
+    opacity: 0.12;
+  }
+
+}
+
+/* ---- keyframes -------------------------------------------------------- */
+
+@keyframes spec-cue-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.75;
+  }
+  45% {
+    transform: translateY(0.28rem);
+    opacity: 1;
+  }
+}
+
+@keyframes spec-rule-in {
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 0.4;
+  }
+}
+
+@keyframes spec-rule-grow {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
+
+@keyframes spec-dock-in {
+  from {
+    transform: translateY(130%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==========================================================================
+   Booking dock (phones only)
+   ========================================================================== */
+
+.spec-dock {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .spec-page--hair ~ .spec-dock,
+  .spec-dock[data-theme="dark"] {
+    --dock-bg: #140d0b;
+    --dock-ink: #f4eee7;
+    --dock-on-ink: #140d0b;
+    color: #f4eee7;
+  }
+
+  .spec-page--pmu ~ .spec-dock,
+  .spec-dock[data-theme="light"] {
+    --dock-bg: #f7efe9;
+    --dock-ink: #351421;
+    --dock-on-ink: #fff8f3;
+    color: #351421;
+  }
+
+  .spec-dock {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 0.85rem calc(0.55rem + env(safe-area-inset-bottom, 0px));
+    background: color-mix(in srgb, var(--dock-bg, #f3eee8) 88%, transparent);
+    border-top: 1px solid color-mix(in srgb, currentColor 12%, transparent);
+    -webkit-backdrop-filter: blur(16px) saturate(1.1);
+    backdrop-filter: blur(16px) saturate(1.1);
+    transform: translateY(130%);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+      opacity 0.4s ease;
+  }
+
+  .spec-dock[data-visible="true"] {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .spec-dock__book {
+    flex: 1 1 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 2.9rem;
+    border-radius: var(--radius-pill, 999px);
+    background: var(--dock-ink, #3a1530);
+    color: var(--dock-on-ink, #f6efe7);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .spec-dock__book:active {
+    transform: scale(0.98);
+  }
+
+  .spec-dock__call {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.9rem;
+    height: 2.9rem;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--dock-ink, #3a1530) 25%, transparent);
+    color: var(--dock-ink, #3a1530);
+    transition: background 0.25s ease;
+  }
+
+  .spec-dock__call:active {
+    background: color-mix(in srgb, var(--dock-ink, #3a1530) 10%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spec-hero__scroll-cue svg,
+  .spec-focus__item.is-active::before,
+  .spec-steps__list::before {
+    animation: none !important;
+  }
+
+  .spec-dock,
+  .spec-more__image,
+  .spec-more__grid {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================================
+   Scroll-linked motion (Chrome/Edge). Everything degrades to the static
+   layout, and the stepped reveals from motion/react still carry the rest.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @media (max-width: 767px) {
+      .spec-steps__list::before {
+        animation: spec-rule-grow linear both;
+        animation-timeline: view();
+        animation-range: entry 18% cover 65%;
+      }
+
+      .spec-more__image {
+        animation: spec-image-drift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% cover 100%;
+      }
+
+      .spec-folder__object {
+        animation: spec-lift linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 70%;
+      }
+
+      .spec-globe__stage {
+        animation: spec-lift linear both;
+        animation-timeline: view();
+        animation-range: entry 5% entry 75%;
+      }
+    }
+  }
+}
+
+@keyframes spec-image-drift {
+  from {
+    transform: scale(1.09);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes spec-lift {
+  from {
+    transform: translateY(1.6rem);
+    opacity: 0.55;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

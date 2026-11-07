@@ -46,7 +46,7 @@ export default function CrossLinks({ data }: { data: SpecialtyContent }) {
               <Link
                 href={item.href}
                 className={`spec-more__card spec-more__card--${item.tone}`}
-                aria-label={`Explore ${item.name} at Aesthedent`}
+                aria-label={`Explore ${item.name} at Aesthédent`}
               >
                 <span className="spec-more__media">
                   <Image

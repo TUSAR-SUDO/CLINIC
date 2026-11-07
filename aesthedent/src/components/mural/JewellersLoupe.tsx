@@ -88,7 +88,7 @@ export default function JewellersLoupe({
               href="#fr-loupe-circle-path"
               startOffset="0%"
             >
-              • ART &amp; SCIENCE • AESTHEDENT CLINIC • CLINICAL PRECISION •
+              • ART &amp; SCIENCE • AESTHÉDENT CLINIC • CLINICAL PRECISION •
             </textPath>
           </text>
         </g>

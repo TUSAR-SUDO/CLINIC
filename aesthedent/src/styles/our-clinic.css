@@ -5,7 +5,7 @@
    --------------------------------------------------------------------------- */
 
 .our-clinic {
-  /* Tailwind / shadcn variables mapped to Aesthedent's luminous palette */
+  /* Tailwind / shadcn variables mapped to Aesthédent's luminous palette */
   --bg-stone: #f3eee8;
   --bg-stone-deep: #ebd8cc;
   --surface: #fffaf7;
@@ -581,5 +581,48 @@
   .clinic-standards__card {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* ---- brand mark reveal --------------------------------------------------- */
+
+.our-clinic__mark {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  padding: clamp(2rem, 4vw, 3.25rem) var(--page-gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
+  gap: clamp(1.75rem, 4vw, 4rem);
+  align-items: center;
+  border-top: 1px solid var(--our-clinic-line);
+}
+
+.our-clinic__mark-tile {
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  border-radius: 1.9rem;
+  background-color: var(--bg-stone);
+}
+
+.our-clinic__mark-copy {
+  max-width: 46ch;
+}
+
+.our-clinic__mark-text {
+  margin-top: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--our-clinic-ink-soft);
+}
+
+@media (max-width: 860px) {
+  .our-clinic__mark {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+  }
+
+  .our-clinic__mark-tile {
+    max-width: 220px;
   }
 }

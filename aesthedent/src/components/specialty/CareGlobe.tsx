@@ -10,7 +10,7 @@ export default function CareGlobe({ data }: { data: SpecialtyContent }) {
   return (
     <section
       className={`spec-globe spec-globe--${data.id}`}
-      aria-label={`Patient stories at Aesthedent`}
+      aria-label={`Patient stories at Aesthédent`}
     >
       <TestimonialGlobe
         items={PATIENT_STORIES}
@@ -20,7 +20,7 @@ export default function CareGlobe({ data }: { data: SpecialtyContent }) {
             In their <em>own words.</em>
           </>
         }
-        caption="A few words from people who have visited Aesthedent from Bhubaneswar and around the world."
+        caption="A few words from people who have visited Aesthédent from Bhubaneswar and around the world."
         action={
           <a href={CLINIC.bookingHref} className="spec-globe__cta">
             Book a visit

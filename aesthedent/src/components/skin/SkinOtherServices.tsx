@@ -17,7 +17,7 @@ export default function SkinOtherServices() {
       <div className="more-services__container">
         <div className="more-services__intro">
           <Reveal>
-            <span className="more-services__kicker">MORE AT AESTHEDENT</span>
+            <span className="more-services__kicker">MORE AT AESTHÉDENT</span>
           </Reveal>
           <h2 className="more-services__title" id="skin-more-title">
             <MaskedLine>One Clinic.</MaskedLine>
@@ -41,7 +41,7 @@ export default function SkinOtherServices() {
               <Link
                 href={service.href}
                 className={`skin-more-card skin-more-card--${service.tone}`}
-                aria-label={`Explore ${service.name} at Aesthedent`}
+                aria-label={`Explore ${service.name} at Aesthédent`}
               >
                 <span className="skin-more-card__bg" aria-hidden="true" />
                 <span className="skin-more-card__content">

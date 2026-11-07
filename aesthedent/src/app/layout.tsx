@@ -8,25 +8,26 @@ import "./globals.css";
 import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
 import "@/styles/specialty.css";
+import "@/styles/specialty-mobile.css";
 import "@/styles/system.css";
 
 const siteUrl = SITE_URL;
 
-const title = "Aesthedent — Dental, Skin, Hair & PMU in Old Town, Bhubaneswar";
+const title = "Aesthédent — Dental, Skin, Hair & PMU in Old Town, Bhubaneswar";
 const description =
-  "Aesthedent is a multi-speciality aesthetic clinic in Old Town, Bhubaneswar, offering dental, skin, hair and PMU care. Book a visit with Dr. Manisha Mohanty and Dr. Shruti Rath.";
+  "Aesthédent is a multi-speciality aesthetic clinic in Old Town, Bhubaneswar, offering dental, skin, hair and PMU care. Book a visit with Dr. Manisha Mohanty and Dr. Shruti Rath.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title,
   description,
-  applicationName: "Aesthedent",
+  applicationName: "Aesthédent",
   alternates: { canonical: "/" },
   robots: { index: true, follow: true },
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Aesthedent",
+    siteName: "Aesthédent",
     title,
     description,
     url: "/",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
         url: "/og.png",
         width: 1200,
         height: 630,
-        alt: "Aesthedent — dental, skin, hair and PMU care in Old Town, Bhubaneswar",
+        alt: "Aesthédent — dental, skin, hair and PMU care in Old Town, Bhubaneswar",
       },
     ],
   },

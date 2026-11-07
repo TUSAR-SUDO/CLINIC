@@ -8,14 +8,15 @@ import CareGlobe from "@/components/specialty/CareGlobe";
 import CrossLinks from "@/components/specialty/CrossLinks";
 import SpecialtyFaq from "@/components/specialty/SpecialtyFaq";
 import ClosingCta from "@/components/specialty/ClosingCta";
+import BookingDock from "@/components/specialty/BookingDock";
 import { CLINIC } from "@/lib/clinic";
 import { SPECIALTIES } from "@/lib/specialty";
 
 const data = SPECIALTIES.pmu;
 
-const title = "PMU | Brows, Lips & Eyeliner | Aesthedent";
+const title = "PMU | Brows, Lips & Eyeliner | Aesthédent";
 const description =
-  "Permanent makeup at Aesthedent in Old Town, Bhubaneswar. Explore brows, lips and eyeliner, planned with you and drawn with restraint.";
+  "Permanent makeup at Aesthédent in Old Town, Bhubaneswar. Explore brows, lips and eyeliner, planned with you and drawn with restraint.";
 
 export const metadata: Metadata = {
   title,
@@ -24,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Aesthedent",
+    siteName: "Aesthédent",
     title,
     description,
     url: "/pmu",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
         url: "/images/hero/pmu.png",
         width: 1295,
         height: 1215,
-        alt: "Editorial close-up of an eyebrow and eye at Aesthedent",
+        alt: "Editorial close-up of an eyebrow and eye at Aesthédent",
       },
     ],
   },
@@ -48,9 +49,9 @@ export const metadata: Metadata = {
 const schema = {
   "@context": "https://schema.org",
   "@type": ["MedicalClinic", "MedicalBusiness"],
-  name: "Aesthedent PMU",
+  name: "Aesthédent PMU",
   description:
-    "Permanent makeup at Aesthedent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
+    "Permanent makeup at Aesthédent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
   telephone: CLINIC.phone.primaryHref.replace("tel:", ""),
   address: {
     "@type": "PostalAddress",
@@ -93,6 +94,7 @@ export default function PmuPage() {
           <ClosingCta data={data} />
         </main>
       </div>
+      <BookingDock bookingLabel={data.bookingLabel} theme="light" />
     </>
   );
 }

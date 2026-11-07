@@ -20,7 +20,7 @@ export default function NotFound() {
         </h1>
         <p className="system-page__lede">
           The link you followed may be old, or the page may have a new home.
-          Everything at Aesthedent is still a few steps away.
+          Everything at Aesthédent is still a few steps away.
         </p>
 
         <div className="system-page__actions">

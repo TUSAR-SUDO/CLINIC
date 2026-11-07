@@ -68,7 +68,7 @@ export default function SkinBottomCta() {
           <div className="cta-pill__map-wrap">
             <Image
               src="/images/skin/map-card.png"
-              alt="Map location of Aesthedent in Old Town, Bhubaneswar"
+              alt="Map location of Aesthédent in Old Town, Bhubaneswar"
               width={132}
               height={61}
               className="cta-pill__map-img"

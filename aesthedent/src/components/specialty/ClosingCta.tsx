@@ -86,7 +86,7 @@ export default function ClosingCta({ data }: { data: SpecialtyContent }) {
               </defs>
               <text>
                 <textPath href={`#${data.id}-stamp-circle`}>
-                  AESTHEDENT · OLD TOWN · CONSIDERED CARE ·
+                  AESTHÉDENT · OLD TOWN · CONSIDERED CARE ·
                 </textPath>
               </text>
               <circle cx="80" cy="80" r="35" />

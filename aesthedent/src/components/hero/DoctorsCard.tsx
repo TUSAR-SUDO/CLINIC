@@ -5,7 +5,7 @@ import { CLINIC } from "@/lib/clinic";
 
 export default function DoctorsCard() {
   return (
-    <aside id="doctors" className="doctors-card" aria-label="Doctors at Aesthedent">
+    <aside id="doctors" className="doctors-card" aria-label="Doctors at Aesthédent">
       <div className="doctors-card__left">
         <span className="doctors-card__avatars" aria-hidden="true">
           {CLINIC.doctors.map((doctor) => (
@@ -37,7 +37,7 @@ export default function DoctorsCard() {
       <Link
         className="doctors-card__arrow"
         href="/our-clinic#our-clinic-team"
-        aria-label="Meet the doctors at Aesthedent"
+        aria-label="Meet the doctors at Aesthédent"
         title="Meet the team"
       >
         <ArrowRight size={16} strokeWidth={1.75} aria-hidden="true" />

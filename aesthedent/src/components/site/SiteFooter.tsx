@@ -67,8 +67,8 @@ export default function SiteFooter() {
       <SiteMap />
       <DoodleCrewFooter
         className="site-footer"
-        wordmark="AESTHEDENT"
-        brand="Aesthedent"
+        wordmark="AESTHÉDENT"
+        brand="Aesthédent"
         blurb="A multi-speciality aesthetic clinic in Old Town, Bhubaneswar — dental, skin, hair and PMU care under one roof."
         tagline="Dental, skin, hair and PMU — considered care, all under one roof."
         columns={COLUMNS}
@@ -79,7 +79,7 @@ export default function SiteFooter() {
         crew={[...CREW]}
         doodles={["sparkle", "heart", "star", "spiral", "plane", "bolt"]}
         doodleCount={10}
-        copyright="© 2026 Aesthedent · Old Town, Bhubaneswar"
+        copyright="© 2026 Aesthédent · Old Town, Bhubaneswar"
         legal={[]}
         socials={[]}
         palette={{ background: "#2a0e1e", ink: "#f3eee8", accent: "#d9a79e" }}

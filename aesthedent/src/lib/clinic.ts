@@ -1,9 +1,9 @@
 /**
- * Single source of truth for Aesthedent's confirmed brand details.
+ * Single source of truth for Aesthédent's confirmed brand details.
  * Do not add reviews, ratings, awards, patient counts or claims here.
  */
 export const CLINIC = {
-  name: "Aesthedent",
+  name: "Aesthédent",
   tagline: "Your one stop destination",
   address: {
     line1: "265, Giani Zail Singh Rd",

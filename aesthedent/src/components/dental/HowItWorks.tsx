@@ -68,7 +68,7 @@ export default function HowItWorks() {
           >
             <Image
               src="/images/dental/dental-chair.png"
-              alt="Aesthedent modern dental suite with a comfortable clinic chair and surgical light"
+              alt="Aesthédent modern dental suite with a comfortable clinic chair and surgical light"
               fill
               className="how-section__img"
               sizes="(max-width: 1100px) 100vw, 42vw"

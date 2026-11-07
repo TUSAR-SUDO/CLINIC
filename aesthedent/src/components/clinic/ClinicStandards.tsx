@@ -81,7 +81,7 @@ export default function ClinicStandards() {
     <section className="clinic-standards" aria-labelledby="clinic-standards-title">
       <div className="clinic-standards__inner">
         <header className="clinic-standards__head">
-          <p className="clinic-standards__eyebrow">The Aesthedent Promise</p>
+          <p className="clinic-standards__eyebrow">The Aesthédent Promise</p>
           <h2 id="clinic-standards-title" className="clinic-standards__title">
             Clinical standards you can <em>feel and trust.</em>
           </h2>

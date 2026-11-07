@@ -12,7 +12,7 @@ export default function FaceRevealSection() {
             Art and science of natural aesthetics
           </h2>
           <p className="fr-section__body">
-            Aesthedent is a multi-speciality clinic for dental, skin, hair and
+            Aesthédent is a multi-speciality clinic for dental, skin, hair and
             PMU care in Old Town, Bhubaneswar — bringing thoughtful clinical
             precision and calm, personalised care together under one roof.
           </p>

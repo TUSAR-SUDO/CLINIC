@@ -84,7 +84,7 @@ export default function HomeSections() {
             </Reveal>
           </header>
 
-          <ul className="home-care__grid" aria-label="Aesthedent care">
+          <ul className="home-care__grid" aria-label="Aesthédent care">
             {SERVICES.map((service, index) => (
               <RevealListItem
                 key={service.id}

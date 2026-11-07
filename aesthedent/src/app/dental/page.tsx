@@ -9,9 +9,9 @@ import DentalFAQ from "@/components/dental/DentalFAQ";
 import DentalBottomCta from "@/components/dental/DentalBottomCta";
 import { CLINIC } from "@/lib/clinic";
 
-const title = "Dental Care | Comprehensive Smiles & Treatments | Aesthedent";
+const title = "Dental Care | Comprehensive Smiles & Treatments | Aesthédent";
 const description =
-  "Explore dental check-ups, cleaning, fillings, root canal treatment, crowns and bridges, and teeth whitening at Aesthedent in Old Town, Bhubaneswar.";
+  "Explore dental check-ups, cleaning, fillings, root canal treatment, crowns and bridges, and teeth whitening at Aesthédent in Old Town, Bhubaneswar.";
 
 export const metadata: Metadata = {
   title,
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Aesthedent",
+    siteName: "Aesthédent",
     title,
     description,
     url: "/dental",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
         url: "/images/hero/dental.png",
         width: 1295,
         height: 1215,
-        alt: "Patient with a bright, healthy smile at Aesthedent",
+        alt: "Patient with a bright, healthy smile at Aesthédent",
       },
     ],
   },
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
 const dentalSchema = {
   "@context": "https://schema.org",
   "@type": ["Dentist", "MedicalBusiness"],
-  name: "Aesthedent Dental Care",
+  name: "Aesthédent Dental Care",
   description:
     "Comprehensive dental treatments including exams, root canal, teeth whitening, crowns, and smile design in Old Town, Bhubaneswar.",
   telephone: CLINIC.phone.primaryHref.replace("tel:", ""),

@@ -88,7 +88,7 @@ export default function PanelsContainer() {
     <div
       className={`hero__stage${compact ? " is-compact" : ""}`}
       role="group"
-      aria-label="Aesthedent services"
+      aria-label="Aesthédent services"
       onPointerLeave={endPreview}
       onPointerCancel={endPreview}
     >

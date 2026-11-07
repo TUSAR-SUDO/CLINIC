@@ -12,9 +12,9 @@ import ScrollProgress from "@/components/skin/ScrollProgress";
 import { CLINIC } from "@/lib/clinic";
 import { SKIN_TREATMENTS } from "@/lib/skin";
 
-const title = "Skin Care | Treatments for Healthier, Clearer Skin | Aesthedent";
+const title = "Skin Care | Treatments for Healthier, Clearer Skin | Aesthédent";
 const description =
-  "Personalized skin care at Aesthedent in Old Town, Bhubaneswar. Explore acne care, pigmentation, anti-ageing, skin rejuvenation and medical facials with Dr. Manisha Mohanty and Dr. Shruti Rath.";
+  "Personalized skin care at Aesthédent in Old Town, Bhubaneswar. Explore acne care, pigmentation, anti-ageing, skin rejuvenation and medical facials with Dr. Manisha Mohanty and Dr. Shruti Rath.";
 
 export const metadata: Metadata = {
   title,
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    siteName: "Aesthedent",
+    siteName: "Aesthédent",
     title,
     description,
     url: "/skin",
@@ -47,9 +47,9 @@ export const metadata: Metadata = {
 const skinSchema = {
   "@context": "https://schema.org",
   "@type": ["MedicalClinic", "MedicalBusiness"],
-  name: "Aesthedent Skin Care",
+  name: "Aesthédent Skin Care",
   description:
-    "Skin care at Aesthedent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
+    "Skin care at Aesthédent, a multi-speciality aesthetic clinic in Old Town, Bhubaneswar.",
   telephone: CLINIC.phone.primaryHref.replace("tel:", ""),
   address: {
     "@type": "PostalAddress",
