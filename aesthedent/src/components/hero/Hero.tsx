@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { motion, useReducedMotion } from "motion/react";
+import { useSiteLoader } from "@/components/ui/site-loader";
 import Navbar from "./Navbar";
 import Headline from "./Headline";
 import PanelsContainer from "./PanelsContainer";
@@ -15,6 +16,7 @@ const CustomCursor = dynamic(() => import("./CustomCursor"), { ssr: false });
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const { isRevealed } = useSiteLoader();
 
   return (
     <section className="hero" id="top" aria-labelledby="hero-title">
@@ -28,11 +30,11 @@ export default function Hero() {
       <motion.footer
         className="hero__footer js-reveal"
         initial={reduceMotion ? { opacity: 0 } : { opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
+        animate={isRevealed ? { opacity: 1, y: 0 } : { opacity: 0, y: 16 }}
         transition={
           reduceMotion
             ? { duration: 0.2 }
-            : { duration: 0.55, delay: 0.9, ease: [0.16, 1, 0.3, 1] }
+            : { duration: 0.55, delay: 0.48, ease: [0.16, 1, 0.3, 1] }
         }
       >
         <DoctorsCard />

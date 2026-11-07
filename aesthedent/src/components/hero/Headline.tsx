@@ -1,11 +1,13 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { useSiteLoader } from "@/components/ui/site-loader";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 
 export default function Headline() {
   const reduceMotion = useReducedMotion();
+  const { isRevealed } = useSiteLoader();
 
   const lineTransition = (delay: number) =>
     reduceMotion
@@ -18,8 +20,8 @@ export default function Headline() {
         <motion.span
           className="mask-line__inner hero__kicker"
           initial={reduceMotion ? { opacity: 0 } : { y: "115%" }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={lineTransition(0.5)}
+          animate={isRevealed ? { y: 0, opacity: 1 } : { y: "115%", opacity: 0 }}
+          transition={lineTransition(0.12)}
         >
           Teeth. Skin. Hair. Brows.
         </motion.span>
@@ -28,8 +30,8 @@ export default function Headline() {
         <motion.span
           className="mask-line__inner hero__title"
           initial={reduceMotion ? { opacity: 0 } : { y: "112%" }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={lineTransition(0.62)}
+          animate={isRevealed ? { y: 0, opacity: 1 } : { y: "112%", opacity: 0 }}
+          transition={lineTransition(0.24)}
         >
           One clinic.
         </motion.span>
@@ -38,8 +40,8 @@ export default function Headline() {
         <motion.span
           className="mask-line__inner hero__subtitle"
           initial={reduceMotion ? { opacity: 0 } : { y: "110%" }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={lineTransition(0.72)}
+          animate={isRevealed ? { y: 0, opacity: 1 } : { y: "110%", opacity: 0 }}
+          transition={lineTransition(0.36)}
         >
           Dental, skin, hair and PMU care in Old Town, Bhubaneswar.
         </motion.span>

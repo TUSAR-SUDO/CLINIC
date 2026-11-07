@@ -2,9 +2,11 @@ import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
 import SiteFooter from "@/components/site/SiteFooter";
 import SmoothScroll from "@/components/ui/SmoothScroll";
+import SiteLoaderProvider from "@/components/ui/site-loader";
 import { fraunces, geist } from "@/lib/fonts";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
+import "@/styles/site-loader.css";
 import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
 import "@/styles/specialty.css";
@@ -62,10 +64,12 @@ export default function RootLayout({ children }: Readonly<{ children: ReactNode 
         <a href="#main" className="skip-link">
           Skip to content
         </a>
-        <SmoothScroll>
-          {children}
-          <SiteFooter />
-        </SmoothScroll>
+        <SiteLoaderProvider>
+          <SmoothScroll>
+            {children}
+            <SiteFooter />
+          </SmoothScroll>
+        </SiteLoaderProvider>
       </body>
     </html>
   );

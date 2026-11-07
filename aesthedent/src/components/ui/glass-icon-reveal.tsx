@@ -807,6 +807,8 @@ export interface GlassIconRevealProps extends Omit<React.HTMLAttributes<HTMLDivE
   tuning?: Partial<GlassTuning>;
   /** Accessible name of the logo */
   label?: string;
+  /** Called when the reveal animation completes (when loop is false) */
+  onComplete?: () => void;
 }
 
 export function GlassIconReveal({
@@ -828,6 +830,7 @@ export function GlassIconReveal({
   time,
   tuning,
   label = "Logo",
+  onComplete,
   className,
   style,
   onClick,
@@ -847,7 +850,7 @@ export function GlassIconReveal({
     return { ...LOOKS[look], ...set, ...(JSON.parse(tuningKey) as Partial<GlassTuning>) };
   }, [look, background, logoColor, plateColor, iconPlate, keepPlate, originalColors, tileSize, logoScale, finalScale, hold, offsetKey, tuningKey]);
 
-  const live = React.useRef({ settings, loop, speed, time });
+  const live = React.useRef({ settings, loop, speed, time, onComplete });
 
   React.useEffect(() => {
     const wrap = wrapRef.current;
@@ -855,6 +858,9 @@ export function GlassIconReveal({
     const engine = startEngine(wrap, live);
     if (!engine) {
       setFallback(true);
+      if (!loop) {
+        setTimeout(() => live.current.onComplete?.(), 800);
+      }
       return;
     }
     engineRef.current = engine;
@@ -862,12 +868,12 @@ export function GlassIconReveal({
       engineRef.current = null;
       engine.dispose();
     };
-  }, []);
+  }, [loop]);
 
   React.useEffect(() => {
-    live.current = { settings, loop, speed, time };
+    live.current = { settings, loop, speed, time, onComplete };
     engineRef.current?.invalidate();
-  }, [settings, loop, speed, time]);
+  }, [settings, loop, speed, time, onComplete]);
 
   React.useEffect(() => {
     let cancelled = false;
@@ -876,12 +882,17 @@ export function GlassIconReveal({
         if (cancelled) return;
         engineRef.current?.setLogo(data);
       },
-      (err) => console.error(err),
+      (err) => {
+        console.error(err);
+        if (!loop) {
+          live.current.onComplete?.();
+        }
+      },
     );
     return () => {
       cancelled = true;
     };
-  }, [logo]);
+  }, [logo, loop]);
 
   const fallbackUrl = React.useMemo(() => (fallback ? logoUrl(logo) : ""), [fallback, logo]);
 
@@ -927,7 +938,13 @@ export function GlassIconReveal({
 // drawn only while on screen and only when something changed.
 function startEngine(
   wrap: HTMLDivElement,
-  live: React.RefObject<{ settings: Settings; loop: boolean; speed: number; time?: number }>,
+  live: React.RefObject<{
+    settings: Settings;
+    loop: boolean;
+    speed: number;
+    time?: number;
+    onComplete?: () => void;
+  }>,
 ) {
   const canvas = document.createElement("canvas");
   canvas.setAttribute("aria-hidden", "true");
@@ -956,6 +973,7 @@ function startEngine(
   let lost = false;
   let raf = 0;
   let last = 0;
+  let completed = false;
 
   function tick(now: number) {
     raf = 0;
@@ -985,8 +1003,15 @@ function startEngine(
         time += dt * speed;
         if (time >= end) {
           time = end;
-          if (loop) pauseLeft = Math.max(0.05, P.hold) + OUTRO;
-          else playing = false;
+          if (loop) {
+            pauseLeft = Math.max(0.05, P.hold) + OUTRO;
+          } else {
+            playing = false;
+            if (!completed) {
+              completed = true;
+              live.current.onComplete?.();
+            }
+          }
         }
         dirty = true;
       }
@@ -1052,15 +1077,22 @@ function startEngine(
       logo = data;
       renderer?.setLogo(data);
       if (!reduceMotion) {
+        completed = false;
         time = 0;
         playing = true;
         pauseLeft = 0;
         outro = 0;
+      } else {
+        if (!completed) {
+          completed = true;
+          setTimeout(() => live.current.onComplete?.(), 250);
+        }
       }
       dirty = true;
       kick();
     },
     replay() {
+      completed = false;
       time = 0;
       playing = true;
       pauseLeft = 0;
