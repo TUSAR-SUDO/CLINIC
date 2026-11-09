@@ -4,7 +4,7 @@ import SpecialtyHero from "@/components/specialty/SpecialtyHero";
 import FocusIndex from "@/components/specialty/FocusIndex";
 import JourneyFolder from "@/components/specialty/JourneyFolder";
 import VisitSteps from "@/components/specialty/VisitSteps";
-import CareGlobe from "@/components/specialty/CareGlobe";
+import TestimonialSection from "@/components/site/TestimonialSection";
 import CrossLinks from "@/components/specialty/CrossLinks";
 import SpecialtyFaq from "@/components/specialty/SpecialtyFaq";
 import ClosingCta from "@/components/specialty/ClosingCta";
@@ -88,7 +88,7 @@ export default function PmuPage() {
           <FocusIndex data={data} />
           <JourneyFolder data={data} />
           <VisitSteps data={data} />
-          <CareGlobe data={data} />
+          <TestimonialSection service="pmu" theme="light" />
           <CrossLinks data={data} />
           <SpecialtyFaq data={data} />
           <ClosingCta data={data} />

@@ -1,0 +1,100 @@
+/* One type system for the whole site.
+ *
+ * The families were already shared (Fraunces for display, Geist for text), but
+ * each page dialled Fraunces' variable axes differently — SOFT 30 on skin,
+ * WONK 1 on PMU and the clinic page, nothing at all on dental — so the same
+ * typeface read as three different ones. Eyebrows drifted between 0.11em and
+ * 0.26em tracking at five sizes. This sheet is imported last and pins softness,
+ * wonk and the eyebrow treatment site-wide. Each size keeps its own optical
+ * size, so small headings still render with text-sized letterforms.
+ */
+
+:root {
+  --type-display: var(--font-display), Georgia, serif;
+  --type-text: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  --type-em-weight: 350;
+  --type-eyebrow-size: clamp(0.6rem, 0.72vw, 0.72rem);
+  --type-eyebrow-track: 0.14em;
+  --type-eyebrow-weight: 550;
+}
+
+/* Display headings: same face, same softness, no wonky alternates. */
+.dental-hero__title,
+.skin-hero__title {
+  --type-opsz: 96;
+}
+
+.spec-hero__title {
+  --type-opsz: 144;
+}
+
+.spec-focus__title,
+.our-clinic__title {
+  --type-opsz: 120;
+}
+
+.home-visit__card-title,
+.how-section__kicker {
+  --type-opsz: 60;
+}
+
+.tst__title {
+  --type-opsz: 72;
+}
+
+.dental-hero__title,
+.skin-hero__title,
+.spec-hero__title,
+.spec-focus__title,
+.our-clinic__title,
+.home-visit__card-title,
+.how-section__kicker,
+.tst__title {
+  font-family: var(--type-display);
+  font-variation-settings: "opsz" var(--type-opsz, 96), "SOFT" 45, "WONK" 0;
+}
+
+/* Italic emphasis reads with the same weight on every page. */
+.dental-hero__title em,
+.skin-hero__title em,
+.spec-hero__title em,
+.spec-focus__title em,
+.our-clinic__title em,
+.home-visit__card-title em,
+.how-section__kicker em,
+.tst__title em {
+  font-weight: var(--type-em-weight);
+  font-variation-settings: "opsz" var(--type-opsz, 96), "SOFT" 45, "WONK" 0;
+}
+
+/* Eyebrows and kickers: one size, one tracking, one weight. Each element keeps
+ * its own casing, because the specialty eyebrows are set in sentence case. */
+.clinic-standards__eyebrow,
+.dental-hero__kicker,
+.dentists-section__kicker,
+.fr-section__eyebrow,
+.hero__kicker,
+.home-care__eyebrow,
+.home-visit__eyebrow,
+.how-section__kicker,
+.more-services__kicker,
+.our-clinic__kicker,
+.our-clinic__eyebrow,
+.site-map__eyebrow,
+.spec-focus__kicker,
+.spec-hero__eyebrow,
+.system-page__eyebrow,
+.treatments-section__kicker,
+.tst__eyebrow {
+  font-family: var(--type-text);
+  font-size: var(--type-eyebrow-size);
+  font-weight: var(--type-eyebrow-weight);
+  letter-spacing: var(--type-eyebrow-track);
+}
+
+/* Panels that hard-coded their own stack inherit the shared text family. */
+.dcf,
+.lgf-root,
+.lgn-root {
+  font-family: var(--type-text);
+}

@@ -1,0 +1,286 @@
+/* Testimonial columns: infinite drift, edge fade, hover pause, per-page theme. */
+
+.tst {
+  position: relative;
+  padding: clamp(3.2rem, 7vw, 5.5rem) clamp(1.15rem, 4vw, 3rem);
+  overflow: hidden;
+}
+
+.tst--light {
+  background: #f7efe9;
+  color: #351421;
+  --tst-muted: #70555d;
+  --tst-card: #fffaf6;
+  --tst-line: rgba(58, 21, 48, 0.14);
+  --tst-accent: #a4576a;
+  --tst-shadow: 0 22px 44px -30px rgba(53, 20, 33, 0.55);
+}
+
+.tst--dark {
+  background: #140d0b;
+  color: #f4eee7;
+  --tst-muted: rgba(244, 238, 231, 0.66);
+  --tst-card: rgba(255, 255, 255, 0.055);
+  --tst-line: rgba(244, 238, 231, 0.16);
+  --tst-accent: #d9a79e;
+  --tst-shadow: 0 22px 44px -30px rgba(0, 0, 0, 0.8);
+}
+
+.tst__inner {
+  display: grid;
+  gap: clamp(1.7rem, 4vw, 2.6rem);
+  width: min(100%, 74rem);
+  margin: 0 auto;
+}
+
+.tst__copy {
+  display: grid;
+  gap: 0.9rem;
+  align-content: center;
+}
+
+.tst__eyebrow {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 550;
+  letter-spacing: 0.19em;
+  text-transform: uppercase;
+  color: var(--tst-muted);
+}
+
+.tst__title {
+  margin: 0;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(2.05rem, 8vw, 2.9rem);
+  font-weight: 400;
+  line-height: 1.03;
+  letter-spacing: -0.045em;
+  font-variation-settings: "opsz" 72, "SOFT" 45;
+}
+
+.tst__title em {
+  font-style: italic;
+}
+
+.tst__caption {
+  max-width: 34ch;
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--tst-muted);
+}
+
+.tst__actions {
+  margin-top: 0.35rem;
+}
+
+/* Stage ------------------------------------------------------------------ */
+
+.tst__stage {
+  position: relative;
+  height: clamp(23rem, 60vh, 30rem);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0,
+    #000 7%,
+    #000 93%,
+    transparent 100%
+  );
+}
+
+.tst__cols {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  height: 100%;
+}
+
+.tst__col {
+  height: 100%;
+  overflow: hidden;
+}
+
+.tst__col--reverse {
+  display: none;
+}
+
+.tst__track {
+  display: flex;
+  flex-direction: column;
+  animation-name: tst-drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.tst__col--reverse .tst__track {
+  animation-direction: reverse;
+}
+
+.tst__set {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1rem;
+}
+
+.tst:hover .tst__track,
+.tst:focus-within .tst__track {
+  animation-play-state: paused;
+}
+
+@keyframes tst-drift {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, -50%, 0);
+  }
+}
+
+/* Cards ------------------------------------------------------------------ */
+
+.tst__card {
+  position: relative;
+  margin: 0;
+  padding: 1.1rem 1.15rem 1.05rem;
+  border: 1px solid var(--tst-line);
+  border-radius: 1.05rem;
+  background: var(--tst-card);
+  box-shadow: var(--tst-shadow);
+}
+
+.tst--dark .tst__card {
+  backdrop-filter: blur(6px);
+}
+
+.tst__mark {
+  position: absolute;
+  top: 0.2rem;
+  right: 0.8rem;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  color: var(--tst-accent);
+  opacity: 0.45;
+}
+
+.tst__quote {
+  margin: 0;
+  max-width: 30ch;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 0.97rem;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+
+.tst__person {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 0.9rem;
+}
+
+.tst__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  object-fit: cover;
+  flex: none;
+}
+
+.tst__who strong {
+  display: block;
+  font-size: 0.84rem;
+  font-weight: 600;
+}
+
+.tst__who small {
+  display: block;
+  font-size: 0.71rem;
+  color: var(--tst-muted);
+}
+
+/* Sparse pools: one pull quote instead of a loop of the same sentence ----- */
+
+.tst--sparse .tst__stage {
+  height: auto;
+  overflow: visible;
+  -webkit-mask-image: none;
+  mask-image: none;
+}
+
+.tst--sparse .tst__cols--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.tst--sparse .tst__track {
+  animation: none;
+}
+
+.tst--sparse .tst__card {
+  max-width: 32rem;
+  padding: 1.35rem 1.4rem 1.25rem;
+}
+
+.tst--sparse .tst__quote {
+  max-width: 34ch;
+  font-size: 1.12rem;
+  line-height: 1.45;
+}
+
+/* Desk ------------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .tst__cols {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tst__col--reverse {
+    display: block;
+  }
+}
+
+@media (min-width: 900px) {
+  .tst__inner {
+    grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tst__track {
+    animation: none;
+  }
+
+  .tst__set[aria-hidden="true"] {
+    display: none;
+  }
+
+  .tst__col--reverse {
+    display: none;
+  }
+
+  .tst__stage {
+    height: auto;
+    max-height: 30rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+
+  .tst__col {
+    overflow: visible;
+  }
+}

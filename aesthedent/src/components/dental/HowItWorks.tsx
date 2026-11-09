@@ -67,12 +67,12 @@ export default function HowItWorks() {
             style={{ y: reduceMotion ? 0 : imageY }}
           >
             <Image
-              src="/images/dental/dental-chair.png"
-              alt="Aesthédent modern dental suite with a comfortable clinic chair and surgical light"
+              src="/images/dental/visit-detail.webp"
+              alt="Close-up of a patient's smile during a dental visit"
               fill
               className="how-section__img"
               sizes="(max-width: 1100px) 100vw, 42vw"
-              quality={86}
+              quality={84}
             />
           </motion.div>
         </motion.div>

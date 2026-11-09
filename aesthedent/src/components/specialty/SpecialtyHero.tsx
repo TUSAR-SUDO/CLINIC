@@ -187,9 +187,7 @@ export default function SpecialtyHero({ data }: { data: SpecialtyContent }) {
                 variant={data.theme === "dark" ? "cream" : "aubergine"}
                 width={224}
                 height={44}
-                onClick={() => {
-                  window.location.href = CLINIC.bookingHref;
-                }}
+                href={CLINIC.bookingHref}
               />
             </Magnetic>
 

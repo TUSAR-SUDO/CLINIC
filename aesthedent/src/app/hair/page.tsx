@@ -4,8 +4,7 @@ import SpecialtyHero from "@/components/specialty/SpecialtyHero";
 import FocusIndex from "@/components/specialty/FocusIndex";
 import JourneyFolder from "@/components/specialty/JourneyFolder";
 import VisitSteps from "@/components/specialty/VisitSteps";
-import CareGlobe from "@/components/specialty/CareGlobe";
-import CrossLinks from "@/components/specialty/CrossLinks";
+import TestimonialSection from "@/components/site/TestimonialSection";import CrossLinks from "@/components/specialty/CrossLinks";
 import SpecialtyFaq from "@/components/specialty/SpecialtyFaq";
 import ClosingCta from "@/components/specialty/ClosingCta";
 import BookingDock from "@/components/specialty/BookingDock";
@@ -88,7 +87,7 @@ export default function HairPage() {
           <FocusIndex data={data} />
           <JourneyFolder data={data} />
           <VisitSteps data={data} />
-          <CareGlobe data={data} />
+          <TestimonialSection service="hair" theme="dark" />
           <CrossLinks data={data} />
           <SpecialtyFaq data={data} />
           <ClosingCta data={data} />

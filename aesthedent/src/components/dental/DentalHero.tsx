@@ -154,9 +154,7 @@ export default function DentalHero() {
                 variant="aubergine"
                 width={216}
                 height={44}
-                onClick={() => {
-                  window.location.href = CLINIC.bookingHref;
-                }}
+                href={CLINIC.bookingHref}
               />
             </Magnetic>
 

@@ -65,6 +65,28 @@
   --spec-folder-accent: #9e3f5b;
 }
 
+/* The skin page runs on the same system as PMU with a cooler, softer palette. */
+.spec-page--skin {
+  --spec-bg: #f8f2ee;
+  --spec-bg-deep: #f1e4dd;
+  --spec-surface: #fffaf6;
+  --spec-surface-ink: #3a2130;
+  --spec-surface-muted: #7a6169;
+  --spec-ink: #3a2130;
+  --spec-muted: #735863;
+  --spec-line: rgba(58, 33, 48, 0.13);
+  --spec-line-strong: rgba(58, 33, 48, 0.26);
+  --spec-accent: #a4576a;
+  --spec-accent-soft: #e8c7bf;
+  --spec-berry: #6b2237;
+  --spec-word-stroke: rgba(164, 87, 106, 0.2);
+  --spec-folder-bg: #f8f2ee;
+  --spec-folder-ink: #3a2130;
+  --spec-folder-muted: #7a6169;
+  --spec-folder-line: rgba(58, 33, 48, 0.13);
+  --spec-folder-accent: #a4576a;
+}
+
 .spec-page ::selection {
   background: var(--spec-accent);
   color: var(--spec-bg);
@@ -2259,4 +2281,37 @@
   .spec-globe__cta {
     transition: none !important;
   }
+}
+
+/* Skin shares the PMU frame language with a softer arch. */
+.spec-hero--skin .spec-hero__frame {
+  inset: 3% 0 2rem 4%;
+  border-radius: 46% 46% 16px 16px / 36% 36% 7px 7px;
+}
+
+.spec-focus--skin {
+  --focus-bg: #f3e9e4;
+  --focus-ink: #3a2130;
+  --focus-muted: #7a6169;
+  --focus-line: rgba(58, 33, 48, 0.12);
+  --focus-accent: #a4576a;
+  --focus-card: #fffaf6;
+  background: var(--focus-bg);
+  color: var(--focus-ink);
+}
+
+.spec-globe--skin {
+  background: #f8f2ee;
+  color: #3a2130;
+}
+
+.spec-faq--skin {
+  background: #fbf5f1;
+}
+
+.spec-close--skin {
+  background:
+    radial-gradient(70% 100% at 80% 30%, rgba(164, 87, 106, 0.24), transparent 66%),
+    #4b1a2c;
+  color: #f8eee9;
 }

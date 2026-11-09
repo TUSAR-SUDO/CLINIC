@@ -59,13 +59,37 @@ and used on `/our-clinic`.
 
 ## Specialty pages on phones
 
-`/hair` and `/pmu` share components in `src/components/specialty` and styles in
+`/skin`, `/hair` and `/pmu` share components in `src/components/specialty` and styles in
 `src/styles/specialty.css` (layout) plus `src/styles/specialty-mobile.css` (the phone pass,
 scoped to `max-width: 767px`). The mobile layer adds the sticky booking dock
 (`BookingDock.tsx`), the drawn timeline for the visit steps, the swipeable cross-link rail and
 scroll-linked image drift. It only runs where the browser supports `animation-timeline: view()`;
 everything else falls back to the existing `motion/react` reveals, and all of it respects
 `prefers-reduced-motion`.
+
+All three pages read their copy from `SPECIALTIES` in `src/lib/specialty.ts`; `/skin` was
+rebuilt on this system, so its old bespoke sections were removed. The dental and skin CTA
+blocks still share rules in `src/styles/skin.css` (`.cta-pill`, `.treatments-section`,
+`.faq-item`), so that stylesheet stays imported even though the skin-specific `.skin-*` rules
+are now unused.
+
+## Typography
+
+Fraunces (display) and Geist (text) are the only families in the build. `src/styles/type-system.css`
+is imported last and pins the shared type tokens: one Fraunces variable-axis setting
+(`"opsz" 96, "SOFT" 45, "WONK" 0`), one italic emphasis weight, and one eyebrow size/tracking.
+Pages keep their own sizes and layouts; they no longer override the optical axes, so the same
+face reads the same on every route.
+
+## Testimonials
+
+`src/components/site/TestimonialSection.tsx` is shared by all four care pages and renders
+infinite testimonial columns, after the 21st.dev "testimonials columns" pattern: quote cards
+drift slowly in opposite directions behind a soft edge fade, pause on hover or keyboard focus,
+and are plain CSS `transform` animations, so nothing here needs WebGL. Each page reads its own
+slice of `SERVICE_STORIES` in `src/lib/testimonials.ts` and passes its own theme
+(`theme="dark"` on `/hair`). A pool with fewer than three consented stories renders as a
+single pull quote instead of looping one sentence — hair and PMU are still in that state.
 
 ## Content still to supply
 
@@ -74,4 +98,5 @@ These are intentionally generic placeholders and should be replaced before launc
 - Doctor and team names, credentials, bios and photos (`src/app/our-clinic/page.tsx`, `src/components/hero/DoctorsCard.tsx`)
 - Detailed treatment lists for all four care pages (`src/lib/specialty.ts`)
 - Equipment and facility details
-- Patient testimonial stories (`src/lib/testimonials.ts`)
+- Patient testimonial stories (`src/lib/testimonials.ts`) — hair and PMU have one placeholder
+  quote each, so their sections render as a single pull quote until the clinic supplies more

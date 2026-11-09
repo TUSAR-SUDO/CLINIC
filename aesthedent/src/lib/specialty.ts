@@ -9,7 +9,7 @@ import type { ArtRecipe } from "@/components/ui/glass-folder-art";
  * ratings, outcome claims or patient numbers.
  */
 
-export type SpecialtyId = "hair" | "pmu";
+export type SpecialtyId = "skin" | "hair" | "pmu";
 export type SpecialtyTheme = "dark" | "light";
 
 export interface SpecialtyFocus {
@@ -230,6 +230,161 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
     bookingLabel: "Book a hair consultation",
     navIndex: 2,
   },
+  skin: {
+    id: "skin",
+    index: "02",
+    label: "Skin",
+    theme: "light",
+    eyebrow: "02 — Skin health",
+    titleTop: "Skin,",
+    titleEm: "cared for.",
+    lede:
+      "Skin care that begins with what your skin is doing now, planned with you and explained before anything starts.",
+    heroImage: "/images/hero/skin.webp",
+    heroAlt: "Close-up portrait of healthy, luminous skin at Aesthédent",
+    heroPosition: "58% 42%",
+    heroWord: "SKIN",
+    heroNote: "Acne · Pigment · Glow",
+    ticker: [
+      "Acne care",
+      "Pigmentation",
+      "Anti-ageing",
+      "Medical facials",
+      "Your pace",
+    ],
+    focusKicker: "The focus",
+    focusTitle: "Three ways",
+    focusTitleEm: "in.",
+    focusLede:
+      "Start with the concern, not the treatment. We look at what your skin is doing and explain the options that fit.",
+    focus: [
+      {
+        id: "skin-acne-care",
+        index: "01",
+        name: "Acne care",
+        kicker: "The concern",
+        description:
+          "Control breakouts and prevent further flare-ups, with a plan explained before you begin.",
+        imagePosition: "30% 36%",
+      },
+      {
+        id: "skin-pigmentation",
+        index: "02",
+        name: "Pigmentation",
+        kicker: "The tone",
+        description:
+          "Reduce dark spots for a more even tone, reviewed with you as treatment goes on.",
+        imagePosition: "62% 44%",
+      },
+      {
+        id: "skin-anti-ageing",
+        index: "03",
+        name: "Anti-ageing",
+        kicker: "The finish",
+        description:
+          "Address fine lines and improve skin firmness, at a pace that suits your skin.",
+        imagePosition: "46% 58%",
+      },
+    ],
+    folderKicker: "The folder",
+    folderTitleTop: "Your skin plan,",
+    folderTitleEm: "in one place.",
+    folderLede:
+      "The consultation, your treatment plan and the aftercare questions — gathered into one folder, so the next step is always clear.",
+    folderArt: {
+      style: "marble",
+      colors: ["#5a1b31", "#d9a79e", "#f3eee8", "#b9cfdb", "#e7c3bd", "#7a3b4e"],
+      scale: 0.72,
+      warp: 2.5,
+      angle: 0.4,
+      gloss: 0.4,
+      veins: 0.22,
+    },
+    folderFiles: [
+      { name: "Consultation", meta: "Start here" },
+      { name: "Your skin plan", meta: "Explained" },
+      { name: "Aftercare", meta: "Questions" },
+    ],
+    folderTargets: ["skin-focus", "skin-visit", "skin-faq"],
+    stepsKicker: "How it feels",
+    stepsTitleTop: "A considered",
+    stepsTitleEm: "visit.",
+    steps: [
+      {
+        number: "01",
+        title: "Understand your skin",
+        italic: true,
+        description:
+          "Tell us what you have noticed and what you have already tried. The consultation begins with your concerns.",
+      },
+      {
+        number: "02",
+        title: "A plan explained to you",
+        description:
+          "A personalized treatment plan, with the options, the sessions and the next step explained.",
+      },
+      {
+        number: "03",
+        title: "Care at your pace",
+        description:
+          "Nothing is rushed. You leave knowing what happens next and when to ask for help.",
+      },
+    ],
+    crossKicker: "More at Aesthédent",
+    crossTitleTop: "Keep",
+    crossTitleEm: "looking.",
+    crossLinks: [
+      {
+        id: "dental",
+        name: "Dental",
+        note: "Check-ups, smile care and braces.",
+        image: "/images/services/dental.webp",
+        alt: "Editorial portrait of a woman smiling",
+        href: "/dental",
+        tone: "dark",
+      },
+      {
+        id: "hair",
+        name: "Hair",
+        note: "Hair-fall care and scalp treatments.",
+        image: "/images/services/hair.webp",
+        alt: "Editorial close-up of glossy dark hair",
+        href: "/hair",
+        tone: "dark",
+      },
+      {
+        id: "pmu",
+        name: "PMU",
+        note: "Brows, lips and eyeliner.",
+        image: "/images/services/pmu.webp",
+        alt: "Editorial close-up of an eyebrow and eye",
+        href: "/pmu",
+        tone: "accent",
+      },
+    ],
+    faqs: [
+      {
+        id: "skin-checkup",
+        question: "How often should I get a check-up?",
+        answer:
+          "A check-up every six months helps keep the clinic aware of changes in your skin and lets concerns be reviewed early. Your recommended interval may differ depending on your treatment plan.",
+      },
+      {
+        id: "skin-sensitive",
+        question: "Is the treatment safe for sensitive skin?",
+        answer:
+          "Tell us about your skin history and sensitivities at consultation. We will discuss suitable options and whether a patch test is appropriate for the treatment being considered.",
+      },
+      {
+        id: "skin-sessions",
+        question: "How many sessions will I need?",
+        answer:
+          "It depends on your skin and the treatment plan. We will explain the expected number of sessions at consultation and review progress together as we go.",
+      },
+    ],
+    bookingLabel: "Book a skin consultation",
+    navIndex: 1,
+  },
   pmu: {
     id: "pmu",
     index: "04",
@@ -380,4 +535,4 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
   },
 };
 
-export const SPECIALTY_IDS = ["hair", "pmu"] as const;
+export const SPECIALTY_IDS = ["skin", "hair", "pmu"] as const;

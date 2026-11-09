@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import GlassFolder, { type FolderFile } from "@/components/ui/glass-folder";
 import { MaskedLine, Reveal } from "@/components/motion/Reveal";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { CLINIC } from "@/lib/clinic";
 import { scrollToSection } from "@/lib/smooth-scroll";
 import type { SpecialtyContent } from "@/lib/specialty";
@@ -83,10 +84,13 @@ export default function JourneyFolder({ data }: { data: SpecialtyContent }) {
 
           <Reveal delay={0.18}>
             <div className="spec-folder__actions">
-              <a className="spec-folder__book" href={CLINIC.bookingHref}>
-                {data.bookingLabel}
-                <ArrowUpRight size={16} strokeWidth={1.7} aria-hidden="true" />
-              </a>
+              <LiquidMetalButton
+                label={data.bookingLabel}
+                variant={data.theme === "dark" ? "cream" : "aubergine"}
+                width={214}
+                height={44}
+                href={CLINIC.bookingHref}
+              />
               <a className="spec-folder__phone" href={CLINIC.phone.primaryHref}>
                 <Phone size={15} strokeWidth={1.7} aria-hidden="true" />
                 {CLINIC.phone.primaryDisplay}

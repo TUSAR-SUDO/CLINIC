@@ -11,6 +11,11 @@ import {
   useSyncExternalStore,
 } from "react";
 
+type ShaderMountInstance = {
+  dispose?: () => void;
+  setSpeed?: (speed: number) => void;
+};
+
 const SHADER_QUERY =
   "(min-width: 700px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)";
 
@@ -39,6 +44,12 @@ export interface LiquidMetalButtonProps {
   children?: React.ReactNode;
   className?: string;
   ariaLabel?: string;
+  /** When set the button renders as a real anchor, so it can be opened in a new tab. */
+  href?: string;
+  target?: string;
+  rel?: string;
+  /** Stretch to the container's width instead of a fixed pixel size. */
+  fullWidth?: boolean;
 }
 
 export function LiquidMetalButton({
@@ -52,6 +63,10 @@ export function LiquidMetalButton({
   children,
   className = "",
   ariaLabel,
+  href,
+  target,
+  rel,
+  fullWidth = false,
 }: LiquidMetalButtonProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
@@ -66,9 +81,8 @@ export function LiquidMetalButton({
     Array<{ x: number; y: number; id: number }>
   >([]);
   const shaderRef = useRef<HTMLDivElement>(null);
-  // biome-ignore lint/suspicious/noExplicitAny: External library without types
-  const shaderMount = useRef<any>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  const shaderMount = useRef<ShaderMountInstance | null>(null);
+  const clickRef = useRef<HTMLAnchorElement | HTMLButtonElement | null>(null);
   const rippleId = useRef(0);
 
   const dimensions = useMemo(() => {
@@ -98,6 +112,11 @@ export function LiquidMetalButton({
       };
     }
   }, [viewMode, customWidth, customHeight, label]);
+
+  const outerWidth = fullWidth ? "100%" : `${dimensions.width}px`;
+  const innerWidth = fullWidth ? "calc(100% - 4px)" : `${dimensions.innerWidth}px`;
+  const shaderWidth = fullWidth ? "100%" : `${dimensions.shaderWidth}px`;
+  const ClickElement = (href ? "a" : "button") as "a";
 
   const isCream = variant === "cream";
   const isDark = variant === "dark";
@@ -196,7 +215,7 @@ export function LiquidMetalButton({
     shaderMount.current?.setSpeed?.(0.6);
   };
 
-  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
     if (shaderMount.current?.setSpeed) {
       shaderMount.current.setSpeed(2.4);
       setTimeout(() => {
@@ -208,8 +227,8 @@ export function LiquidMetalButton({
       }, 300);
     }
 
-    if (buttonRef.current) {
-      const rect = buttonRef.current.getBoundingClientRect();
+    if (clickRef.current) {
+      const rect = clickRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       const ripple = { x, y, id: rippleId.current++ };
@@ -244,7 +263,10 @@ export function LiquidMetalButton({
         : "0px 0px 0px 1px rgba(58, 21, 48, 0.3), 0px 10px 20px -8px rgba(58, 21, 48, 0.35)";
 
   return (
-    <div className={`relative inline-block ${className}`}>
+    <div
+      className={`relative inline-block ${className}`}
+      style={fullWidth ? { width: "100%" } : undefined}
+    >
       <div
         style={{
           perspective: "1000px",
@@ -253,8 +275,7 @@ export function LiquidMetalButton({
       >
         <div
           style={{
-            position: "relative",
-            width: `${dimensions.width}px`,
+            position: "relative",                            width: outerWidth,
             height: `${dimensions.height}px`,
             transformStyle: "preserve-3d",
             transition:
@@ -268,7 +289,7 @@ export function LiquidMetalButton({
               position: "absolute",
               top: 0,
               left: 0,
-              width: `${dimensions.width}px`,
+              width: outerWidth,
               height: `${dimensions.height}px`,
               display: "flex",
               alignItems: "center",
@@ -338,7 +359,7 @@ export function LiquidMetalButton({
               position: "absolute",
               top: 0,
               left: 0,
-              width: `${dimensions.width}px`,
+              width: outerWidth,
               height: `${dimensions.height}px`,
               transformStyle: "preserve-3d",
               transition:
@@ -349,7 +370,7 @@ export function LiquidMetalButton({
           >
             <div
               style={{
-                width: `${dimensions.innerWidth}px`,
+                width: innerWidth,
                 height: `${dimensions.innerHeight}px`,
                 margin: "2px",
                 borderRadius: "100px",
@@ -373,7 +394,7 @@ export function LiquidMetalButton({
               position: "absolute",
               top: 0,
               left: 0,
-              width: `${dimensions.width}px`,
+              width: outerWidth,
               height: `${dimensions.height}px`,
               transformStyle: "preserve-3d",
               transition:
@@ -401,8 +422,8 @@ export function LiquidMetalButton({
                   borderRadius: "100px",
                   overflow: "hidden",
                   position: "relative",
-                  width: `${dimensions.shaderWidth}px`,
-                  maxWidth: `${dimensions.shaderWidth}px`,
+                  width: shaderWidth,
+                  maxWidth: shaderWidth,
                   height: `${dimensions.shaderHeight}px`,
                   background: shaderEnabled
                     ? "transparent"
@@ -414,8 +435,17 @@ export function LiquidMetalButton({
           </div>
 
           {/* Ripple Click Layer */}
-          <button
-            ref={buttonRef}
+          <ClickElement
+            ref={(node) => {
+              clickRef.current = node as HTMLAnchorElement | HTMLButtonElement | null;
+            }}
+            {...(href
+              ? {
+                  href,
+                  ...(target ? { target } : {}),
+                  ...(rel ? { rel } : {}),
+                }
+              : { type: "button" as const })}
             onClick={handleClick}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -459,7 +489,7 @@ export function LiquidMetalButton({
                 }}
               />
             ))}
-          </button>
+          </ClickElement>
         </div>
       </div>
     </div>

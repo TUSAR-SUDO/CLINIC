@@ -11,6 +11,10 @@ import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
 import "@/styles/specialty.css";
 import "@/styles/specialty-mobile.css";
+import "@/styles/site-menu.css";
+import "@/styles/press.css";
+import "@/styles/testimonials.css";
+import "@/styles/type-system.css";
 import "@/styles/system.css";
 
 const siteUrl = SITE_URL;

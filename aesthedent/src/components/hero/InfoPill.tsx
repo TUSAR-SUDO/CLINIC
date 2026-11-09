@@ -67,9 +67,7 @@ export default function InfoPill() {
 
       <div className="info-pill__call-wrapper">
         <LiquidMetalButton
-          onClick={() => {
-            window.location.href = CLINIC.phone.primaryHref;
-          }}
+          href={CLINIC.phone.primaryHref}
           variant="aubergine"
           width={112}
           height={36}

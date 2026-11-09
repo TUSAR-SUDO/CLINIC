@@ -1,10 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { ArrowRight, Menu, Phone } from "lucide-react";
+import { Menu } from "lucide-react";
 import Logo from "@/components/hero/Logo";
 import Magnetic from "@/components/hero/Magnetic";
+import SiteMenu from "@/components/site/SiteMenu";
 import {
   LiquidNavbar,
   NimbusIcons,
@@ -22,8 +23,14 @@ const NAV_ITEMS: LiquidNavItem[] = [
   { label: "Our clinic", href: "/our-clinic", icon: NimbusIcons.home, fx: "spin" },
 ];
 
+const MENU_ITEMS = NAV_ITEMS.map((item) => ({
+  label: item.label,
+  href: item.href ?? "/",
+}));
+
 export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
   const reduceMotion = useReducedMotion();
+  const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
   const progress = useSpring(scrollYProgress, {
     stiffness: 140,
@@ -32,6 +39,15 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
   });
 
   const dark = data.theme === "dark";
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1241px)");
+    const handleChange = () => {
+      if (media.matches) setOpen(false);
+    };
+    media.addEventListener("change", handleChange);
+    return () => media.removeEventListener("change", handleChange);
+  }, []);
 
   return (
     <header className="spec-header" data-theme={data.theme}>
@@ -54,36 +70,23 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
               variant={dark ? "cream" : "aubergine"}
               width={126}
               height={38}
-              onClick={() => {
-                window.location.href = CLINIC.bookingHref;
-              }}
+              href={CLINIC.bookingHref}
             />
           </Magnetic>
 
-          <details className="spec-menu">
-            <summary className="spec-menu__trigger">
+          <div className="spec-menu" data-open={open ? "true" : "false"}>
+            <button
+              type="button"
+              className="spec-menu__trigger"
+              aria-label="Open menu"
+              aria-expanded={open}
+              aria-controls="site-menu"
+              onClick={() => setOpen(true)}
+            >
               <Menu size={17} strokeWidth={1.7} aria-hidden="true" />
               <span>Menu</span>
-            </summary>
-            <div className="spec-menu__panel">
-              {NAV_ITEMS.map((item) => (
-                <Link
-                  key={item.label}
-                  href={item.href ?? "/"}
-                  className={`spec-menu__link${
-                    item.label.toLowerCase() === data.label.toLowerCase() ? " is-active" : ""
-                  }`}
-                >
-                  {item.label}
-                  <ArrowRight size={14} strokeWidth={1.7} aria-hidden="true" />
-                </Link>
-              ))}
-              <a href={CLINIC.phone.primaryHref} className="spec-menu__call">
-                <Phone size={14} strokeWidth={1.8} aria-hidden="true" />
-                Call {CLINIC.phone.primaryDisplay}
-              </a>
-            </div>
-          </details>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -91,6 +94,13 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
         className="spec-header__progress"
         style={{ scaleX: reduceMotion ? 1 : progress }}
         aria-hidden="true"
+      />
+
+      <SiteMenu
+        open={open}
+        onClose={() => setOpen(false)}
+        items={MENU_ITEMS}
+        activeLabel={data.label}
       />
     </header>
   );

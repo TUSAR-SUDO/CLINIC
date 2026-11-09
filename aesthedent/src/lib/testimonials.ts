@@ -4,13 +4,16 @@ import type {
 } from "@/components/ui/testimonial-globe";
 
 /**
- * Placeholder patient stories for the /our-clinic section.
+ * Placeholder patient stories.
  *
  * These are written as experience-focused examples, not medical or outcome
  * claims. Cities are intentionally spread across the globe so the map reads as
  * a world map rather than a single cluster. Replace every quote, name, city and
  * portrait with verified, consented patient feedback before launch. Ratings are
  * intentionally omitted until the clinic supplies real review data.
+ *
+ * TODO(clinic): hair and PMU each have a single placeholder story so far —
+ * supply more consented quotes for those two pages before launch.
  */
 export const PATIENT_STORIES: GlobeTestimonial[] = [
   {
@@ -154,6 +157,21 @@ export const PATIENT_STORIES: GlobeTestimonial[] = [
     tone: 5,
   },
 ];
+
+export type ServiceId = "dental" | "skin" | "hair" | "pmu";
+
+/**
+ * Each page gets its own slice of the same pool, so no two pages show the same
+ * set of stories. Hair and PMU are still thin: add consented quotes there.
+ */
+export const SERVICE_STORIES: Record<ServiceId, GlobeTestimonial[]> = {
+  dental: PATIENT_STORIES.filter(
+    (story) => story.role === "Dental care" || story.role === "Family visit",
+  ),
+  skin: PATIENT_STORIES.filter((story) => story.role === "Skin care"),
+  hair: PATIENT_STORIES.filter((story) => story.role === "Hair care"),
+  pmu: PATIENT_STORIES.filter((story) => story.role === "PMU"),
+};
 
 export const PATIENT_STORY_LABELS: TestimonialGlobeLabels = {
   previous: "Previous patient story",

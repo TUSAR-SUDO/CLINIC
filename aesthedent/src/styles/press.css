@@ -1,0 +1,65 @@
+/* Touch feedback for the controls that keep their bespoke layout (FAQ rows,
+   carousel arrows, the booking dock). Pointer-only: desktop hover states are
+   already handled in their own stylesheets. */
+
+@media (hover: none), (pointer: coarse) {
+  .faq-item__trigger,
+  .treatments-section__ctrl-btn,
+  .dentists-section__ctrl-btn,
+  .spec-menu__trigger,
+  .spec-dock__book,
+  .spec-dock__call,
+  .spec-focus__ask,
+  .spec-folder__phone,
+  .skin-plan__phone,
+  .cta-pill__call-btn,
+  .hero__mobile-book,
+  .system-page__call,
+  .dcf-link,
+  .dcf-totop {
+    transition: transform 0.16s ease, filter 0.16s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .faq-item__trigger:active,
+  .treatments-section__ctrl-btn:active,
+  .dentists-section__ctrl-btn:active,
+  .spec-menu__trigger:active,
+  .spec-dock__book:active,
+  .spec-dock__call:active,
+  .spec-focus__ask:active,
+  .spec-folder__phone:active,
+  .skin-plan__phone:active,
+  .cta-pill__call-btn:active,
+  .hero__mobile-book:active,
+  .system-page__call:active,
+  .dcf-link:active,
+  .dcf-totop:active {
+    transform: scale(0.97);
+    filter: brightness(0.96);
+  }
+
+  .gf-menu-item:active,
+  .spec-focus__row:active {
+    opacity: 0.72;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item__trigger:active,
+  .treatments-section__ctrl-btn:active,
+  .dentists-section__ctrl-btn:active,
+  .spec-menu__trigger:active,
+  .spec-dock__book:active,
+  .spec-dock__call:active,
+  .spec-focus__ask:active,
+  .spec-folder__phone:active,
+  .skin-plan__phone:active,
+  .cta-pill__call-btn:active,
+  .hero__mobile-book:active,
+  .system-page__call:active,
+  .dcf-link:active,
+  .dcf-totop:active {
+    transform: none;
+  }
+}

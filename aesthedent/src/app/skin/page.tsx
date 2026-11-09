@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import SkinNavbar from "@/components/skin/SkinNavbar";
-import SkinHero from "@/components/skin/SkinHero";
-import SkinPlan from "@/components/skin/SkinPlan";
-import SkinTreatments from "@/components/skin/SkinTreatments";
-import SkinHowItWorks from "@/components/skin/SkinHowItWorks";
-import SkinSpecialists from "@/components/skin/SkinSpecialists";
-import SkinOtherServices from "@/components/skin/SkinOtherServices";
-import SkinFAQ from "@/components/skin/SkinFAQ";
-import SkinBottomCta from "@/components/skin/SkinBottomCta";
-import ScrollProgress from "@/components/skin/ScrollProgress";
+import SpecialtyHeader from "@/components/specialty/SpecialtyHeader";
+import SpecialtyHero from "@/components/specialty/SpecialtyHero";
+import FocusIndex from "@/components/specialty/FocusIndex";
+import JourneyFolder from "@/components/specialty/JourneyFolder";
+import VisitSteps from "@/components/specialty/VisitSteps";
+import TestimonialSection from "@/components/site/TestimonialSection";
+import CrossLinks from "@/components/specialty/CrossLinks";
+import SpecialtyFaq from "@/components/specialty/SpecialtyFaq";
+import ClosingCta from "@/components/specialty/ClosingCta";
+import BookingDock from "@/components/specialty/BookingDock";
 import { CLINIC } from "@/lib/clinic";
 import { SKIN_TREATMENTS } from "@/lib/skin";
+import { SPECIALTIES } from "@/lib/specialty";
+
+const data = SPECIALTIES.skin;
 
 const title = "Skin Care | Treatments for Healthier, Clearer Skin | Aesthédent";
 const description =
@@ -79,20 +82,20 @@ export default function SkinPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(skinSchema) }}
       />
-      <div className="skin-page" id="top">
-        <ScrollProgress />
-        <SkinNavbar />
+      <div className="spec-page spec-page--skin" id="top">
+        <SpecialtyHeader data={data} />
         <main id="main">
-          <SkinHero />
-          <SkinPlan />
-          <SkinTreatments />
-          <SkinHowItWorks />
-          <SkinSpecialists />
-          <SkinOtherServices />
-          <SkinFAQ />
-          <SkinBottomCta />
+          <SpecialtyHero data={data} />
+          <FocusIndex data={data} />
+          <JourneyFolder data={data} />
+          <VisitSteps data={data} />
+          <TestimonialSection service="skin" theme="light" />
+          <CrossLinks data={data} />
+          <SpecialtyFaq data={data} />
+          <ClosingCta data={data} />
         </main>
       </div>
+      <BookingDock bookingLabel={data.bookingLabel} theme="light" />
     </>
   );
 }

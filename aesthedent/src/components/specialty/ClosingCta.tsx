@@ -55,9 +55,7 @@ export default function ClosingCta({ data }: { data: SpecialtyContent }) {
                   variant="cream"
                   width={238}
                   height={46}
-                  onClick={() => {
-                    window.location.href = CLINIC.bookingHref;
-                  }}
+                  href={CLINIC.bookingHref}
                 />
               </Magnetic>
               <a href={CLINIC.phone.primaryHref} className="spec-close__call">

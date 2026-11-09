@@ -1,0 +1,192 @@
+/* The one mobile menu. Rendered through a portal on <body>, so no ancestor
+   transform can shrink it and no header stacking context can clip it. */
+
+.site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: flex;
+  height: 100dvh;
+  padding: calc(env(safe-area-inset-top, 0px) + 0.9rem) clamp(1.15rem, 5vw, 2rem)
+    calc(env(safe-area-inset-bottom, 0px) + 1.1rem);
+  background: var(--dark-aubergine);
+  color: var(--cream);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.site-menu__panel {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 33rem;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+.site-menu__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.site-menu__brand .brand__word {
+  color: var(--cream);
+}
+
+.site-menu__brand .brand__tagline {
+  color: color-mix(in srgb, var(--cream) 52%, transparent);
+}
+
+.site-menu__close {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 1px solid color-mix(in srgb, var(--cream) 30%, transparent);
+  border-radius: var(--radius-pill);
+  background: transparent;
+  color: var(--cream);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.site-menu__close:active {
+  background: color-mix(in srgb, var(--cream) 14%, transparent);
+  transform: scale(0.94);
+}
+
+.site-menu__links {
+  display: flex;
+  flex-direction: column;
+  margin: clamp(1.4rem, 5vh, 2.6rem) 0 1.6rem;
+}
+
+.site-menu__link {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.62rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--cream) 15%, transparent);
+  color: var(--cream);
+  text-decoration: none;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: clamp(1.8rem, 8.4vw, 2.5rem);
+  font-weight: 400;
+  font-variation-settings: "opsz" 72, "SOFT" 45, "WONK" 0;
+  letter-spacing: -0.045em;
+  line-height: 1.16;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.site-menu__link:active {
+  color: var(--blush);
+}
+
+.site-menu__link.is-active {
+  color: var(--blush);
+}
+
+.site-menu__index {
+  flex: none;
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+}
+
+.site-menu__foot {
+  display: grid;
+  gap: 1.1rem;
+  margin-top: auto;
+  padding-top: 1.4rem;
+}
+
+.site-menu__meta {
+  display: grid;
+  gap: 0.15rem;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: color-mix(in srgb, var(--cream) 70%, transparent);
+}
+
+.site-menu__actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.55rem;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.site-menu__book {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3.1rem;
+  padding: 0 1.25rem;
+  border-radius: var(--radius-pill);
+  background: var(--cream);
+  color: var(--dark-aubergine);
+  font-size: 0.9rem;
+  font-weight: 550;
+  text-decoration: none;
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.site-menu__book:active {
+  transform: scale(0.975);
+  background: var(--blush);
+}
+
+.site-menu__call {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 3.1rem;
+  padding: 0 1.05rem;
+  border: 1px solid color-mix(in srgb, var(--cream) 30%, transparent);
+  border-radius: var(--radius-pill);
+  color: var(--cream);
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-menu__call:active {
+  background: color-mix(in srgb, var(--cream) 12%, transparent);
+}
+
+/* The specialty header's trigger is a button now, not a <details> summary. */
+.spec-menu__trigger {
+  background: transparent;
+  cursor: pointer;
+  font-style: inherit;
+}
+
+.spec-menu[data-open="true"] .spec-menu__trigger {
+  background: var(--spec-accent);
+  border-color: var(--spec-accent);
+  color: var(--spec-bg);
+}
+
+@media (min-width: 700px) {
+  .site-menu__panel {
+    justify-content: center;
+  }
+
+  .site-menu__link {
+    font-size: 2.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-menu__link,
+  .site-menu__book,
+  .site-menu__close {
+    transition: none;
+  }
+}

@@ -1,17 +1,17 @@
-import { ArrowRight } from "lucide-react";
 import { CLINIC } from "@/lib/clinic";
+import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 
 export default function MobileHeroCta() {
   return (
     <div className="hero__mobile-cta">
-      <a
-        className="hero__mobile-book"
+      <LiquidMetalButton
+        label="Book a visit"
+        variant="aubergine"
+        height={52}
+        fullWidth
         href={CLINIC.bookingHref}
-        aria-label="Book a visit by calling the clinic"
-      >
-        <span>Book a visit</span>
-        <ArrowRight size={16} strokeWidth={1.7} aria-hidden="true" />
-      </a>
+        ariaLabel="Book a visit by calling the clinic"
+      />
     </div>
   );
 }
