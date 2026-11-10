@@ -83,7 +83,7 @@ export default function SkinPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(skinSchema) }}
       />
       <div className="spec-page spec-page--skin" id="top">
-        <SpecialtyHeader data={data} />
+        <SpecialtyHeader label={data.label} activeIndex={data.navIndex} theme={data.theme} />
         <main id="main">
           <SpecialtyHero data={data} />
           <FocusIndex data={data} />

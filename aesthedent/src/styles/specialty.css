@@ -174,7 +174,9 @@
 .spec-header__inner {
   width: min(100%, 1520px);
   margin: 0 auto;
-  padding: 0.85rem var(--spec-gutter);
+  /* Falls back to the page defaults when the header renders outside .spec-page
+     (dental, our clinic), so it keeps the same width and rhythm everywhere. */
+  padding: 0.85rem var(--spec-gutter, clamp(1.4rem, 4.2vw, 5rem));
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
@@ -192,7 +194,7 @@
 }
 
 .spec-header .brand__mark {
-  color: var(--spec-accent);
+  color: var(--spec-accent, #9a4f58);
 }
 
 .spec-header .brand__tagline {
@@ -241,7 +243,7 @@
   display: block;
   height: 1px;
   transform-origin: 0 50%;
-  background: var(--spec-accent);
+  background: var(--spec-accent, #9a4f58);
 }
 
 .spec-menu {
@@ -258,7 +260,7 @@
   border: 1px solid var(--header-line);
   border-radius: 999px;
   color: var(--header-ink);
-  font-family: var(--spec-sans);
+  font-family: var(--spec-sans, var(--font-sans));
   font-size: 0.68rem;
   font-weight: 550;
   letter-spacing: 0.11em;
@@ -272,9 +274,9 @@
 }
 
 .spec-menu[open] .spec-menu__trigger {
-  background: var(--spec-accent);
-  border-color: var(--spec-accent);
-  color: var(--spec-bg);
+  background: var(--spec-accent, #9a4f58);
+  border-color: var(--spec-accent, #9a4f58);
+  color: var(--spec-bg, #f3eee8);
 }
 
 .spec-menu__panel {

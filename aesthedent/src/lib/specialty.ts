@@ -19,6 +19,9 @@ export interface SpecialtyFocus {
   kicker: string;
   description: string;
   imagePosition: string;
+  /** Optional concern photograph shown in the focus preview on hover. */
+  image?: string;
+  imageAlt?: string;
 }
 
 export interface SpecialtyStep {
@@ -119,7 +122,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The concern",
         description:
           "A consultation-led look at hair fall and the factors around it, with the next step explained clearly.",
-        imagePosition: "22% 42%",
+        imagePosition: "50% 42%",
+        image: "/images/hair/focus-hair-fall.webp",
+        imageAlt: "Close-up of hair and scalp during a hair-fall consultation",
       },
       {
         id: "scalp-treatments",
@@ -128,7 +133,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The foundation",
         description:
           "Focused care for the scalp, planned around what we find and kept comfortable throughout.",
-        imagePosition: "72% 56%",
+        imagePosition: "50% 48%",
+        image: "/images/hair/focus-scalp.webp",
+        imageAlt: "Close-up of the scalp during a scalp treatment",
       },
     ],
     folderKicker: "The folder",
@@ -265,7 +272,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The concern",
         description:
           "Control breakouts and prevent further flare-ups, with a plan explained before you begin.",
-        imagePosition: "30% 36%",
+        imagePosition: "56% 42%",
+        image: "/images/skin/focus-acne.webp",
+        imageAlt: "Breakouts on a cheek with a dab of treatment cream being applied",
       },
       {
         id: "skin-pigmentation",
@@ -274,7 +283,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The tone",
         description:
           "Reduce dark spots for a more even tone, reviewed with you as treatment goes on.",
-        imagePosition: "62% 44%",
+        imagePosition: "54% 40%",
+        image: "/images/skin/focus-pigmentation.webp",
+        imageAlt: "A serum dropper held beside pigmented patches on a cheek",
       },
       {
         id: "skin-anti-ageing",
@@ -283,7 +294,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The finish",
         description:
           "Address fine lines and improve skin firmness, at a pace that suits your skin.",
-        imagePosition: "46% 58%",
+        imagePosition: "50% 38%",
+        image: "/images/skin/focus-anti-ageing.webp",
+        imageAlt: "Eyes closed while cream is smoothed across a cheek",
       },
     ],
     folderKicker: "The folder",
@@ -422,7 +435,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The colour",
         description:
           "A considered outline and tone, planned with you rather than over you.",
-        imagePosition: "22% 64%",
+        imagePosition: "50% 46%",
+        image: "/images/pmu/focus-lips.webp",
+        imageAlt: "Close-up of softly defined lips",
       },
       {
         id: "pmu-eyeliner",
@@ -431,7 +446,9 @@ export const SPECIALTIES: Record<SpecialtyId, SpecialtyContent> = {
         kicker: "The line",
         description:
           "Definition drawn with restraint, so the eye still reads as yours.",
-        imagePosition: "72% 50%",
+        imagePosition: "52% 44%",
+        image: "/images/pmu/focus-eyeliner.webp",
+        imageAlt: "Close-up of a defined lash line along the eye",
       },
     ],
     folderKicker: "The folder",

@@ -181,6 +181,18 @@
   pointer-events: auto;
 }
 
+/* The head script sets data-intro="seen" before first paint once the intro has
+   played in this session, so a repeat visit never flashes the loader. */
+html[data-intro="seen"] .site-loader {
+  display: none !important;
+}
+
+html[data-intro="seen"] .site-content-root--hidden {
+  opacity: 1 !important;
+  transform: none !important;
+  pointer-events: auto !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .site-loader {
     transition: opacity 0.2s ease !important;

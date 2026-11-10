@@ -81,7 +81,7 @@ export default function HairPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
       />
       <div className="spec-page spec-page--hair" id="top">
-        <SpecialtyHeader data={data} />
+        <SpecialtyHeader label={data.label} activeIndex={data.navIndex} theme={data.theme} />
         <main id="main">
           <SpecialtyHero data={data} />
           <FocusIndex data={data} />

@@ -1096,7 +1096,8 @@ svg {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 100;
+  /* Above the header, menu and grain (55-90) but below the intro (999999). */
+  z-index: 9998;
   display: none;
   width: 0.7rem;
   height: 0.7rem;
@@ -1118,12 +1119,9 @@ svg {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  .has-custom-cursor,
-  .has-custom-cursor a,
-  .has-custom-cursor button {
-    cursor: none;
-  }
-
+  /* The ring is an accent, not a replacement. The native cursor stays visible:
+     hiding it left the page with no pointer at all whenever the ring was
+     clipped, paused before the first pointer move, or drawn off-screen. */
   .has-custom-cursor .cursor {
     display: block;
   }
@@ -2195,12 +2193,6 @@ svg {
 }
 
 @media (max-width: 1023px) {
-  html.has-custom-cursor,
-  .has-custom-cursor a,
-  .has-custom-cursor button {
-    cursor: auto;
-  }
-
   .has-custom-cursor .cursor {
     display: none;
   }

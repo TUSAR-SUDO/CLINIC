@@ -19,24 +19,69 @@ const SiteLoaderContext = React.createContext<SiteLoaderContextType>({
 
 export const useSiteLoader = () => React.useContext(SiteLoaderContext);
 
+/**
+ * The intro is a first-visit moment, not a page transition.
+ *
+ * The provider sits in the root layout, so every full page load (hard link,
+ * refresh, back/forward restore) mounts it again. A session flag makes it play
+ * once; afterwards the loader is skipped and the site renders straight away.
+ *
+ * The flag is read through useSyncExternalStore: the server snapshot is always
+ * "not seen", so hydration matches the server HTML, and the client re-renders
+ * with the real value a moment later.
+ */
+const INTRO_KEY = "aesthedent:intro-seen";
+
+const readIntro = () => {
+  try {
+    return window.sessionStorage.getItem(INTRO_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+const readIntroOnServer = () => false;
+
+const subscribeIntro = () => () => {};
+
+const rememberIntro = () => {
+  try {
+    window.sessionStorage.setItem(INTRO_KEY, "1");
+  } catch {
+    // Storage can be blocked (private mode); the intro simply plays again.
+  }
+};
+
 export interface SiteLoaderProviderProps {
   children: React.ReactNode;
 }
 
 export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
+  const seenIntro = React.useSyncExternalStore(
+    subscribeIntro,
+    readIntro,
+    readIntroOnServer
+  );
   const [isRevealed, setIsRevealed] = React.useState(false);
   const [isLoaded, setIsLoaded] = React.useState(false);
+
+  // Derived, so a repeat visit never needs to touch state to skip the intro.
+  const revealed = isRevealed || seenIntro;
+  const loaded = isLoaded || seenIntro;
 
   const hasTriggeredRef = React.useRef(false);
 
   const handleReveal = React.useCallback(() => {
     if (hasTriggeredRef.current) return;
     hasTriggeredRef.current = true;
+    rememberIntro();
     setIsRevealed(true);
 
     // After the fade-out / reveal transition ends, unmount the loader completely
     setTimeout(() => {
       setIsLoaded(true);
+      // Marks this document so any later render keeps the loader hidden.
+      document.documentElement.dataset.intro = "seen";
     }, 850);
   }, []);
 
@@ -45,6 +90,9 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
   }, [handleReveal]);
 
   React.useEffect(() => {
+    // Seen already this session: no timers, no scroll lock, no intro.
+    if (seenIntro) return;
+
     // Respect user's reduced-motion preference
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       handleReveal();
@@ -76,23 +124,23 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
       document.body.style.overflow = prevOverflow;
       document.body.style.touchAction = prevTouchAction;
     };
-  }, [handleReveal]);
+  }, [handleReveal, seenIntro]);
 
   // Restore scroll when revealed
   React.useEffect(() => {
-    if (isRevealed) {
+    if (revealed) {
       document.body.style.overflow = "";
       document.body.style.touchAction = "";
     }
-  }, [isRevealed]);
+  }, [revealed]);
 
   const value = React.useMemo(
     () => ({
-      isRevealed,
-      isLoaded,
+      isRevealed: revealed,
+      isLoaded: loaded,
       skipIntro: handleSkip,
     }),
-    [isRevealed, isLoaded, handleSkip]
+    [revealed, loaded, handleSkip]
   );
 
   return (
@@ -101,16 +149,16 @@ export function SiteLoaderProvider({ children }: SiteLoaderProviderProps) {
       <div
         className={cn(
           "site-content-root",
-          !isRevealed ? "site-content-root--hidden" : "site-content-root--revealed"
+          !revealed ? "site-content-root--hidden" : "site-content-root--revealed"
         )}
       >
         {children}
       </div>
 
       {/* The Fullscreen Logo Reveal Loading Screen (in initial HTML to prevent flash of site) */}
-      {!isLoaded && (
+      {!loaded && (
         <aside
-          className={cn("site-loader", isRevealed && "site-loader--revealing")}
+          className={cn("site-loader", revealed && "site-loader--revealing")}
           role="dialog"
           aria-modal="true"
           aria-label="Welcome to Aesthédent"

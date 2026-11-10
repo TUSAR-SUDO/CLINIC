@@ -1,0 +1,24 @@
+/* Lenis smooth scrolling — the small set of rules the library expects.
+   Without these, native smooth scrolling fights Lenis' own easing, and a
+   stopped instance (during the intro) does not lock the page. */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}

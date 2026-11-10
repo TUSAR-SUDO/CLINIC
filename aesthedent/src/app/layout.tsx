@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import type { ReactNode } from "react";
+import Script from "next/script";
 import SiteFooter from "@/components/site/SiteFooter";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import SiteLoaderProvider from "@/components/ui/site-loader";
@@ -7,6 +8,7 @@ import { fraunces, geist } from "@/lib/fonts";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 import "@/styles/site-loader.css";
+import "@/styles/lenis.css";
 import "@/styles/skin.css";
 import "@/styles/our-clinic.css";
 import "@/styles/specialty.css";
@@ -63,8 +65,17 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   return (
-    <html lang="en-IN" className={`${fraunces.variable} ${geist.variable}`}>
+    <html
+      lang="en-IN"
+      className={`${fraunces.variable} ${geist.variable}`}
+      /* The intro script sets data-intro before hydration; that attribute is intentional. */
+      suppressHydrationWarning
+    >
       <body>
+        {/* Marks repeat visits before first paint so the intro never replays. */}
+        <Script id="intro-seen" strategy="beforeInteractive">
+          {`try{if(sessionStorage.getItem("aesthedent:intro-seen")==="1"){document.documentElement.dataset.intro="seen";}}catch(e){}`}
+        </Script>
         <noscript>
           <style>{`
             .site-loader { display: none !important; }

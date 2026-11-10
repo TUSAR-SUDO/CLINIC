@@ -52,8 +52,8 @@ export default function FocusIndex({ data }: { data: SpecialtyContent }) {
                   transition={{ duration: reduceMotion ? 0.18 : 0.55, ease: EASE }}
                 >
                   <Image
-                    src={data.heroImage}
-                    alt=""
+                    src={current.image ?? data.heroImage}
+                    alt={current.imageAlt ?? ""}
                     fill
                     sizes="(max-width: 980px) 100vw, 34vw"
                     className="spec-focus__preview-image"

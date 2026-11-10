@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import DentalNavbar from "@/components/dental/DentalNavbar";
+import SpecialtyHeader from "@/components/specialty/SpecialtyHeader";
 import DentalHero from "@/components/dental/DentalHero";
 import TreatmentsGrid from "@/components/dental/TreatmentsGrid";
 import HowItWorks from "@/components/dental/HowItWorks";
@@ -82,7 +82,7 @@ export default function DentalPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(dentalSchema) }}
       />
       <div className="dental-page-wrapper" id="top">
-        <DentalNavbar />
+        <SpecialtyHeader label="Dental" activeIndex={0} theme="light" />
         <main id="main">
           <DentalHero />
           <TreatmentsGrid />

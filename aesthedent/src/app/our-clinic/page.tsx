@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowLeft, ArrowRight, Sparkles, Shield, Scan, HeartHandshake } from "lucide-react";
-import Logo from "@/components/hero/Logo";
+import { ArrowRight, Sparkles, Shield, Scan, HeartHandshake } from "lucide-react";
+import SpecialtyHeader from "@/components/specialty/SpecialtyHeader";
 import TeamLanyardRail from "@/components/ui/team-lanyard-rail";
 import { TestimonialGlobe } from "@/components/ui/testimonial-globe";
 import ClinicStandards from "@/components/clinic/ClinicStandards";
@@ -20,15 +19,7 @@ export const metadata: Metadata = {
 export default function OurClinicPage() {
   return (
     <div className="our-clinic">
-      {/* Luminous Top Navigation Bar */}
-      <header className="our-clinic__bar">
-        <Logo href="/" className="our-clinic__brand" />
-        <span className="our-clinic__bar-label">Our clinic & members</span>
-        <Link href="/" className="our-clinic__back">
-          <ArrowLeft size={14} strokeWidth={1.8} aria-hidden="true" />
-          <span>Home</span>
-        </Link>
-      </header>
+      <SpecialtyHeader label="Our clinic" activeIndex={4} theme="light" />
 
       <main id="main">
         {/* Hero Section */}

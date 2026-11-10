@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/liquid-glass-navbar";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal-button";
 import { CLINIC } from "@/lib/clinic";
-import type { SpecialtyContent } from "@/lib/specialty";
 
 const NAV_ITEMS: LiquidNavItem[] = [
   { label: "Dental", href: "/dental", icon: NimbusIcons.smile, fx: "glow" },
@@ -28,7 +27,26 @@ const MENU_ITEMS = NAV_ITEMS.map((item) => ({
   href: item.href ?? "/",
 }));
 
-export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
+export type HeaderTheme = "light" | "dark";
+
+interface SpecialtyHeaderProps {
+  /** Page name, used by the mobile menu for `aria-current`. */
+  label: string;
+  /** Which capsule item is current. Omit on pages outside the five-item nav. */
+  activeIndex?: number;
+  theme?: HeaderTheme;
+}
+
+/**
+ * The site's one navigation bar. Every interior page renders it, so the header
+ * no longer changes shape (or disappears) between dental, skin, hair, PMU and
+ * our clinic.
+ */
+export default function SpecialtyHeader({
+  label,
+  activeIndex,
+  theme = "light",
+}: SpecialtyHeaderProps) {
   const reduceMotion = useReducedMotion();
   const [open, setOpen] = useState(false);
   const { scrollYProgress } = useScroll();
@@ -38,7 +56,7 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
     restDelta: 0.001,
   });
 
-  const dark = data.theme === "dark";
+  const dark = theme === "dark";
 
   useEffect(() => {
     const media = window.matchMedia("(min-width: 1241px)");
@@ -50,14 +68,14 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
   }, []);
 
   return (
-    <header className="spec-header" data-theme={data.theme}>
+    <header className="spec-header" data-theme={theme}>
       <div className="spec-header__inner">
         <Logo href="/" className="spec-header__logo" />
 
         <div className="spec-header__nav">
           <LiquidNavbar
             items={NAV_ITEMS}
-            active={data.navIndex}
+            active={activeIndex ?? -1}
             tone={dark ? "dark" : "light"}
             sound={false}
           />
@@ -100,7 +118,7 @@ export default function SpecialtyHeader({ data }: { data: SpecialtyContent }) {
         open={open}
         onClose={() => setOpen(false)}
         items={MENU_ITEMS}
-        activeLabel={data.label}
+        activeLabel={label}
       />
     </header>
   );
