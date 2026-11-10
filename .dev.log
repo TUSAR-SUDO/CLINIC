@@ -441,3 +441,4 @@ Setting a custom Cache-Control header can break Next.js development behavior.
   60 |
   61 |   useEffect(() => {
   62 |     const media = window.matchMedia("(min-width: 1241px)");
+ GET /our-clinic 200 in 254ms (next.js: 1.5ms, application-code: 252ms)
